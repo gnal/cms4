@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\DependencyInjection;
+namespace Msi\AdminBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -19,13 +19,13 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('msi_cmf');
+        $rootNode = $treeBuilder->root('msi_admin');
 
         $rootNode
             ->children()
                 ->booleanNode('multisite')->defaultFalse()->end()
                 ->scalarNode('tiny_mce')
-                    ->defaultValue('MsiCmfBundle:Form:tiny_mce.html.twig')
+                    ->defaultValue('MsiAdminBundle:Form:tiny_mce.html.twig')
                     ->cannotBeEmpty()
                 ->end()
                 ->arrayNode('app_locales')
@@ -112,11 +112,11 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->scalarNode('site_admin')->defaultValue('Msi\CmfBundle\Admin\SiteAdmin')->cannotBeEmpty()->end()
-                ->scalarNode('menu_root_admin')->defaultValue('Msi\CmfBundle\Admin\MenuRootAdmin')->cannotBeEmpty()->end()
-                ->scalarNode('menu_node_admin')->defaultValue('Msi\CmfBundle\Admin\MenuNodeAdmin')->cannotBeEmpty()->end()
-                ->scalarNode('page_admin')->defaultValue('Msi\CmfBundle\Admin\PageAdmin')->cannotBeEmpty()->end()
-                ->scalarNode('block_admin')->defaultValue('Msi\CmfBundle\Admin\BlockAdmin')->cannotBeEmpty()->end()
+                ->scalarNode('site_admin')->defaultValue('Msi\AdminBundle\Admin\SiteAdmin')->cannotBeEmpty()->end()
+                ->scalarNode('menu_root_admin')->defaultValue('Msi\AdminBundle\Admin\MenuRootAdmin')->cannotBeEmpty()->end()
+                ->scalarNode('menu_node_admin')->defaultValue('Msi\AdminBundle\Admin\MenuNodeAdmin')->cannotBeEmpty()->end()
+                ->scalarNode('page_admin')->defaultValue('Msi\AdminBundle\Admin\PageAdmin')->cannotBeEmpty()->end()
+                ->scalarNode('block_admin')->defaultValue('Msi\AdminBundle\Admin\BlockAdmin')->cannotBeEmpty()->end()
             ->end()
         ;
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Msi\CmfBundle\Routing;
+namespace Msi\AdminBundle\Routing;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\Route;
 
-class CmfLoader implements LoaderInterface
+class AdminLoader implements LoaderInterface
 {
     private $loaded = false;
     private $container;
@@ -25,7 +25,7 @@ class CmfLoader implements LoaderInterface
 
         $collection = new RouteCollection();
 
-        foreach ($this->container->getParameter('msi_cmf.admin_ids') as $id) {
+        foreach ($this->container->getParameter('msi_admin.admin_ids') as $id) {
             $collection->addCollection($this->buildRoutes($id));
         }
 
@@ -34,7 +34,7 @@ class CmfLoader implements LoaderInterface
 
     public function supports($resource, $type = null)
     {
-        return 'msi_cmf' === $type;
+        return 'msi_admin' === $type;
     }
 
     public function getResolver()
@@ -70,7 +70,7 @@ class CmfLoader implements LoaderInterface
                 new Route(
                     $prefix.'/'.$name.$suffix,
                     [
-                        '_controller' => 'MsiCmfBundle:Core:'.$name,
+                        '_controller' => 'MsiAdminBundle:Core:'.$name,
                         '_admin' => $id,
                     ]
                 )

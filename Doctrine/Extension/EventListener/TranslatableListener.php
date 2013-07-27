@@ -1,12 +1,12 @@
 <?php
 
-namespace Msi\CmfBundle\Doctrine\Extension\EventListener;
+namespace Msi\AdminBundle\Doctrine\Extension\EventListener;
 
 use Doctrine\ORM\Events;
 use Doctrine\Common\EventArgs;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-use Msi\CmfBundle\Doctrine\Extension\BaseListener;
+use Msi\AdminBundle\Doctrine\Extension\BaseListener;
 
 class TranslatableListener extends BaseListener
 {
@@ -34,7 +34,7 @@ class TranslatableListener extends BaseListener
     {
         $entity = $e->getEntity();
 
-        if ($this->skipPostLoad === false && $this->isEntitySupported($e, 'Msi\CmfBundle\Doctrine\Extension\Model\Translatable')) {
+        if ($this->skipPostLoad === false && $this->isEntitySupported($e, 'Msi\AdminBundle\Doctrine\Extension\Model\Translatable')) {
             $entity->setRequestLocale($this->container->get('request')->getLocale());
         }
     }
@@ -50,7 +50,7 @@ class TranslatableListener extends BaseListener
     {
         $metadata = $e->getClassMetadata();
 
-        if ($this->getClassAnalyzer()->hasTrait($metadata->reflClass, 'Msi\CmfBundle\Doctrine\Extension\Model\Translatable')) {
+        if ($this->getClassAnalyzer()->hasTrait($metadata->reflClass, 'Msi\AdminBundle\Doctrine\Extension\Model\Translatable')) {
             if (!$metadata->isMappedSuperclass && !$metadata->hasAssociation('translations')) {
                 $metadata->mapOneToMany([
                     'fieldName' => 'translations',
@@ -62,7 +62,7 @@ class TranslatableListener extends BaseListener
             }
         }
 
-        if ($this->getClassAnalyzer()->hasTrait($metadata->reflClass, 'Msi\CmfBundle\Doctrine\Extension\Model\Translation')) {
+        if ($this->getClassAnalyzer()->hasTrait($metadata->reflClass, 'Msi\AdminBundle\Doctrine\Extension\Model\Translation')) {
             if (!$metadata->isMappedSuperclass && !$metadata->hasAssociation('object')) {
                 $metadata->mapManyToOne([
                     'fieldName' => 'object',

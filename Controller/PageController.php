@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Controller;
+namespace Msi\AdminBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -12,12 +12,12 @@ class PageController extends ContainerAware
     {
         $criteria = [
             'a.published' => true,
-            'a.site' => $this->container->get('msi_cmf.provider')->getSite(),
+            'a.site' => $this->container->get('msi_admin.provider')->getSite(),
         ];
 
         $criteria['t.slug'] = $request->attributes->get('slug');
 
-        $qb = $this->container->get('msi_cmf.page_manager')->getFindByQueryBuilder(
+        $qb = $this->container->get('msi_admin.page_manager')->getFindByQueryBuilder(
             $criteria,
             ['a.translations' => 't', 'a.blocks' => 'b'],
             ['b.position' => 'ASC']

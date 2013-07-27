@@ -1,8 +1,8 @@
 <?php
 
-namespace Msi\CmfBundle\Admin;
+namespace Msi\AdminBundle\Admin;
 
-use Msi\CmfBundle\Grid\GridBuilder;
+use Msi\AdminBundle\Grid\GridBuilder;
 use Symfony\Component\Form\FormBuilder;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,8 +13,8 @@ class MenuRootAdmin extends Admin
     {
         $this->options = [
             'search_fields' => ['a.id', 't.name'],
-            'form_template' => 'MsiCmfBundle:MenuRoot:form.html.twig',
-            'sidebar_nav_template' => 'MsiCmfBundle:MenuRoot:sidebar_nav.html.twig',
+            'form_template' => 'MsiAdminBundle:MenuRoot:form.html.twig',
+            'sidebar_nav_template' => 'MsiAdminBundle:MenuRoot:sidebar_nav.html.twig',
         ];
     }
 
@@ -52,6 +52,6 @@ class MenuRootAdmin extends Admin
 
     public function postLoad(ArrayCollection $collection)
     {
-        $this->container->get('msi_cmf.bouncer')->operatorFilter($collection);
+        $this->container->get('msi_admin.bouncer')->operatorFilter($collection);
     }
 }

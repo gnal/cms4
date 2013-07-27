@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Form\Type;
+namespace Msi\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,7 +27,7 @@ class BlockTranslationType extends AbstractType
             $form = $event->getForm();
             $data = $event->getData();
 
-            if ($data instanceof \Msi\CmfBundle\Entity\BlockTranslation) {
+            if ($data instanceof \Msi\AdminBundle\Entity\BlockTranslation) {
                 $typeId = $data->getObject()->getType();
                 $blockHandler = $this->container->get($typeId);
                 $builder2 = $this->container->get('form.factory')->createBuilder();
@@ -43,7 +43,7 @@ class BlockTranslationType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Msi\CmfBundle\Entity\BlockTranslation',
+            'data_class' => 'Msi\AdminBundle\Entity\BlockTranslation',
         ]);
     }
 

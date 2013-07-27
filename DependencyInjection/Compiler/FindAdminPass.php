@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\DependencyInjection\Compiler;
+namespace Msi\AdminBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -15,6 +15,6 @@ class FindAdminPass implements CompilerPassInterface
             $admin = $container->getDefinition($id);
             $admin->addMethodCall('setId', [$id]);
         }
-        $container->setParameter('msi_cmf.admin_ids', $ids);
+        $container->setParameter('msi_admin.admin_ids', $ids);
     }
 }

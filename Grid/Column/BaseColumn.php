@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Grid\Column;
+namespace Msi\AdminBundle\Grid\Column;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Grid;
+namespace Msi\AdminBundle\Grid;
 
 use Doctrine\Common\Collections\Collection;
 

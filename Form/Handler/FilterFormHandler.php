@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Form\Handler;
+namespace Msi\AdminBundle\Form\Handler;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\QueryBuilder;

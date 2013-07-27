@@ -16,7 +16,7 @@
                             {% else %}
                                 {%  set url = path(app.request.attributes.get('_admin')~'_deleteUpload', {'id': app.request.attributes.get('id')}) %}
                             {% endif %}
-                            <a class="btn btn-danger btn-mini msi_cmf_admin_deleteUpload" href="{{ url }}">{{ 'Delete file'|trans }}</a>
+                            <a class="btn btn-danger btn-mini msi_admin_admin_deleteUpload" href="{{ url }}">{{ 'Delete file'|trans }}</a>
                         </div>
                     {% endif %}#}
                     {#{{ form_errors(form) }}#}

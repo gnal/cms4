@@ -1,11 +1,11 @@
 <?php
 
-namespace Msi\CmfBundle\Block\Handler;
+namespace Msi\AdminBundle\Block\Handler;
 
-use Msi\CmfBundle\Block\BaseBlockHandler;
+use Msi\AdminBundle\Block\BaseBlockHandler;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Msi\CmfBundle\Entity\Block;
-use Msi\CmfBundle\Entity\Page;
+use Msi\AdminBundle\Entity\Block;
+use Msi\AdminBundle\Entity\Page;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints\NotBlank;
 

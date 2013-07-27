@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Tools;
+namespace Msi\AdminBundle\Tools;
 
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\KernelInterface;

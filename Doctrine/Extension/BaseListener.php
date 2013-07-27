@@ -1,10 +1,10 @@
 <?php
 
-namespace Msi\CmfBundle\Doctrine\Extension;
+namespace Msi\AdminBundle\Doctrine\Extension;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\EventArgs;
-use Msi\CmfBundle\Tools\ClassAnalyzer;
+use Msi\AdminBundle\Tools\ClassAnalyzer;
 
 abstract class BaseListener implements EventSubscriber
 {

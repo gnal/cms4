@@ -1,9 +1,9 @@
 <?php
 
-namespace Msi\CmfBundle\Block;
+namespace Msi\AdminBundle\Block;
 
-use Msi\CmfBundle\Entity\Block;
-use Msi\CmfBundle\Entity\Page;
+use Msi\AdminBundle\Entity\Block;
+use Msi\AdminBundle\Entity\Page;
 use Symfony\Component\Form\FormBuilder;
 
 abstract class BaseBlockHandler

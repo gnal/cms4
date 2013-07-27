@@ -16,22 +16,22 @@ FOS\UserBundle\Model\Group:
         name:
             - NotBlank: ~
 
-Msi\CmfBundle\Entity\MenuTranslation:
+Msi\AdminBundle\Entity\MenuTranslation:
     properties:
         name:
             - NotBlank: ~
 
-Msi\CmfBundle\Entity\Page:
+Msi\AdminBundle\Entity\Page:
     properties:
         template:
             - NotBlank: ~
 
-Msi\CmfBundle\Entity\PageTranslation:
+Msi\AdminBundle\Entity\PageTranslation:
     properties:
         title:
             - NotBlank: ~
 
-Msi\CmfBundle\Entity\Site:
+Msi\AdminBundle\Entity\Site:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: host
     properties:

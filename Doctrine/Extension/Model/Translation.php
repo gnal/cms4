@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Doctrine\Extension\Model;
+namespace Msi\AdminBundle\Doctrine\Extension\Model;
 
 trait Translation
 {

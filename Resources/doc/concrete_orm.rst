@@ -10,11 +10,11 @@ Menu class
 
     <?php
 
-    namespace Acme\CmfBundle\Entity;
+    namespace Acme\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
     use Gedmo\Mapping\Annotation as Gedmo;
-    use Msi\CmfBundle\Entity\Menu as BaseMenu;
+    use Msi\AdminBundle\Entity\Menu as BaseMenu;
 
     /**
      * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
@@ -63,10 +63,10 @@ MenuTranslation class
 
     <?php
 
-    namespace Acme\CmfBundle\Entity;
+    namespace Acme\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Msi\CmfBundle\Entity\MenuTranslation as BaseMenuTranslation;
+    use Msi\AdminBundle\Entity\MenuTranslation as BaseMenuTranslation;
 
     /**
      * @ORM\Entity
@@ -93,10 +93,10 @@ Page class
 
     <?php
 
-    namespace Acme\CmfBundle\Entity;
+    namespace Acme\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Msi\CmfBundle\Entity\Page as BasePage;
+    use Msi\AdminBundle\Entity\Page as BasePage;
 
     /**
      * @ORM\Entity
@@ -133,10 +133,10 @@ PageTranslation class
 
     <?php
 
-    namespace Acme\CmfBundle\Entity;
+    namespace Acme\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Msi\CmfBundle\Entity\PageTranslation as BasePageTranslation;
+    use Msi\AdminBundle\Entity\PageTranslation as BasePageTranslation;
 
     /**
      * @ORM\Entity
@@ -163,10 +163,10 @@ Block class
 
     <?php
 
-    namespace Acme\CmfBundle\Entity;
+    namespace Acme\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Msi\CmfBundle\Entity\Block as BaseBlock;
+    use Msi\AdminBundle\Entity\Block as BaseBlock;
 
     /**
      * @ORM\Entity
@@ -203,10 +203,10 @@ BlockTranslation class
 
     <?php
 
-    namespace Acme\CmfBundle\Entity;
+    namespace Acme\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Msi\CmfBundle\Entity\BlockTranslation as BaseBlockTranslation;
+    use Msi\AdminBundle\Entity\BlockTranslation as BaseBlockTranslation;
 
     /**
      * @ORM\Entity
@@ -233,10 +233,10 @@ Site class
 
     <?php
 
-    namespace Acme\CmfBundle\Entity;
+    namespace Acme\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Msi\CmfBundle\Entity\Site as BaseSite;
+    use Msi\AdminBundle\Entity\Site as BaseSite;
 
     /**
      * @ORM\Entity
@@ -263,10 +263,10 @@ SiteTranslation class
 
     <?php
 
-    namespace Acme\CmfBundle\Entity;
+    namespace Acme\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Msi\CmfBundle\Entity\SiteTranslation as BaseSiteTranslation;
+    use Msi\AdminBundle\Entity\SiteTranslation as BaseSiteTranslation;
 
     /**
      * @ORM\Entity
@@ -288,8 +288,8 @@ SiteTranslation class
 
 Configure your application::
 
-    msi_cmf:
-        site_class: Acme\CmfBundle\Entity\Site
-        menu_class: Acme\CmfBundle\Entity\Menu
-        page_class: Acme\CmfBundle\Entity\Page
-        block_class: Acme\CmfBundle\Entity\Block
+    msi_admin:
+        site_class: Acme\AdminBundle\Entity\Site
+        menu_class: Acme\AdminBundle\Entity\Menu
+        page_class: Acme\AdminBundle\Entity\Page
+        block_class: Acme\AdminBundle\Entity\Block

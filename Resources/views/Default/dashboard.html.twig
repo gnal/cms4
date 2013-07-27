@@ -1,11 +1,11 @@
-{% extends 'MsiCmfBundle::layout.html.twig' %}
+{% extends 'MsiAdminBundle::layout.html.twig' %}
 
 {% block title %}Dashboard{% endblock %}
 
 {% block js %}
 {{ parent() }}
-<script src="{{ asset('/bundles/msicmf/vendor/tiny_mce/plugins/filemanager/js/mcfilemanager.js') }}"></script>
-<script src="{{ asset('/bundles/msicmf/vendor/tiny_mce/plugins/imagemanager/js/mcimagemanager.js') }}"></script>
+<script src="{{ asset('/bundles/msiadmin/vendor/tiny_mce/plugins/filemanager/js/mcfilemanager.js') }}"></script>
+<script src="{{ asset('/bundles/msiadmin/vendor/tiny_mce/plugins/imagemanager/js/mcimagemanager.js') }}"></script>
 {% endblock js %}
 
 {% block content %}

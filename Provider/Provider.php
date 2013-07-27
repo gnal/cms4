@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Provider;
+namespace Msi\AdminBundle\Provider;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Pager;
+namespace Msi\AdminBundle\Pager;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

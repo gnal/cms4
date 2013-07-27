@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Pager;
+namespace Msi\AdminBundle\Pager;
 
 class PagerFactory
 {

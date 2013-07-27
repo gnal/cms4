@@ -1,8 +1,8 @@
 <?php
 
-namespace Msi\CmfBundle\Admin;
+namespace Msi\AdminBundle\Admin;
 
-use Msi\CmfBundle\Grid\GridBuilder;
+use Msi\AdminBundle\Grid\GridBuilder;
 use Symfony\Component\Form\FormBuilder;
 use Doctrine\ORM\QueryBuilder;
 
@@ -11,8 +11,8 @@ class PageAdmin extends Admin
     public function configure()
     {
         $this->options = [
-            'form_template' => 'MsiCmfBundle:Page:form.html.twig',
-            'sidebar_nav_template' => 'MsiCmfBundle:Page:sidebar_nav.html.twig',
+            'form_template' => 'MsiAdminBundle:Page:form.html.twig',
+            'sidebar_nav_template' => 'MsiAdminBundle:Page:sidebar_nav.html.twig',
             'search_fields' => ['a.id', 't.title'],
             'order_by'      => ['t.title' => 'ASC'],
         ];
@@ -42,7 +42,7 @@ class PageAdmin extends Admin
         }
 
         $builder
-            ->add('template', 'choice', ['choices' => $this->container->getParameter('msi_cmf.page.layouts')])
+            ->add('template', 'choice', ['choices' => $this->container->getParameter('msi_admin.page.layouts')])
             ->add('showTitle')
             ->add('route', 'choice', [
                 'empty_value' => '',
@@ -51,14 +51,14 @@ class PageAdmin extends Admin
             ->add('css', 'textarea')
             ->add('js', 'textarea')
             // ->add('blocks', 'collection', [
-            //     'type' => new \Msi\CmfBundle\Form\Type\BlockType($this->container),
+            //     'type' => new \Msi\AdminBundle\Form\Type\BlockType($this->container),
             //     'allow_add' => true,
             // ])
         ;
 
-        if ($this->container->getParameter('msi_cmf.multisite')) {
+        if ($this->container->getParameter('msi_admin.multisite')) {
             $builder->add('site', 'entity', [
-                'class' => $this->container->getParameter('msi_cmf.site.class'),
+                'class' => $this->container->getParameter('msi_admin.site.class'),
             ]);
         }
     }
@@ -79,11 +79,11 @@ class PageAdmin extends Admin
 
     // public function buildFilterForm(FormBuilder $builder)
     // {
-    //     if ($this->container->getParameter('msi_cmf.multisite')) {
+    //     if ($this->container->getParameter('msi_admin.multisite')) {
     //         $builder->add('site', 'entity', [
     //             'label' => ' ',
     //             'empty_value' => '- Site -',
-    //             'class' => $this->container->getParameter('msi_cmf.site.class'),
+    //             'class' => $this->container->getParameter('msi_admin.site.class'),
     //         ]);
     //     }
 
@@ -104,8 +104,8 @@ class PageAdmin extends Admin
 
     public function prePersist($entity)
     {
-        if (!$this->container->getParameter('msi_cmf.multisite')) {
-            $entity->setSite($this->container->get('msi_cmf.provider')->getSite());
+        if (!$this->container->getParameter('msi_admin.multisite')) {
+            $entity->setSite($this->container->get('msi_admin.provider')->getSite());
         }
     }
 }

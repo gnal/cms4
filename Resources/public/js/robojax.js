@@ -66,7 +66,7 @@ if ( typeof Object.create !== 'function' ) {
 
             // self.$modalBody
             //     .empty()
-            //     .html('<div class="text-center"><img style="padding: 40px;" src="/bundles/msicmf/img/ajax-loader3.gif" alt="ajax-loader"></div>')
+            //     .html('<div class="text-center"><img style="padding: 40px;" src="/bundles/msiadmin/img/ajax-loader3.gif" alt="ajax-loader"></div>')
             // ;
 
             // self.$modal.modal('show');
@@ -109,7 +109,7 @@ if ( typeof Object.create !== 'function' ) {
                 .css('visibility', 'hidden');
 
             self.$modalBody
-                .css('background', 'url(/bundles/msicmf/img/ajax-loader3.gif) no-repeat center center #fff');
+                .css('background', 'url(/bundles/msiadmin/img/ajax-loader3.gif) no-repeat center center #fff');
 
             $.ajax($form.attr('action'), {
                 type: 'POST',

@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Request;
+namespace Msi\AdminBundle\Request;
 
 use Symfony\Component\HttpFoundation\Request as BaseRequest;
 

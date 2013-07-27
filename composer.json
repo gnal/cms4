@@ -1,5 +1,5 @@
 {
-    "name": "msi/cmf-bundle",
+    "name": "msi/admin-bundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
@@ -9,7 +9,7 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Msi\\CmfBundle": "" }
+        "psr-0": { "Msi\\AdminBundle": "" }
     },
-    "target-dir": "Msi/CmfBundle"
+    "target-dir": "Msi/AdminBundle"
 }

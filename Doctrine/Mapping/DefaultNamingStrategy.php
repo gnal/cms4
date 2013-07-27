@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Doctrine\Mapping;
+namespace Msi\AdminBundle\Doctrine\Mapping;
 
 use Doctrine\ORM\Mapping\NamingStrategy;
 

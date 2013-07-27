@@ -1,11 +1,11 @@
 <?php
 
-namespace Msi\CmfBundle\Doctrine\Extension\EventListener;
+namespace Msi\AdminBundle\Doctrine\Extension\EventListener;
 
 use Doctrine\ORM\Events;
 use Doctrine\Common\EventArgs;
 
-use Msi\CmfBundle\Doctrine\Extension\BaseListener;
+use Msi\AdminBundle\Doctrine\Extension\BaseListener;
 
 class SoftDeletableListener extends BaseListener
 {
@@ -23,7 +23,7 @@ class SoftDeletableListener extends BaseListener
 
         foreach ($uow->getScheduledEntityDeletions() as $entity) {
             $metadata = $e->getEntityManager()->getClassMetadata(get_class($entity));
-            if ($this->getClassAnalyzer()->hasTrait($metadata->reflClass, 'Msi\CmfBundle\Doctrine\Extension\Model\SoftDeletable')) {
+            if ($this->getClassAnalyzer()->hasTrait($metadata->reflClass, 'Msi\AdminBundle\Doctrine\Extension\Model\SoftDeletable')) {
                 $oldValue = $entity->getDeletedAt();
                 $entity->setDeletedAt(new \DateTime());
 

@@ -18,7 +18,7 @@
             </td>#}
             {% for column in grid.columns %}
                 <td {% for attrname,attrvalue in column.options.attr %}{{attrname}}="{{attrvalue}}" {% endfor %}id="td{{ loop.index~row.id }}">
-                {% include 'MsiCmfBundle:Column:'~column.type~'.html.twig' with {'i': loop.index, 'column': column.resolveRow(row)} %}
+                {% include 'MsiAdminBundle:Column:'~column.type~'.html.twig' with {'i': loop.index, 'column': column.resolveRow(row)} %}
                 </td>
             {% endfor %}
         </tr>

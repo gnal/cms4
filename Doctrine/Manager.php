@@ -1,9 +1,9 @@
 <?php
 
-namespace Msi\CmfBundle\Doctrine;
+namespace Msi\AdminBundle\Doctrine;
 
 use Doctrine\ORM\EntityManager;
-use Msi\CmfBundle\Tools\ClassAnalyzer;
+use Msi\AdminBundle\Tools\ClassAnalyzer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Doctrine\ORM\QueryBuilder;
 
@@ -136,7 +136,7 @@ class Manager
             $object = $this->create();
         }
 
-        if ($this->classAnalyzer->hasTrait($this->getMetadata()->reflClass, 'Msi\CmfBundle\Doctrine\Extension\Model\Translatable')) {
+        if ($this->classAnalyzer->hasTrait($this->getMetadata()->reflClass, 'Msi\AdminBundle\Doctrine\Extension\Model\Translatable')) {
             $this->createTranslations($object, $locales);
         }
 

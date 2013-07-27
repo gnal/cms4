@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Controller;
+namespace Msi\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Msi\CmfBundle\Event\FilterEntityResponseEvent;
+use Msi\AdminBundle\Event\FilterEntityResponseEvent;
 
 class CoreController extends Controller
 {
@@ -48,12 +48,12 @@ class CoreController extends Controller
         $filterForm = $this->admin->getForm('filter');
 
         if (count($filterForm->all())) {
-            $this->get('msi_cmf.filter.form.handler')->process($filterForm, $this->admin->getObject(), $qb);
+            $this->get('msi_admin.filter.form.handler')->process($filterForm, $this->admin->getObject(), $qb);
             $parameters['filterForm'] = $filterForm->createView();
         }
 
         // Pager
-        $pager = $this->get('msi_cmf.pager.factory')->create($qb, array('attr' => array('class' => 'pull-left')));
+        $pager = $this->get('msi_admin.pager.factory')->create($qb, array('attr' => array('class' => 'pull-left')));
         $pager->paginate($request->query->get('page', 1) ?: 1, $this->get('session')->get('limit', 25));
 
         // Table
@@ -155,7 +155,7 @@ class CoreController extends Controller
                 }
             }
 
-            $this->get('event_dispatcher')->dispatch('msi_cmf.entity.update.completed', new FilterEntityResponseEvent($this->admin->getObject(), $request, $response));
+            $this->get('event_dispatcher')->dispatch('msi_admin.entity.update.completed', new FilterEntityResponseEvent($this->admin->getObject(), $request, $response));
 
             return $response;
         } else {
@@ -196,7 +196,7 @@ class CoreController extends Controller
             $entity = $this->admin->getObject();
         }
 
-        $this->get('msi_cmf.uploader')->removeUpload($entity);
+        $this->get('msi_admin.uploader')->removeUpload($entity);
         $entity->setFilename(null);
         $this->admin->getObjectManager()->update($entity);
 
@@ -297,7 +297,7 @@ class CoreController extends Controller
     protected function processForm()
     {
         $form = $this->admin->getForm();
-        $process = $this->get('msi_cmf.admin.form.handler')->setAdmin($this->admin)->process($form);
+        $process = $this->get('msi_admin.admin.form.handler')->setAdmin($this->admin)->process($form);
 
         return $process;
     }

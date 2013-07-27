@@ -1,12 +1,12 @@
 <?php
 
-namespace Msi\CmfBundle\Admin;
+namespace Msi\AdminBundle\Admin;
 
-use Msi\CmfBundle\Grid\GridBuilder;
+use Msi\AdminBundle\Grid\GridBuilder;
 use Symfony\Component\Form\FormBuilder;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Msi\CmfBundle\Form\Type\DynamicType;
+use Msi\AdminBundle\Form\Type\DynamicType;
 
 class BlockAdmin extends Admin
 {
@@ -14,8 +14,8 @@ class BlockAdmin extends Admin
     {
         $this->options = [
             'search_fields' => ['a.id', 'a.type', 'a.name', 'a.slot'],
-            'form_template' => 'MsiCmfBundle:Block:form.html.twig',
-            'sidebar_nav_template' => 'MsiCmfBundle:Block:sidebar_nav.html.twig',
+            'form_template' => 'MsiAdminBundle:Block:form.html.twig',
+            'sidebar_nav_template' => 'MsiAdminBundle:Block:sidebar_nav.html.twig',
         ];
     }
 
@@ -45,7 +45,7 @@ class BlockAdmin extends Admin
             $builder->add('pages', 'entity', [
                 'multiple' => true,
                 'expanded' => true,
-                'class' => $this->container->getParameter('msi_cmf.page.class'),
+                'class' => $this->container->getParameter('msi_admin.page.class'),
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('a')
                         ->leftJoin('a.translations', 't')
@@ -75,7 +75,7 @@ class BlockAdmin extends Admin
             ]);
         }
 
-        $builder->add('slot', 'choice', ['choices' => $this->container->getParameter('msi_cmf.block.slots')]);
+        $builder->add('slot', 'choice', ['choices' => $this->container->getParameter('msi_admin.block.slots')]);
     }
 
     public function buildTranslationForm(FormBuilder $builder)
@@ -102,7 +102,7 @@ class BlockAdmin extends Admin
 
         $builder
             ->add('pages', 'entity', array(
-                'class' => $this->container->getParameter('msi_cmf.page.class'),
+                'class' => $this->container->getParameter('msi_admin.page.class'),
                 'label' => ' ',
                 'empty_value' => '- '.$this->container->get('translator')->transchoice('entity.Page', 1).' -',
                 'query_builder' => function(EntityRepository $er) {
@@ -122,6 +122,6 @@ class BlockAdmin extends Admin
 
     public function postLoad(ArrayCollection $collection)
     {
-        $this->container->get('msi_cmf.bouncer')->operatorFilter($collection);
+        $this->container->get('msi_admin.bouncer')->operatorFilter($collection);
     }
 }

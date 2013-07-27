@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Bouncer;
+namespace Msi\AdminBundle\Bouncer;
 
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Doctrine\Common\Collections\ArrayCollection;

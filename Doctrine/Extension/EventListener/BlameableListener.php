@@ -1,12 +1,12 @@
 <?php
 
-namespace Msi\CmfBundle\Doctrine\Extension\EventListener;
+namespace Msi\AdminBundle\Doctrine\Extension\EventListener;
 
 use Doctrine\ORM\Events;
 use Doctrine\Common\EventArgs;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-use Msi\CmfBundle\Doctrine\Extension\BaseListener;
+use Msi\AdminBundle\Doctrine\Extension\BaseListener;
 
 class BlameableListener extends BaseListener
 {
@@ -30,7 +30,7 @@ class BlameableListener extends BaseListener
 
     public function prePersist(EventArgs $e)
     {
-        if ($this->getUser() && $this->isEntitySupported($e, 'Msi\CmfBundle\Doctrine\Extension\Model\Blameable')) {
+        if ($this->getUser() && $this->isEntitySupported($e, 'Msi\AdminBundle\Doctrine\Extension\Model\Blameable')) {
             $em = $e->getEntityManager();
             $uow = $em->getUnitOfWork();
             $entity = $e->getEntity();
@@ -46,7 +46,7 @@ class BlameableListener extends BaseListener
 
     public function preUpdate(EventArgs $e)
     {
-        if ($this->getUser() && $this->isEntitySupported($e, 'Msi\CmfBundle\Doctrine\Extension\Model\Blameable')) {
+        if ($this->getUser() && $this->isEntitySupported($e, 'Msi\AdminBundle\Doctrine\Extension\Model\Blameable')) {
             $em = $e->getEntityManager();
             $uow = $em->getUnitOfWork();
             $entity = $e->getEntity();
@@ -62,7 +62,7 @@ class BlameableListener extends BaseListener
 
     public function preRemove(EventArgs $e)
     {
-        if ($this->getUser() && $this->isEntitySupported($e, 'Msi\CmfBundle\Doctrine\Extension\Model\Blameable')) {
+        if ($this->getUser() && $this->isEntitySupported($e, 'Msi\AdminBundle\Doctrine\Extension\Model\Blameable')) {
             $em = $e->getEntityManager();
             $uow = $em->getUnitOfWork();
             $entity = $e->getEntity();
@@ -80,7 +80,7 @@ class BlameableListener extends BaseListener
     {
         $userClass = $this->container->get('msi_user.user_manager')->getClass();
         $metadata = $e->getClassMetadata();
-        if ($this->getClassAnalyzer()->hasTrait($metadata->reflClass, 'Msi\CmfBundle\Doctrine\Extension\Model\Blameable')) {
+        if ($this->getClassAnalyzer()->hasTrait($metadata->reflClass, 'Msi\AdminBundle\Doctrine\Extension\Model\Blameable')) {
             if (!$metadata->hasAssociation('createdBy')) {
                 $metadata->mapManyToOne([
                     'fieldName'    => 'createdBy',

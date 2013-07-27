@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Menu;
+namespace Msi\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 

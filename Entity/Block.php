@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Entity;
+namespace Msi\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class Block
 {
-    use \Msi\CmfBundle\Doctrine\Extension\Model\Translatable;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Translatable;
 
     /**
      * @ORM\Column()

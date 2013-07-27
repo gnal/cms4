@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Entity;
+namespace Msi\AdminBundle\Entity;
 
 class DecorateStrategy
 {

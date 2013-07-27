@@ -1,119 +1,119 @@
 parameters:
-    msi_cmf.manager.class: Msi\CmfBundle\Doctrine\Manager
+    msi_admin.manager.class: Msi\AdminBundle\Doctrine\Manager
 
 services:
-    msi_cmf.admin:
-        class: Msi\CmfBundle\Admin\Admin
+    msi_admin.admin:
+        class: Msi\AdminBundle\Admin\Admin
         abstract: true
         calls:
             - [ setContainer, [ @service_container ] ]
 
-    msi_cmf.manager:
-        class: %msi_cmf.manager.class%
+    msi_admin.manager:
+        class: %msi_admin.manager.class%
         abstract: true
         calls:
             - [ setEntityManager, [ @doctrine.orm.default_entity_manager ] ]
-            - [ setClassAnalyzer, [ @msi_cmf.class_analyzer ] ]
+            - [ setClassAnalyzer, [ @msi_admin.class_analyzer ] ]
 
-    msi_cmf.provider:
-        class: Msi\CmfBundle\Provider\Provider
+    msi_admin.provider:
+        class: Msi\AdminBundle\Provider\Provider
         scope: request
-        arguments: [ @request, @msi_cmf.site_manager ]
+        arguments: [ @request, @msi_admin.site_manager ]
 
-    msi_cmf.bouncer:
-        class: Msi\CmfBundle\Bouncer\Bouncer
+    msi_admin.bouncer:
+        class: Msi\AdminBundle\Bouncer\Bouncer
         arguments: [ @security.context ]
 
-    msi_cmf.admin_loader:
-        class: Msi\CmfBundle\Routing\CmfLoader
+    msi_admin.admin_loader:
+        class: Msi\AdminBundle\Routing\AdminLoader
         arguments: [ @service_container ]
         tags:
             - { name: routing.loader }
 
-    msi_cmf.admin.form.handler:
-        class: Msi\CmfBundle\Form\Handler\AdminFormHandler
+    msi_admin.admin.form.handler:
+        class: Msi\AdminBundle\Form\Handler\AdminFormHandler
         scope: request
         arguments: [ @request, @event_dispatcher ]
 
-    msi_cmf.filter.form.handler:
-        class: Msi\CmfBundle\Form\Handler\FilterFormHandler
+    msi_admin.filter.form.handler:
+        class: Msi\AdminBundle\Form\Handler\FilterFormHandler
         scope: request
         arguments: [ @request ]
 
-    msi_cmf.admin.twig.extension:
-        class: Msi\CmfBundle\Twig\Extension\CmfExtension
+    msi_admin.admin.twig.extension:
+        class: Msi\AdminBundle\Twig\Extension\AdminExtension
         arguments: [ @service_container ]
         tags:
             - { name: twig.extension }
 
-    msi_cmf.pager.factory:
-        class: Msi\CmfBundle\Pager\PagerFactory
+    msi_admin.pager.factory:
+        class: Msi\AdminBundle\Pager\PagerFactory
 
-    msi_cmf.request_listener:
-        class: Msi\CmfBundle\EventListener\RequestListener
+    msi_admin.request_listener:
+        class: Msi\AdminBundle\EventListener\RequestListener
         scope: request
-        arguments: [ @msi_cmf.provider, @security.context ]
+        arguments: [ @msi_admin.provider, @security.context ]
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-    msi_cmf.sortable_listener:
-        class: Msi\CmfBundle\Doctrine\Extension\EventListener\SortableListener
+    msi_admin.sortable_listener:
+        class: Msi\AdminBundle\Doctrine\Extension\EventListener\SortableListener
         tags:
             - { name: doctrine.event_subscriber }
 
-    msi_cmf.soft_deletable_listener:
-        class: Msi\CmfBundle\Doctrine\Extension\EventListener\SoftDeletableListener
+    msi_admin.soft_deletable_listener:
+        class: Msi\AdminBundle\Doctrine\Extension\EventListener\SoftDeletableListener
         tags:
             - { name: doctrine.event_subscriber }
 
-    msi_cmf.timestampable_listener:
-        class: Msi\CmfBundle\Doctrine\Extension\EventListener\TimestampableListener
+    msi_admin.timestampable_listener:
+        class: Msi\AdminBundle\Doctrine\Extension\EventListener\TimestampableListener
         tags:
             - { name: doctrine.event_subscriber }
 
-    msi_cmf.translatable_listener:
-        class: Msi\CmfBundle\Doctrine\Extension\EventListener\TranslatableListener
+    msi_admin.translatable_listener:
+        class: Msi\AdminBundle\Doctrine\Extension\EventListener\TranslatableListener
         arguments: [ @service_container ]
         tags:
             - { name: doctrine.event_subscriber }
 
-    msi_cmf.blameable_listener:
-        class: Msi\CmfBundle\Doctrine\Extension\EventListener\BlameableListener
+    msi_admin.blameable_listener:
+        class: Msi\AdminBundle\Doctrine\Extension\EventListener\BlameableListener
         arguments: [ @service_container ]
         tags:
             - { name: doctrine.event_subscriber }
 
-    msi_cmf.uploadable_listener:
-        class: Msi\CmfBundle\Doctrine\Extension\EventListener\UploadableListener
-        arguments: [ @msi_cmf.uploader ]
+    msi_admin.uploadable_listener:
+        class: Msi\AdminBundle\Doctrine\Extension\EventListener\UploadableListener
+        arguments: [ @msi_admin.uploader ]
         tags:
             - { name: doctrine.event_subscriber }
 
-    msi_cmf.block.text:
-        class: Msi\CmfBundle\Block\Handler\TextBlockHandler
+    msi_admin.block.text:
+        class: Msi\AdminBundle\Block\Handler\TextBlockHandler
 
-    msi_cmf.block.action:
-        class: Msi\CmfBundle\Block\Handler\ActionBlockHandler
-        arguments: [ %msi_cmf.block.actions%, @http_kernel ]
+    msi_admin.block.action:
+        class: Msi\AdminBundle\Block\Handler\ActionBlockHandler
+        arguments: [ %msi_admin.block.actions%, @http_kernel ]
 
-    msi_cmf.block.template:
-        class: Msi\CmfBundle\Block\Handler\TemplateBlockHandler
-        arguments: [ %msi_cmf.block.templates%, @templating ]
+    msi_admin.block.template:
+        class: Msi\AdminBundle\Block\Handler\TemplateBlockHandler
+        arguments: [ %msi_admin.block.templates%, @templating ]
 
-    msi_cmf.block.menu:
-        class: Msi\CmfBundle\Block\Handler\MenuBlockHandler
-        arguments: [ @knp_menu.factory, @knp_menu.renderer.list, @msi_cmf.menu_root_manager ]
+    msi_admin.block.menu:
+        class: Msi\AdminBundle\Block\Handler\MenuBlockHandler
+        arguments: [ @knp_menu.factory, @knp_menu.renderer.list, @msi_admin.menu_root_manager ]
 
-    msi_cmf._voter:
-        class: Msi\CmfBundle\Security\Voter\AclVoter
+    msi_admin._voter:
+        class: Msi\AdminBundle\Security\Voter\AclVoter
         arguments: [ @service_container ]
         public: false
         tags:
             - { name: security.voter }
 
-    msi_cmf.uploader:
-        class: Msi\CmfBundle\Tools\Uploader
+    msi_admin.uploader:
+        class: Msi\AdminBundle\Tools\Uploader
         arguments: [@kernel]
 
-    msi_cmf.class_analyzer:
-        class: Msi\CmfBundle\Tools\ClassAnalyzer
+    msi_admin.class_analyzer:
+        class: Msi\AdminBundle\Tools\ClassAnalyzer

@@ -1,8 +1,8 @@
 <?php
 
-namespace Msi\CmfBundle\Admin;
+namespace Msi\AdminBundle\Admin;
 
-use Msi\CmfBundle\Grid\GridBuilder;
+use Msi\AdminBundle\Grid\GridBuilder;
 use Symfony\Component\Form\FormBuilder;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityRepository;
@@ -13,11 +13,11 @@ class MenuNodeAdmin extends Admin
     public function configure()
     {
         $this->options = [
-            'sidebar_nav_template' => 'MsiCmfBundle:MenuNode:sidebar_nav.html.twig',
-            'index_template' => 'MsiCmfBundle:MenuNode:index.html.twig',
-            'controller' => 'MsiCmfBundle:Admin/MenuNode:',
+            'sidebar_nav_template' => 'MsiAdminBundle:MenuNode:sidebar_nav.html.twig',
+            'index_template' => 'MsiAdminBundle:MenuNode:index.html.twig',
+            'controller' => 'MsiAdminBundle:Admin/MenuNode:',
             'search_fields' => ['a.id', 't.name'],
-            'form_template' => 'MsiCmfBundle:MenuNode:form.html.twig',
+            'form_template' => 'MsiAdminBundle:MenuNode:form.html.twig',
             'order_by' => [],
         ];
     }
@@ -59,7 +59,7 @@ class MenuNodeAdmin extends Admin
         $builder
             ->add('page', 'entity', [
                 'empty_value' => '',
-                'class' => $this->container->getParameter('msi_cmf.page.class'),
+                'class' => $this->container->getParameter('msi_admin.page.class'),
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('a')
                         ->leftJoin('a.translations', 't')
@@ -68,7 +68,7 @@ class MenuNodeAdmin extends Admin
                 },
             ])
             ->add('parent', 'entity', [
-                'class' => $this->container->getParameter('msi_cmf.menu.class'),
+                'class' => $this->container->getParameter('msi_admin.menu.class'),
                 'choices' => $choices,
                 'property' => 'toTree',
             ])
@@ -112,7 +112,7 @@ class MenuNodeAdmin extends Admin
 
     public function postLoad(ArrayCollection $collection)
     {
-        $this->container->get('msi_cmf.bouncer')->operatorFilter($collection);
+        $this->container->get('msi_admin.bouncer')->operatorFilter($collection);
     }
 
     public function validateRoute($entity)

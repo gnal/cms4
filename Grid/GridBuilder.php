@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Grid;
+namespace Msi\AdminBundle\Grid;
 
 class GridBuilder
 {
@@ -21,7 +21,7 @@ class GridBuilder
             if (class_exists($field['type'])) {
                 $class = $field['type'];
             } else {
-                $class = 'Msi\CmfBundle\Grid\Column\\'.ucfirst($field['type']).'Column';
+                $class = 'Msi\AdminBundle\Grid\Column\\'.ucfirst($field['type']).'Column';
             }
             $columns[] = new $class($field);
         }

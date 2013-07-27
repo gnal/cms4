@@ -1,8 +1,8 @@
 <?php
 
-namespace Msi\CmfBundle\Manager;
+namespace Msi\AdminBundle\Manager;
 
-use Msi\CmfBundle\Doctrine\Manager as BaseManager;
+use Msi\AdminBundle\Doctrine\Manager as BaseManager;
 
 class PageManager extends BaseManager
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Tools;
+namespace Msi\AdminBundle\Tools;
 
 class Cutter
 {

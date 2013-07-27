@@ -1,10 +1,10 @@
 <?php
 
-namespace Msi\CmfBundle\Form\Handler;
+namespace Msi\AdminBundle\Form\Handler;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Msi\CmfBundle\Event\EntityEvent;
+use Msi\AdminBundle\Event\EntityEvent;
 
 class AdminFormHandler
 {
@@ -58,10 +58,10 @@ class AdminFormHandler
 
             if (!$entity->getId()) {
                 $this->admin->prePersist($entity);
-                $this->dispatcher->dispatch('msi_cmf.entity.create.success', new EntityEvent($entity, $this->request));
+                $this->dispatcher->dispatch('msi_admin.entity.create.success', new EntityEvent($entity, $this->request));
             } else {
                 $this->admin->preUpdate($entity);
-                $this->dispatcher->dispatch('msi_cmf.entity.update.success', new EntityEvent($entity, $this->request));
+                $this->dispatcher->dispatch('msi_admin.entity.update.success', new EntityEvent($entity, $this->request));
             }
 
             if ('msi_user_user_admin' === $this->admin->getId()) {

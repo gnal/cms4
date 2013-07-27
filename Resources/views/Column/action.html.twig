@@ -12,6 +12,6 @@
     {% endif %}
 
     {% if grid.admin.isGranted('delete') and column.options.delete %}
-        <a title="{{ 'Delete'|trans }}" class="btn btn-small msi_cmf_admin_delete" data-url="{{ grid.admin.genUrl('delete', {'id': row.id}) }}" href="#"><i class="icon-trash"></i></a>
+        <a title="{{ 'Delete'|trans }}" class="btn btn-small msi_admin_admin_delete" data-url="{{ grid.admin.genUrl('delete', {'id': row.id}) }}" href="#"><i class="icon-trash"></i></a>
     {% endif %}
 </div>

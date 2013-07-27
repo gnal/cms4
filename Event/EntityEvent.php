@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Event;
+namespace Msi\AdminBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;

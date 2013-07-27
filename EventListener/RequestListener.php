@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\EventListener;
+namespace Msi\AdminBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

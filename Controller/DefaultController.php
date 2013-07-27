@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Controller;
+namespace Msi\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,7 +9,7 @@ class DefaultController extends Controller
 {
     public function dashboardAction()
     {
-        return $this->render('MsiCmfBundle:Default:dashboard.html.twig');
+        return $this->render('MsiAdminBundle:Default:dashboard.html.twig');
     }
 
     public function limitAction()
@@ -42,7 +42,7 @@ class DefaultController extends Controller
 
         $key = md5(implode('', $configuration['configs']).'someSecretKey');
 
-        return $this->render('MsiCmfBundle:Default:tinymcelogin.html.twig', [
+        return $this->render('MsiAdminBundle:Default:tinymcelogin.html.twig', [
             'configuration' => $configuration,
             'url' => $url,
             'key' => $key

@@ -1,11 +1,11 @@
 <?php
 
-namespace Msi\CmfBundle\Doctrine\Extension\EventListener;
+namespace Msi\AdminBundle\Doctrine\Extension\EventListener;
 
 use Doctrine\ORM\Events;
 use Doctrine\Common\EventArgs;
 
-use Msi\CmfBundle\Doctrine\Extension\BaseListener;
+use Msi\AdminBundle\Doctrine\Extension\BaseListener;
 
 class UploadableListener extends BaseListener
 {
@@ -31,7 +31,7 @@ class UploadableListener extends BaseListener
     public function prePersist(EventArgs $e)
     {
         $entity = $e->getEntity();
-        if ($this->isEntitySupported($e, 'Msi\CmfBundle\Doctrine\Extension\Model\Uploadable')) {
+        if ($this->isEntitySupported($e, 'Msi\AdminBundle\Doctrine\Extension\Model\Uploadable')) {
             $this->uploader->preUpload($entity);
         }
     }
@@ -39,7 +39,7 @@ class UploadableListener extends BaseListener
     public function preUpdate(EventArgs $e)
     {
         $entity = $e->getEntity();
-        if ($this->isEntitySupported($e, 'Msi\CmfBundle\Doctrine\Extension\Model\Uploadable')) {
+        if ($this->isEntitySupported($e, 'Msi\AdminBundle\Doctrine\Extension\Model\Uploadable')) {
             $this->uploader->preUpload($entity);
             $em   = $e->getEntityManager();
             $uow  = $em->getUnitOfWork();
@@ -51,7 +51,7 @@ class UploadableListener extends BaseListener
     public function postPersist(EventArgs $e)
     {
         $entity = $e->getEntity();
-        if ($this->isEntitySupported($e, 'Msi\CmfBundle\Doctrine\Extension\Model\Uploadable')) {
+        if ($this->isEntitySupported($e, 'Msi\AdminBundle\Doctrine\Extension\Model\Uploadable')) {
             $this->uploader->postUpload($entity);
         }
     }
@@ -59,7 +59,7 @@ class UploadableListener extends BaseListener
     public function postUpdate(EventArgs $e)
     {
         $entity = $e->getEntity();
-        if ($this->isEntitySupported($e, 'Msi\CmfBundle\Doctrine\Extension\Model\Uploadable')) {
+        if ($this->isEntitySupported($e, 'Msi\AdminBundle\Doctrine\Extension\Model\Uploadable')) {
             $this->uploader->postUpload($entity);
         }
     }
@@ -67,7 +67,7 @@ class UploadableListener extends BaseListener
     public function postRemove(EventArgs $e)
     {
         $entity = $e->getEntity();
-        if ($this->isEntitySupported($e, 'Msi\CmfBundle\Doctrine\Extension\Model\Uploadable')) {
+        if ($this->isEntitySupported($e, 'Msi\AdminBundle\Doctrine\Extension\Model\Uploadable')) {
             foreach ($entity->getUploadFields() as $fieldName) {
                 $this->uploader->removeUpload($fieldName, $entity);
             }

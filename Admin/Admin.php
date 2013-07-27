@@ -1,14 +1,14 @@
 <?php
 
-namespace Msi\CmfBundle\Admin;
+namespace Msi\AdminBundle\Admin;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Msi\CmfBundle\Doctrine\Manager;
+use Msi\AdminBundle\Doctrine\Manager;
 use Doctrine\Common\Collections\ArrayCollection;
-use Msi\CmfBundle\Form\Type\DynamicType;
+use Msi\AdminBundle\Form\Type\DynamicType;
 
 use Symfony\Component\Form\FormBuilder;
-use Msi\CmfBundle\Grid\GridBuilder;
+use Msi\AdminBundle\Grid\GridBuilder;
 use Doctrine\ORM\QueryBuilder;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -116,24 +116,24 @@ abstract class Admin
         return $matches[0];
     }
 
-    public function hasTrait($traitName, $namespace = 'Msi\CmfBundle\Doctrine\Extension\Model\\')
+    public function hasTrait($traitName, $namespace = 'Msi\AdminBundle\Doctrine\Extension\Model\\')
     {
-        return $this->container->get('msi_cmf.class_analyzer')->hasTrait($this->getMetadata()->reflClass, $namespace.$traitName);
+        return $this->container->get('msi_admin.class_analyzer')->hasTrait($this->getMetadata()->reflClass, $namespace.$traitName);
     }
 
     public function isSortable()
     {
-        return $this->container->get('msi_cmf.class_analyzer')->hasTrait($this->getMetadata()->reflClass, 'Msi\CmfBundle\Doctrine\Extension\Model\Sortable');
+        return $this->container->get('msi_admin.class_analyzer')->hasTrait($this->getMetadata()->reflClass, 'Msi\AdminBundle\Doctrine\Extension\Model\Sortable');
     }
 
     public function isUploadable()
     {
-        return $this->container->get('msi_cmf.class_analyzer')->hasTrait($this->getMetadata()->reflClass, 'Msi\CmfBundle\Doctrine\Extension\Model\Uploadable');
+        return $this->container->get('msi_admin.class_analyzer')->hasTrait($this->getMetadata()->reflClass, 'Msi\AdminBundle\Doctrine\Extension\Model\Uploadable');
     }
 
     public function isTranslatable()
     {
-        return $this->container->get('msi_cmf.class_analyzer')->hasTrait($this->getMetadata()->reflClass, 'Msi\CmfBundle\Doctrine\Extension\Model\Translatable');
+        return $this->container->get('msi_admin.class_analyzer')->hasTrait($this->getMetadata()->reflClass, 'Msi\AdminBundle\Doctrine\Extension\Model\Translatable');
     }
 
     public function getMetadata()
@@ -174,7 +174,7 @@ abstract class Admin
     {
         if (!$this->object) {
             $this->object = $this->objectManager->findOneOrCreate(
-                $this->container->getParameter('msi_cmf.app_locales'),
+                $this->container->getParameter('msi_admin.app_locales'),
                 $this->container->get('request')->query->get('id')
             );
         }
@@ -186,7 +186,7 @@ abstract class Admin
     {
         if (!$this->parentObject) {
             $this->parentObject = $this->getParent()->objectManager->findOneOrCreate(
-                $this->container->getParameter('msi_cmf.app_locales'),
+                $this->container->getParameter('msi_admin.app_locales'),
                 $this->container->get('request')->query->get('parentId')
             );
         }
@@ -393,7 +393,7 @@ abstract class Admin
         ];
 
         if ($action === 'new') {
-            $crumbs[] = array('label' => '<i class="icon-plus"></i> '.$this->getLabel(1), 'path' => '', 'class' => 'active');
+            $crumbs[] = array('label' => '<i class="icon-plus-sign-alt"></i> '.$this->getLabel(1), 'path' => '', 'class' => 'active');
         }
 
         if ($action === 'edit') {
@@ -433,12 +433,12 @@ abstract class Admin
     {
         $resolver->setDefaults([
             'controller'           => null,
-            'form_template'        => 'MsiCmfBundle:Admin:form.html.twig',
+            'form_template'        => 'MsiAdminBundle:Admin:form.html.twig',
             'sidebar_template'     => null,
             'sidebar_nav_template' => null,
-            'index_template'       => 'MsiCmfBundle:Admin:index.html.twig',
-            'new_template'         => 'MsiCmfBundle:Admin:new.html.twig',
-            'edit_template'        => 'MsiCmfBundle:Admin:edit.html.twig',
+            'index_template'       => 'MsiAdminBundle:Admin:index.html.twig',
+            'new_template'         => 'MsiAdminBundle:Admin:new.html.twig',
+            'edit_template'        => 'MsiAdminBundle:Admin:edit.html.twig',
             'search_fields'        => [],
             'order_by'             => ['a.id' => 'DESC'],
             'uploadify'            => false,

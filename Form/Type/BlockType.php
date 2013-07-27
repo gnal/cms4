@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Form\Type;
+namespace Msi\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,19 +22,19 @@ class BlockType extends AbstractType
             ->add('name')
             ->add('type', 'choice', [
                 'choices' => [
-                    'msi_cmf.block.text' => 'Text',
-                    'msi_cmf.block.action' => 'Action',
-                    'msi_cmf.block.template' => 'Template',
-                    'msi_cmf.block.menu' => 'Menu',
+                    'msi_admin.block.text' => 'Text',
+                    'msi_admin.block.action' => 'Action',
+                    'msi_admin.block.template' => 'Template',
+                    'msi_admin.block.menu' => 'Menu',
                 ],
             ])
             ->add('slot', 'choice', [
-                'choices' => $this->container->getParameter('msi_cmf.block.slots')
+                'choices' => $this->container->getParameter('msi_admin.block.slots')
             ])
             ->add('pages', 'entity', [
                 'multiple' => true,
                 'expanded' => true,
-                'class' => $this->container->getParameter('msi_cmf.page.class'),
+                'class' => $this->container->getParameter('msi_admin.page.class'),
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('a')
                         ->leftJoin('a.translations', 't')
@@ -56,7 +56,7 @@ class BlockType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Msi\CmfBundle\Entity\Block',
+            'data_class' => 'Msi\AdminBundle\Entity\Block',
         ]);
     }
 

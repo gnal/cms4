@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Menu;
+namespace Msi\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
@@ -12,7 +12,7 @@ class BaseMenuBuilder extends ContainerAware
 
     protected function getMenu(FactoryInterface $factory, $name)
     {
-        $root = $this->container->get('msi_cmf.menu_root_manager')->findRootByName($name)[0];
+        $root = $this->container->get('msi_admin.menu_root_manager')->findRootByName($name)[0];
 
         return $this->create($factory, $root, $name);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\DataFixtures;
+namespace Msi\AdminBundle\DataFixtures;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

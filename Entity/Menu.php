@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Entity;
+namespace Msi\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -12,8 +12,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 abstract class Menu
 {
-    use \Msi\CmfBundle\Doctrine\Extension\Model\Timestampable;
-    use \Msi\CmfBundle\Doctrine\Extension\Model\Translatable;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Timestampable;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Translatable;
 
     /**
      * @ORM\Column(type="integer")

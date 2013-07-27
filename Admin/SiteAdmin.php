@@ -1,8 +1,8 @@
 <?php
 
-namespace Msi\CmfBundle\Admin;
+namespace Msi\AdminBundle\Admin;
 
-use Msi\CmfBundle\Grid\GridBuilder;
+use Msi\AdminBundle\Grid\GridBuilder;
 use Symfony\Component\Form\FormBuilder;
 
 class SiteAdmin extends Admin
@@ -10,8 +10,8 @@ class SiteAdmin extends Admin
     public function configure()
     {
         $this->options = [
-            'form_template' => 'MsiCmfBundle:Site:form.html.twig',
-            'sidebar_nav_template' => 'MsiCmfBundle:Site:sidebar_nav.html.twig',
+            'form_template' => 'MsiAdminBundle:Site:form.html.twig',
+            'sidebar_nav_template' => 'MsiAdminBundle:Site:sidebar_nav.html.twig',
             'search_fields' => ['a.id', 'a.host', 't.brand'],
         ];
     }
@@ -29,7 +29,7 @@ class SiteAdmin extends Admin
     public function buildForm(FormBuilder $builder)
     {
         $choices = [];
-        foreach ($this->container->getParameter('msi_cmf.app_locales') as $locale) {
+        foreach ($this->container->getParameter('msi_admin.app_locales') as $locale) {
             $choices[$locale] = strtoupper($locale);
         }
 

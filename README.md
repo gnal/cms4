@@ -1,4 +1,4 @@
-MsiCmfBundle
+MsiAdminBundle
 ==============
 
 ok

@@ -1,8 +1,8 @@
 <?php
 
-namespace Msi\CmfBundle\Controller\Admin;
+namespace Msi\AdminBundle\Controller\Admin;
 
-use Msi\CmfBundle\Controller\CoreController;
+use Msi\AdminBundle\Controller\CoreController;
 use Symfony\Component\HttpFoundation\Request;
 
 class MenuNodeController extends CoreController

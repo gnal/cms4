@@ -1,8 +1,8 @@
 <?php
 
-namespace Msi\CmfBundle\Twig\Extension;
+namespace Msi\AdminBundle\Twig\Extension;
 
-class CmfExtension extends \Twig_Extension
+class AdminExtension extends \Twig_Extension
 {
     private $container;
 
@@ -25,7 +25,7 @@ class CmfExtension extends \Twig_Extension
     {
         $globals = [];
 
-        $globals['app_locales'] = $this->container->getParameter('msi_cmf.app_locales');
+        $globals['app_locales'] = $this->container->getParameter('msi_admin.app_locales');
 
         if (!$this->container->isScopeActive('request')) {
             return $globals;
@@ -33,13 +33,13 @@ class CmfExtension extends \Twig_Extension
 
         $request = $this->container->get('request');
 
-        $site = $this->container->get('msi_cmf.provider')->getSite();
+        $site = $this->container->get('msi_admin.provider')->getSite();
         $globals['site'] = $site;
 
         // set page
-        $page = $this->container->get('msi_cmf.page_manager')->findByRoute($request->attributes->get('_route'));
+        $page = $this->container->get('msi_admin.page_manager')->findByRoute($request->attributes->get('_route'));
         if (!$page) {
-            $page = $this->container->get('msi_cmf.page_manager')->findOneOrCreate($this->container->getParameter('msi_cmf.app_locales'));
+            $page = $this->container->get('msi_admin.page_manager')->findOneOrCreate($this->container->getParameter('msi_admin.app_locales'));
         }
         $globals['page'] = $page;
 
@@ -152,7 +152,7 @@ class CmfExtension extends \Twig_Extension
 
         if ($paginator->getPage() > $numPages) return;
 
-        return $this->container->get('templating')->render('MsiCmfBundle:Pager:'.$options['template'].'.html.twig', array('paginator' => $paginator, 'pagination' => $pagination));
+        return $this->container->get('templating')->render('MsiAdminBundle:Pager:'.$options['template'].'.html.twig', array('paginator' => $paginator, 'pagination' => $pagination));
     }
 
     protected function generateUrl($page)
@@ -166,6 +166,6 @@ class CmfExtension extends \Twig_Extension
 
     public function getName()
     {
-        return 'msi_cmf';
+        return 'msi_admin';
     }
 }

@@ -1,4 +1,4 @@
-{% extends 'MsiCmfBundle:Admin:index.html.twig' %}
+{% extends 'MsiAdminBundle:Admin:index.html.twig' %}
 
 {% block sidebar %}
 <ul id="sortable1" class="unstyled" data-url="{{ admin.genUrl('sort') }}">
@@ -11,15 +11,15 @@
                         {% if i < item.lvl and i > 1 %}
                             <i class="icon-minus"></i>
                         {% else %}
-                            {#<img src="/bundles/msicmf/img/elbow-line.gif" alt="0">#}
+                            {#<img src="/bundles/msiadmin/img/elbow-line.gif" alt="0">#}
                             <i class="icon-minus"></i>
                         {% endif %}
                     {% else %}
                         {% if item.rgt == item.parent.rgt - 1 %}
-                            {#<img src="/bundles/msicmf/img/elbow-end.gif" alt="0">#}
+                            {#<img src="/bundles/msiadmin/img/elbow-end.gif" alt="0">#}
                             <i class="icon-minus"></i>
                         {% else %}
-                            {#<img src="/bundles/msicmf/img/elbow.gif" alt="0">#}
+                            {#<img src="/bundles/msiadmin/img/elbow.gif" alt="0">#}
                             <i class="icon-minus"></i>
                         {% endif %}
                         <i class="icon-folder-open"></i>
@@ -34,5 +34,5 @@
 
 {% block js %}
 {{ parent() }}
-<script src="{{ asset('bundles/msicmf/js/tree.js') }}"></script>
+<script src="{{ asset('bundles/msiadmin/js/tree.js') }}"></script>
 {% endblock js %}

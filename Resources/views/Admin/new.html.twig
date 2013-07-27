@@ -1,11 +1,11 @@
-{% extends 'MsiCmfBundle::layout.html.twig' %}
+{% extends 'MsiAdminBundle::layout.html.twig' %}
 
-{% block title %}<i class="icon-plus"></i> {{ admin.getLabel() }}{% endblock title %}
+{% block title %}<i class="icon-plus-sign-alt"></i> {{ admin.getLabel() }}{% endblock title %}
 
 {% block actions %}
-<button class="btn btn-primary msi_cmf_save"><i class="icon-white icon-ok"></i> {{ 'save'|trans }}</button>
-<button class="btn msi_cmf_save_quit"><i class="icon-ok"></i> {{ 'save_quit'|trans }}</button>
-<button class="btn btn-success msi_cmf_save_add"><i class="icon-white icon-plus"></i> {{ 'save_add'|trans }}</button>
+<button class="btn btn-primary msi_admin_save"><i class="icon-white icon-ok"></i> {{ 'save'|trans }}</button>
+<button class="btn msi_admin_save_quit"><i class="icon-ok"></i> {{ 'save_quit'|trans }}</button>
+<button class="btn btn-success msi_admin_save_add"><i class="icon-white icon-plus-sign-alt"></i> {{ 'save_add'|trans }}</button>
 {% endblock actions %}
 
 {% block sidebar %}
@@ -29,8 +29,8 @@
 
 {% block js %}
 {{ parent() }}
-{% include admin.container.getParameter('msi_cmf.tiny_mce') %}
-<script src="{{ asset('bundles/msicmf/js/save.js') }}"></script>
+{% include admin.container.getParameter('msi_admin.tiny_mce') %}
+<script src="{{ asset('bundles/msiadmin/js/save.js') }}"></script>
 {% if admin.getOption('form_js_template') %}
 {% include admin.getOption('form_js_template') %}
 {% endif %}

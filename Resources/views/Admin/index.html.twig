@@ -1,4 +1,4 @@
-{% extends 'MsiCmfBundle::layout.html.twig' %}
+{% extends 'MsiAdminBundle::layout.html.twig' %}
 
 {% block title %}
 <i class="icon-folder-open"></i> {{ admin.getLabel(2) }}
@@ -7,7 +7,7 @@
 {% block sidebar %}
 {% if filterForm is defined %}
     <form novalidate method="GET" action="{{ admin.genUrl('list') }}">
-        {% form_theme filterForm 'MsiCmfBundle:Form:form.html.twig' %}
+        {% form_theme filterForm 'MsiAdminBundle:Form:form.html.twig' %}
         {{ form_widget(filterForm) }}
         <div class="btn-group">
             <button type="submit" class="btn"><i class="icon-filter"></i></button>
@@ -23,14 +23,14 @@
 
 {% block actions %}
 {% if admin.isGranted('create') %}
-    <a href="{{ admin.genUrl('new') }}" class="btn btn-success"><i class="icon-white icon-plus"></i> {{ 'Add'|trans }} {{ admin.getLabel(1) }}</a>
+    <a href="{{ admin.genUrl('new') }}" class="btn btn-success"><i class="icon-white icon-plus-sign-alt"></i> {{ 'Add'|trans }} {{ admin.getLabel(1) }}</a>
 {% endif %}
 {% endblock %}
 
 {% block content %}
 <div class="row-fluid">
     <div class="span6">
-        {% include 'MsiCmfBundle:Pager:pager.html.twig' %}
+        {% include 'MsiAdminBundle:Pager:pager.html.twig' %}
     </div>
     <div class="span6">
         {% if admin.getOption('search_fields')|length %}
@@ -47,10 +47,10 @@
         {% endif %}
     </div>
 </div>
-{% include 'MsiCmfBundle:Grid:default.html.twig' with {'grid': admin.getGrid()} %}
-<form id="limitForm" novalidate class="pull-left form-search" method="POST" action="{{ path('msi_cmf_limit') }}">
+{% include 'MsiAdminBundle:Grid:default.html.twig' with {'grid': admin.getGrid()} %}
+<form id="limitForm" novalidate class="pull-left form-search" method="POST" action="{{ path('msi_admin_limit') }}">
     <small>view</small>
-    <select name="limit" style="width: auto;">
+    <select name="limit" class="notchosen input-mini">
         <option {% if app.session.get('limit') == 10 %}selected=selected{% endif %} value="10">10</option>
         <option {% if app.session.get('limit', 25) == 25 %}selected=selected{% endif %} value="25">25</option>
         <option {% if app.session.get('limit') == 50 %}selected=selected{% endif %} value="50">50</option>
@@ -124,11 +124,11 @@
 </script>
 {% endif %}
 {% if admin.getOption('uploadify') %}
-<script src="{{ asset('bundles/msicmf/vendor/uploadify/jquery.uploadify.min.js') }}"></script>
+<script src="{{ asset('bundles/msiadmin/vendor/uploadify/jquery.uploadify.min.js') }}"></script>
 <script>
 $(function() {
     $('#file_upload').uploadify({
-        swf: "{{ asset('bundles/msicmf/vendor/uploadify/uploadify.swf') }}",
+        swf: "{{ asset('bundles/msiadmin/vendor/uploadify/uploadify.swf') }}",
         uploader: "{{ admin.genUrl('new') }}",
         auto: false,
         buttonText: 'CHOOSE FILE',
@@ -147,7 +147,7 @@ $(function() {
 
 {% block css %}
 {% if admin.getOption('uploadify') %}
-<link rel="stylesheet" href="{{ asset('bundles/msicmf/vendor/uploadify/uploadify.css') }}" />
+<link rel="stylesheet" href="{{ asset('bundles/msiadmin/vendor/uploadify/uploadify.css') }}" />
 {% endif %}
 {{ parent() }}
 {% endblock css %}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CmfBundle\Entity;
+namespace Msi\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class MenuTranslation
 {
-    use \Msi\CmfBundle\Doctrine\Extension\Model\Translation;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Translation;
 
     /**
      * @ORM\Column(type="integer")
