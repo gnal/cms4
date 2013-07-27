@@ -1,0 +1,30 @@
+<table id="grid" class="{% if admin.hasTrait('Sortable') %}table-sortable {% endif %}table table-bordered table-striped">
+    {# Head #}
+    <thead>
+        <tr>
+        {% for column in grid.columns %}
+            <th>{{ column.get('label')|capitalize|trans }}</th>
+        {% endfor %}
+        </tr>
+    </thead>
+    {# Body #}
+    <tbody>
+    {% for row in grid.rows %}
+        <tr id="tr{{ row.id }}" data-row="{{ loop.index }}">
+            {#<td class="span1">
+                <div class="text-center">
+                    <input data-row-id="<?php echo $row->getId() ?>" style="margin-top: 0;" type=checkbox>
+                </div>
+            </td>#}
+            {% for column in grid.columns %}
+                <td {% for attrname,attrvalue in column.options.attr %}{{attrname}}="{{attrvalue}}" {% endfor %}id="td{{ loop.index~row.id }}">
+                {% include 'MsiCmfBundle:Column:'~column.type~'.html.twig' with {'i': loop.index, 'column': column.resolveRow(row)} %}
+                </td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr><td colspan={{ grid.columns|length }}></td></tr>
+    </tfoot>
+</table>

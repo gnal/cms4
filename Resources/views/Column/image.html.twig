@@ -1,0 +1,11 @@
+{% if column.options.collection == false %}
+    <a target="_blank" href="{{ row.pathname(column.name) }}">
+        <img style="height: 26px;" class="pull-left" src="{{ row.pathname(column.name) }}" alt="0">
+    </a>
+{% else %}
+    {% if column.value.count %}
+    <a target="_blank" href="{{ column.value.first.pathname(column.name) }}">
+        <img style="height: 26px;" class="pull-left" src="{{ column.value.first.pathname(column.name) }}" alt="0">
+    </a>
+    {% endif %}
+{% endif %}

@@ -1,0 +1,10 @@
+{% extends 'MsiCmfBundle:Page:layout.html.twig' %}
+
+{% block body %}
+{% if page.showTitle %}
+<h2>{{ page.translation.title }}</h2>
+{% endif %}
+{{ msi_block_render('content_top', page) }}
+{{ block('page_content') }}
+{{ msi_block_render('content_bottom', page) }}
+{% endblock body %}

@@ -1,0 +1,39 @@
+{% form_theme form 'MsiCmfBundle:Form:form.html.twig' %}
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="tab1">
+        <fieldset>
+            {{ form_row(form.parent) }}
+            {{ form_row(form.targetBlank) }}
+            <ul class="nav nav-tabs">
+                {% for translation in form.translations %}
+                <li{% if loop.index == 1 %} class="active"{% endif %}><a href="#translation1{{ translation.vars.value.locale }}" data-toggle="tab">{{ translation.vars.value.locale|trans|capitalize }}</a></li>
+                {% endfor %}
+            </ul>
+            <div class="tab-content">
+                {% for translation in form.translations %}
+                    <div class="tab-pane fade{% if loop.index == 1 %} active in{% endif %}" id="translation1{{ translation.vars.value.locale }}">
+                        {{ form_row(translation.name) }}
+                        {{ form_row(translation.route) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="tab-pane fade" id="tab2">
+        <fieldset>
+            {{ form_row(form.page) }}
+        </fieldset>
+    </div>
+
+    {% if app.user.isSuperAdmin %}
+    <div class="tab-pane fade" id="tab3">
+        <fieldset>
+            {{ form_row(form.operators) }}
+        </fieldset>
+    </div>
+    {% endif %}
+</div>
+
+{{ form_rest(form) }}

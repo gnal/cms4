@@ -1,0 +1,16 @@
+{% extends 'MsiCmfBundle::layout.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block js %}
+{{ parent() }}
+<script src="{{ asset('/bundles/msicmf/vendor/tiny_mce/plugins/filemanager/js/mcfilemanager.js') }}"></script>
+<script src="{{ asset('/bundles/msicmf/vendor/tiny_mce/plugins/imagemanager/js/mcimagemanager.js') }}"></script>
+{% endblock js %}
+
+{% block content %}
+<p>
+    <a class="btn" href="javascript:mcImageManager.open();">Image manager</a>
+    <a class="btn" href="javascript:mcFileManager.open();">File manager</a>
+</p>
+{% endblock content %}

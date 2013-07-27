@@ -1,0 +1,17 @@
+msi_cmf_dashboard:
+    pattern: /admin/
+    defaults: { _controller: MsiCmfBundle:Default:dashboard }
+
+msi_cmf_limit:
+    pattern: /change-limit
+    defaults: { _controller: MsiCmfBundle:Default:limit }
+
+msi_page_show:
+    pattern: /{_locale}/{slug}
+    defaults: { _controller: MsiCmfBundle:Page:show, slug: ~ }
+    requirements:
+        _locale: fr|en
+
+tinymce_login:
+    pattern: /_tinymce/login
+    defaults: { _controller: MsiCmfBundle:Default:tinymcelogin }

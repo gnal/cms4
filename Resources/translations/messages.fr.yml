@@ -1,0 +1,86 @@
+entity:
+    Menu: Menu|Menus
+    MenuRoot: Menu|Menus
+    MenuNode: Item|Items
+    Page: Page|Pages
+    Block: Bloc|Blocs
+    Site: Site|Sites
+
+locale:
+    fr: Français
+    en: English
+
+save: Enregistrer
+save_quit: Enregistrer & Quitter
+save_add: Enregistrer & Ajouter
+
+Dashboard: Tableau de bord
+Language:: Langage :
+Add: Ajouter
+Edit: Modifier
+Delete: Supprimer
+Show: Afficher
+Cancel: Annuler
+Back: Retour
+Save Changes: Sauvegarder les modifications
+View site: Voir le Site
+index_title: Liste des %label%
+Reset: Réinitialiser
+Search: Rechercher
+Profile: Profil
+Logout: Déconnexion
+Français: English
+Filter: Filtre
+error!: Erreur!
+Updatedat: Modifié le
+Createdat: Créé le
+Download: Télécharger
+Enabled: Activé
+View file: Voir le fichier
+Update: Mettre à jour
+Main: Principal
+Advanced: Avancé
+All: Tout
+None: Aucun
+Default language: Langage par défaut
+Available languages: Langages disponibles
+Languages: Langages
+Isdefault: Site par défaut
+Yes: Oui
+No: Non
+text: Contenu
+action: Action
+template: Template
+menu: Menu
+Dashboard: Tableau de bord
+Locked: Barré
+Roles: Rôles
+Banned: Banni
+Path: Chemin
+Showtitle: Afficher le titre
+Link: Lien
+Content: Contenu
+Home: Accueil
+Title: Titre
+Template: Gabarit
+Metakeywords: Mots clés
+Metadescription: Description
+Name: Nom
+Order: Ordre
+Content: Contenu
+Security: Sécurité
+Lastlogin: Dernière connexion
+Published: Publié
+Issuperadmin: Is Super Admin
+Targetblank: Ouvrir dans un nouvel onglet
+Back to list: Retour à la liste
+Settings: Paramètres
+Open in a new tab: Ouvrir dans un nouvel onglet
+Groups: Groupes
+Body: Contenu
+Whitelist: Liste blanche
+
+fr: Français
+en: Anglais
+
+success!: The %label% has been saved.

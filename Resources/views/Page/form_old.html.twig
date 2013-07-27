@@ -1,0 +1,98 @@
+{% form_theme form 'MsiCmfBundle:Form:form.html.twig' %}
+
+<div class="tab-content">
+    {# BLOCKS #}
+    <div class="tab-pane fade active in" id="blocks">
+        <div class="tabs-right">
+            <ul class="nav nav-tabs">
+                {% for row in form.blocks %}
+                    <li{% if loop.index == 1 %} class="active"{% endif %}><a href="#block{{ loop.index }}" data-toggle="tab">{{ row.name.vars.value|capitalize }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <div class="tab-content">
+                {% for row in form.blocks %}
+                    <div class="tab-pane fade{% if loop.index == 1 %} active in{% endif %}" id="block{{ loop.index }}">
+
+                        <ul class="nav nav-tabs pull-left">
+                            <li class="active"><a href="#block{{ loop.index }}dada" data-toggle="tab">{{ 'Main'|trans }}</a></li>
+                            <li><a href="#block{{ loop.index }}caca" data-toggle="tab">{{ 'Admin'|trans }}</a></li>
+                        </ul>
+
+                        <div class="clearfix"></div>
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="block{{ loop.index }}dada">
+                                {% for translation in row.translations %}
+                                <div class="well">
+                                    <h4>{{ translation.get('value').locale|trans|capitalize }}</h4>
+                                    {{ form_widget(translation) }}
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="tab-pane fade" id="block{{ loop.index }}caca">
+                                <div class="well">
+                                    {{ form_row(row.name) }}
+                                    {{ form_row(row.type) }}
+                                    {{ form_row(row.slot) }}
+                                    {{ form_row(row.pages) }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {{ form_rest(row) }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {# PAGE #}
+    <div class="tab-pane fade" id="page">
+        <ul class="nav nav-tabs pull-left">
+            <li class="active"><a href="#page1" data-toggle="tab">{{ 'Main'|trans }}</a></li>
+            <li><a href="#page2" data-toggle="tab">{{ 'SEO'|trans }}</a></li>
+            <li><a href="#page3" data-toggle="tab">{{ 'Admin'|trans }}</a></li>
+        </ul>
+
+        <div class="clearfix"></div>
+
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="page1">
+                <div class="well">
+                    {% if admin.container.parameter('msi_cmf.multisite') %}{{ form_row(form.site) }}{% endif %}
+                    {{ form_row(form.template) }}
+                    {{ form_row(form.home) }}
+                    {{ form_row(form.showTitle) }}
+                </div>
+                {% for translation in form.translations %}
+                <div class="well">
+                    <h4>{{ translation.get('value').locale|trans|capitalize }}</h4>
+                    {{ form_row(translation.published) }}
+                    {{ form_row(translation.title) }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="tab-pane fade" id="page2">
+                {% for translation in form.translations %}
+                <div class="well">
+                    <h4>{{ translation.get('value').locale|trans|capitalize }}</h4>
+                    {{ form_row(translation.metaKeywords) }}
+                    {{ form_row(translation.metaDescription) }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="tab-pane fade" id="page3">
+                <div class="well">
+                    {{ form_row(form.route) }}
+                    {{ form_row(form.css) }}
+                    {{ form_row(form.js) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ form_rest(form) }}

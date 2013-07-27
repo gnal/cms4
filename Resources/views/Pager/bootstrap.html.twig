@@ -1,0 +1,10 @@
+{% set paginator_attr = paginator.options.attr|merge({'class': (paginator.options.attr.class|default('')~' pagination')|trim}) %}
+<div{% for attrname, attrvalue in paginator_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+    <ul class="pull-left">
+        {% for item in pagination %}
+            {% set item_attr = item.attr %}
+            <li{% for attrname, attrvalue in item_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}><a href="{{ item.url }}">{{ item.label|raw }}</a></li>
+        {% endfor %}
+    </ul>
+    <form style="margin-left: 5px;" method=get action="{{ path(app.request.attributes.get('_route', app.request.query.all)) }}" class="form-inline pull-left"><input class="input-mini" name=page type=text> <button class="btn" type=submit>Go</button></form>
+</div>
