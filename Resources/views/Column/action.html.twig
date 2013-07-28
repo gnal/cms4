@@ -1,17 +1,17 @@
 <div style="white-space: nowrap;">
     {% for child in grid.admin.children if grid.admin.hasChildren() and column.options.children %}
-        <a title="{{ child.label(2) }}" href="{{ child.genUrl('list', {'parentId': row.id}) }}" class="btn btn-small"><i class="icon-folder-close"></i></a>
+        <a title="{{ child.label(2) }}" href="{{ child.genUrl('list', {'parentId': row.id}) }}" class="label"><i class="icon-2x icon-folder-close"></i></a>
     {% endfor %}
 
     {% for key, val in column.options.actions %}
-        <a class="btn btn-small" href="{% if val != '#' %}{{ path(val, {'id': row.id, 'parentId': app.request.query.get('parentId')}) }}{% else %}{{ val }}{% endif %}">{{ key|raw }}</a>
+        <a class="label" href="{% if val != '#' %}{{ path(val, {'id': row.id, 'parentId': app.request.query.get('parentId')}) }}{% else %}{{ val }}{% endif %}">{{ key|raw }}</a>
     {% endfor %}
 
     {% if grid.admin.isGranted('update') and column.options.edit %}
-        <a title="{{ 'Edit'|trans }}" href="{{ grid.admin.genUrl('edit', {'id': row.id}) }}" class="btn btn-small"><i class="icon-pencil"></i></a>
+        <a title="{{ 'Edit'|trans }}" href="{{ grid.admin.genUrl('edit', {'id': row.id}) }}" class="label"><i class="icon-2x icon-pencil"></i></a>
     {% endif %}
 
     {% if grid.admin.isGranted('delete') and column.options.delete %}
-        <a title="{{ 'Delete'|trans }}" class="btn btn-small msi_admin_admin_delete" data-url="{{ grid.admin.genUrl('delete', {'id': row.id}) }}" href="#"><i class="icon-trash"></i></a>
+        <a title="{{ 'Delete'|trans }}" class="label msi_admin_admin_delete" href="{{ grid.admin.genUrl('delete', {'id': row.id}) }}"><i class="icon-2x icon-trash"></i></a>
     {% endif %}
 </div>

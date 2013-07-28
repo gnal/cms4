@@ -1,25 +1,12 @@
 {% extends 'MsiAdminBundle::layout.html.twig' %}
 
-{% block title %}<i class="icon-plus-sign-alt"></i> {{ admin.getLabel() }}{% endblock title %}
+{% block title %}<i class="icon-plus"></i> {{ admin.getLabel() }}{% endblock title %}
 
 {% block actions %}
-<button class="btn btn-primary msi_admin_save"><i class="icon-white icon-ok"></i> {{ 'save'|trans }}</button>
-<button class="btn msi_admin_save_quit"><i class="icon-ok"></i> {{ 'save_quit'|trans }}</button>
-<button class="btn btn-success msi_admin_save_add"><i class="icon-white icon-plus-sign-alt"></i> {{ 'save_add'|trans }}</button>
+<button class="btn btn-primary msi_admin_save"><i class="icon-ok icon-large"></i> {{ 'save'|trans }}</button>
+<button class="btn btn-default msi_admin_save_quit"><i class="icon-ok icon-large"></i> {{ 'save_quit'|trans }}</button>
+<button class="btn btn-success msi_admin_save_add"><i class="icon-plus icon-large"></i> {{ 'save_add'|trans }}</button>
 {% endblock actions %}
-
-{% block sidebar %}
-{% if admin.getOption('sidebar_nav_template') %}
-    <ul class="nav nav-list">
-        {% if admin.getOption('sidebar_nav_template') %}
-            {% include admin.getOption('sidebar_nav_template') %}
-        {% endif %}
-    </ul>
-{% endif %}
-{% if admin.getOption('sidebar_template') %}
-    {% include admin.getOption('sidebar_template') %}
-{% endif %}
-{% endblock sidebar %}
 
 {% block content %}
     <form novalidate class="form-crud form-horizontal" action="{{ admin.genUrl('new') }}" method="POST" {{ form_enctype(form) }}>
@@ -27,11 +14,10 @@
     </form>
 {% endblock %}
 
+{% block sidebar %}{% include admin.getOption('sidebar_template') %}{% endblock %}
+
 {% block js %}
 {{ parent() }}
 {% include admin.container.getParameter('msi_admin.tiny_mce') %}
 <script src="{{ asset('bundles/msiadmin/js/save.js') }}"></script>
-{% if admin.getOption('form_js_template') %}
-{% include admin.getOption('form_js_template') %}
-{% endif %}
 {% endblock js %}

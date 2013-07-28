@@ -7,8 +7,8 @@
         var $this = $(this),
             iconTrue = $this.data('icon-true'),
             iconFalse = $this.data('icon-false'),
-            BadgeTrue = $this.data('badge-true'),
-            BadgeFalse = $this.data('badge-false'),
+            BadgeTrue = $this.data('btn-true'),
+            BadgeFalse = $this.data('btn-false'),
             cellId = $this.closest('td').attr('id');
 
         if ($.inArray(cellId, loadingCellIds) !== -1) {
@@ -16,27 +16,25 @@
         }
         loadingCellIds.push(cellId);
 
-        $this.children('span').children().html('<img src="/bundles/msiadmin/img/ajax-loader2.gif" alt="0">');
+        $this.html('<i class="'+iconTrue+' icon-spin icon-2x"></i>');
 
         $.ajax($this.data('url'), {
             success: function() {
-                if ($this.children('span').hasClass(BadgeTrue)) {
-                    var i = '<i class="icon-white"><span class="hide">0</span></i>';
-                    $this.children('span')
+                if ($this.hasClass(BadgeTrue)) {
+                    var i = '<i class="icon-2x"><span class="hide">0</span></i>';
+                    $this
                         .removeClass(BadgeTrue)
                         .addClass(BadgeFalse)
-                        .children()
                         .empty()
                         .html(i)
                         .children()
                         .removeClass(iconTrue)
                         .addClass(iconFalse);
                 } else {
-                    var i = '<i class="icon-white"><span class="hide">1</span></i>';
-                    $this.children('span')
+                    var i = '<i class="icon-2x"><span class="hide">1</span></i>';
+                    $this
                         .removeClass(BadgeFalse)
                         .addClass(BadgeTrue)
-                        .children()
                         .empty()
                         .html(i)
                         .children()
@@ -70,8 +68,13 @@
         if (!window.confirm('Are you sure you want to delete this entry?')) {
             return;
         }
-        $.ajax($this.data('url'), {type: 'POST'});
-        $this.closest('tr').remove();
+        $.ajax($this.attr('href'), {
+            type: 'POST',
+            success: function(response) {
+                $table.html($(response).find('table.table').html());
+                $('#gridCount').html($(response).find('#gridCount').html());
+            }
+        });
         e.preventDefault();
     });
 
@@ -80,12 +83,12 @@
     });
 
     $('.btn-select-all').on('click', function(e) {
-        $(this).closest('.controls').next('.control-group').find('input').prop('checked', true);
+        $(this).closest('.btn-toolbar').next('.form-group').find('input').prop('checked', true);
         e.preventDefault();
     });
 
     $('.btn-select-none').on('click', function(e) {
-        $(this).closest('.controls').next('.control-group').find('input').prop('checked', false);
+        $(this).closest('.btn-toolbar').next('.form-group').find('input').prop('checked', false);
         e.preventDefault();
     });
 

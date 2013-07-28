@@ -302,18 +302,18 @@ class CoreController extends Controller
         return $process;
     }
 
-    protected function getResponse($data = [])
+    protected function getResponse()
     {
-        if ($this->get('request')->isXmlHttpRequest()) {
-            $defaultData = [
-                'status' => 'ok',
-            ];
-            $data = array_merge($defaultData, $data);
+        // if ($this->get('request')->isXmlHttpRequest()) {
+        //     $defaultData = [
+        //         'status' => 'ok',
+        //     ];
+        //     $data = array_merge($defaultData, $data);
 
-            return new JsonResponse($data);
-        } else {
+        //     return new JsonResponse($data);
+        // } else {
             return $this->redirect($this->admin->getSaveAndQuitUrl());
-        }
+        // }
     }
 
     protected function isGranted($role, $object = null)

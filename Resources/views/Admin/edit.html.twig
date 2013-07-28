@@ -3,42 +3,20 @@
 {% block title %}<i class="icon-pencil"></i> {{ admin.label(1) }} <small>{{ admin.object|truncate }}</small>{% endblock title %}
 
 {% block actions %}
-<button class="btn btn-primary msi_admin_save"><i class="icon-white icon-ok"></i> {{ 'save'|trans }}</button>
-<button class="btn msi_admin_save_quit"><i class="icon-ok"></i> {{ 'save_quit'|trans }}</button>
-
-{#<a onclick="return confirm('Are you sure you want to delete this entry?');" class="btn btn-danger" href="{{ admin.genUrl('delete', {'id': admin.object.id}) }}"><i class="icon-trash icon-white"></i> {{ 'Delete'|trans }}</a>#}
+<button class="btn btn-primary msi_admin_save"><i class="icon-ok icon-large"></i> {{ 'save'|trans }}</button>
+<button class="btn btn-default msi_admin_save_quit"><i class="icon-ok icon-large"></i> {{ 'save_quit'|trans }}</button>
 {% endblock actions %}
 
-{% block sidebar %}
-{% if admin.getOption('sidebar_nav_template') or (admin.children|length and admin.options.show_children) %}
-    <ul class="nav nav-list">
-        {% if admin.getOption('sidebar_nav_template') %}
-            {% include admin.getOption('sidebar_nav_template') %}
-        {% endif %}
-        {% if admin.children|length and admin.options.show_children %}
-            <li class="divider"></li>
-            {% for child in admin.children %}
-                <li><a href="{{ child.genUrl('list', {'parentId': admin.object.id}, false) }}">{{ child.label(2) }}</a></li>
-            {% endfor %}
-        {% endif %}
-    </ul>
-{% endif %}
-{% if admin.getOption('sidebar_template') %}
-    {% include admin.getOption('sidebar_template') %}
-{% endif %}
-{% endblock sidebar %}
-
 {% block content %}
-    <form novalidate class="form-crud form-horizontal" action="{{ admin.genUrl('edit', {'id': admin.object.id}) }}" method="POST" {{ form_enctype(form) }}>
-        {% include admin.getOption('form_template') %}
-    </form>
+<form novalidate class="form-crud form-horizontal" action="{{ admin.genUrl('edit', {'id': admin.object.id}) }}" method="POST" {{ form_enctype(form) }}>
+    {% include admin.getOption('form_template') %}
+</form>
 {% endblock %}
+
+{% block sidebar %}{% include admin.getOption('sidebar_template') %}{% endblock %}
 
 {% block js %}
 {{ parent() }}
 {% include admin.container.getParameter('msi_admin.tiny_mce') %}
 <script src="{{ asset('bundles/msiadmin/js/save.js') }}"></script>
-{% if admin.getOption('form_js_template') %}
-{% include admin.getOption('form_js_template') %}
-{% endif %}
 {% endblock js %}

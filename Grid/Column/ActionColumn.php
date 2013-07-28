@@ -10,7 +10,7 @@ class ActionColumn extends BaseColumn
     {
         $resolver->setDefaults([
             'actions' => [],
-            'attr' => ['class' => 'span1'],
+            'attr' => ['class' => 'col-lg-1'],
             'delete' => true,
             'edit' => true,
             'children' => true,

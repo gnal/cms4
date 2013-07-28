@@ -10,7 +10,7 @@ class MenuBuilder extends BaseMenuBuilder
     {
         $menu = $this->getMenu($factory, 'admin');
 
-        $menu->setChildrenAttribute('class', 'nav');
+        $menu->setChildrenAttribute('class', 'nav navbar-nav');
         $this->setBootstrapDropdownMenuAttributes($menu);
 
         return $this->execute($menu);

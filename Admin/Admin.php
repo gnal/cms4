@@ -393,7 +393,7 @@ abstract class Admin
         ];
 
         if ($action === 'new') {
-            $crumbs[] = array('label' => '<i class="icon-plus-sign-alt"></i> '.$this->getLabel(1), 'path' => '', 'class' => 'active');
+            $crumbs[] = array('label' => '<i class="icon-plus"></i> '.$this->getLabel(1), 'path' => '', 'class' => 'active');
         }
 
         if ($action === 'edit') {
@@ -434,7 +434,7 @@ abstract class Admin
         $resolver->setDefaults([
             'controller'           => null,
             'form_template'        => 'MsiAdminBundle:Admin:form.html.twig',
-            'sidebar_template'     => null,
+            'sidebar_template'     => 'MsiAdminBundle:Admin:sidebar.html.twig',
             'sidebar_nav_template' => null,
             'index_template'       => 'MsiAdminBundle:Admin:index.html.twig',
             'new_template'         => 'MsiAdminBundle:Admin:new.html.twig',

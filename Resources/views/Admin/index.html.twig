@@ -23,41 +23,57 @@
 
 {% block actions %}
 {% if admin.isGranted('create') %}
-    <a href="{{ admin.genUrl('new') }}" class="btn btn-success"><i class="icon-white icon-plus-sign-alt"></i> {{ 'Add'|trans }} {{ admin.getLabel(1) }}</a>
+    <a href="{{ admin.genUrl('new') }}" class="btn btn-success"><i class="icon-large icon-plus"></i> {{ 'Add'|trans }} {{ admin.getLabel(1) }}</a>
 {% endif %}
 {% endblock %}
 
 {% block content %}
-<div class="row-fluid">
-    <div class="span6">
+<div class="row">
+    <div class="col-lg-1">
+        <span class="help-block">page</span>
+    </div>
+    <div class="col-lg-3">
         {% include 'MsiAdminBundle:Pager:pager.html.twig' %}
     </div>
-    <div class="span6">
+    <div class="col-lg-3">
+        <span class="help-block">of {{ pager.countPages }} page{% if pager.countPages > 1 %}s{% endif %}</span>
+    </div>
+    <div class="col-lg-5">
         {% if admin.getOption('search_fields')|length %}
-        <form novalidate class="form-inline pull-right" method="GET" action="{{ admin.genUrl('list') }}">
+        <form novalidate method="GET" action="{{ admin.genUrl('list') }}">
             {% if admin.hasParent() %}
                 <input type="hidden" value="{{ app.request.query.get('parentId') }}" name="parentId">
             {% endif %}
-            <div class="input-append">
-                <input class="input-medium" value="{{ app.request.query.get('q') }}" name="q" type="text">
-                <button type="submit" class="btn"><i class="icon-search"></i></button>
-                <a class="btn" href="{{ admin.genUrl('list', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-remove"></i></a>
+            <div class="input-group">
+                <input class="form-control" value="{{ app.request.query.get('q') }}" name="q" type="text">
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="icon-search icon-large"></i></button>
+                    <a class="btn btn-default" href="{{ admin.genUrl('list', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-remove icon-large"></i></a>
+                </div>
             </div>
         </form>
         {% endif %}
     </div>
 </div>
 {% include 'MsiAdminBundle:Grid:default.html.twig' with {'grid': admin.getGrid()} %}
-<form id="limitForm" novalidate class="pull-left form-search" method="POST" action="{{ path('msi_admin_limit') }}">
-    <small>view</small>
-    <select name="limit" class="notchosen input-mini">
-        <option {% if app.session.get('limit') == 10 %}selected=selected{% endif %} value="10">10</option>
-        <option {% if app.session.get('limit', 25) == 25 %}selected=selected{% endif %} value="25">25</option>
-        <option {% if app.session.get('limit') == 50 %}selected=selected{% endif %} value="50">50</option>
-        <option {% if app.session.get('limit') == 100 %}selected=selected{% endif %} value="100">100</option>
-    </select>
-    <small>rows per page | {{ pager.count|number_format }} row{% if pager.count > 1 %}s{% endif %} in total</small>
-</form>
+<div class="row">
+    <div class="col-lg-1">
+        <span class="help-block">view</span>
+    </div>
+    <div class="col-lg-2">
+        <form id="limitForm" novalidate method="POST" action="{{ path('msi_admin_limit') }}">
+            <select name="limit" class="notchosen form-control">
+                <option {% if app.session.get('limit') == 10 %}selected=selected{% endif %} value="10">10</option>
+                <option {% if app.session.get('limit', 25) == 25 %}selected=selected{% endif %} value="25">25</option>
+                <option {% if app.session.get('limit') == 50 %}selected=selected{% endif %} value="50">50</option>
+                <option {% if app.session.get('limit') == 100 %}selected=selected{% endif %} value="100">100</option>
+            </select>
+        </form>
+    </div>
+    <div class="col-lg-9">
+        <span id="gridCount" class="help-block">rows per page | {{ pager.count|number_format }} row{% if pager.count > 1 %}s{% endif %} in total</span>
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}

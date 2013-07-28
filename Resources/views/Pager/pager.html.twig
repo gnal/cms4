@@ -1,11 +1,13 @@
 {% set page = app.request.query.get('page', 1) %}
-<form style="margin-right: 5px;" method=get action="{{ path(app.request.attributes.get('_route', app.request.query.all)) }}" class="form-inline pull-left">
-    <small>page</small>
-    <div class="input-prepend input-append">
-        <a class="btn{% if page == 1 %} disabled{% endif %}" href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': page != 1 ? page - 1 : 1})) }}"><i class="icon-chevron-left"></i></a>
-        <input class="text-center input-mini" name=page value="{{ page ?: 1 }}" type=text>
-        <a class="btn{% if page == pager.countPages %} disabled{% endif %}" href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': page != pager.countPages ? page + 1 : pager.countPages})) }}"><i class="icon-chevron-right"></i></a>
-        <button class="btn" type=submit><i class="icon-search"></i></button>
+<form method=get action="{{ path(app.request.attributes.get('_route', app.request.query.all)) }}">
+    <div class="input-group">
+        <div class="input-group-btn">
+            <a class="btn-default btn{#{% if page == 1 %} disabled{% endif %}#}" href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': page != 1 ? page - 1 : 1})) }}"><i class="icon-chevron-left icon-large"></i></a>
+        </div>
+        <input class="text-center form-control" name=page value="{{ page ?: 1 }}" type=text>
+        <div class="input-group-btn">
+            <a class="btn-default btn{#{% if page == pager.countPages %} disabled{% endif %}#}" href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': page != pager.countPages ? page + 1 : pager.countPages})) }}"><i class="icon-chevron-right icon-large"></i></a>
+            <button class="btn-default btn" type=submit><i class="icon-search icon-large"></i></button>
+        </div>
     </div>
-    <small>of {{ pager.countPages }} pages</small>
 </form>

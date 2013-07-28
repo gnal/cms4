@@ -1,10 +1,10 @@
 {% if column.options.toggle %}
-<a href="#" class="msi_admin_admin_change" data-url="{{ admin.genUrl('toggle', {'id': column.object.id, 'field': column.name}) }}" data-icon-true="{{ column.options.icon_true }}" data-icon-false="{{ column.options.icon_false }}" data-badge-true="{{ column.options.badge_true }}" data-badge-false="{{ column.options.badge_false }}">
+<a href="#" class="msi_admin_admin_change{% if column.value %} label {{ column.options.btn_true }}{% else %} label {{ column.options.btn_false }}{% endif %}" data-url="{{ admin.genUrl('toggle', {'id': column.object.id, 'field': column.name}) }}" data-icon-true="{{ column.options.icon_true }}" data-icon-false="{{ column.options.icon_false }}" data-btn-true="{{ column.options.btn_true }}" data-btn-false="{{ column.options.btn_false }}">
 {% endif %}
     {% if column.value %}
-        <span class="badge {{ column.options.badge_true }}"><span><i class="{{ column.options.icon_true }} icon-white"><span class="hide">1</span></i></span></span>
+        <i class="{{ column.options.icon_true }} icon-2x"></i>
     {% else %}
-        <span class="badge {{ column.options.badge_false }}"><span><i class="{{ column.options.icon_false }} icon-white"><span class="hide">0</span></i></span></span>
+        <i class="{{ column.options.icon_false }} icon-2x"></i>
     {% endif %}
 {% if column.options.toggle %}
 </a>

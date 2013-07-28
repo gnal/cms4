@@ -10,9 +10,9 @@ class BooleanColumn extends BaseColumn
     {
         $resolver->setDefaults([
             'toggle' => true,
-            'attr' => ['style' => 'text-align:center;', 'class' => 'span2'],
-            'badge_true' => 'badge-success',
-            'badge_false' => '',
+            'attr' => ['class' => 'col-lg-1'],
+            'btn_true' => 'label-success',
+            'btn_false' => '',
             'icon_true' => 'icon-ok',
             'icon_false' => 'icon-ok',
         ]);
