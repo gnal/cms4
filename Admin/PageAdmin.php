@@ -12,7 +12,7 @@ class PageAdmin extends Admin
     {
         $this->options = [
             'form_template' => 'MsiAdminBundle:Page:form.html.twig',
-            'sidebar_nav_template' => 'MsiAdminBundle:Page:sidebar_nav.html.twig',
+            'sidebar_template' => 'MsiAdminBundle:Page:sidebar.html.twig',
             'search_fields' => ['a.id', 't.title'],
             'order_by'      => ['t.title' => 'ASC'],
         ];

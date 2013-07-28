@@ -13,7 +13,7 @@ class MenuNodeAdmin extends Admin
     public function configure()
     {
         $this->options = [
-            'sidebar_nav_template' => 'MsiAdminBundle:MenuNode:sidebar_nav.html.twig',
+            'sidebar_template' => 'MsiAdminBundle:MenuNode:sidebar_nav.html.twig',
             'index_template' => 'MsiAdminBundle:MenuNode:index.html.twig',
             'controller' => 'MsiAdminBundle:Admin/MenuNode:',
             'search_fields' => ['a.id', 't.name'],

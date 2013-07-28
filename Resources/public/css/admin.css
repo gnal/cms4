@@ -127,8 +127,12 @@ h4, h5 {
 
 /* form */
 
-.mceLayout {
+/*.mceLayout {
     margin-bottom: 20px !important;
+}*/
+
+form .nav-tabs {
+    margin-bottom: 20px;
 }
 
 .form-horizontal .control-label {
