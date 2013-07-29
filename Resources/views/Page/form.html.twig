@@ -20,7 +20,9 @@
                 {% for translation in form.translations %}
                     <div class="tab-pane fade{% if loop.index == 1 %} active in{% endif %}" id="translation2{{ translation.vars.value.locale }}">
                         {{ form_row(translation.title) }}
-                        {{ form_widget(translation.body) }}
+                        <div class="form-group">
+                            {{ form_widget(translation.body) }}
+                        </div>
                     </div>
                 {% endfor %}
             </div>
