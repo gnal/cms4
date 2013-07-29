@@ -344,6 +344,10 @@ abstract class Admin
 
     public function getParentFieldName()
     {
+        if (!$this->hasParent()) {
+            return null;
+        }
+
         foreach ($this->getMetadata()->associationMappings as $value) {
             if ($value['targetEntity'] === $this->getParent()->getClass()) {
                 return $value['fieldName'];
@@ -379,10 +383,9 @@ abstract class Admin
         ];
     }
 
-    public function buildBreadcrumb()
+    public function buildBreadcrumb($action = null)
     {
-        $action = $this->getAction();
-        $crumbs = [];
+        $action = $action ?: $this->getAction();
 
         if ($this->hasParent()) $this->buildParentBreadcrumb($crumbs, $this->getParent(), $this->getParentObject());
 
@@ -405,9 +408,13 @@ abstract class Admin
         }
 
         if ($action === 'list' && $this->hasParent()) {
+            $getter = 'get'.ucfirst($this->getParent()->getParentFieldName());
             $crumbs[] = [
                 'label' => $this->container->get('translator')->trans('Back'),
-                'path' => $this->getParent()->genUrl('edit', ['id' => $this->getParentObject()->getId()]),
+                'path' => $this->getParent()->genUrl('edit', [
+                    'id' => $this->getParentObject()->getId(),
+                    'parentId' => $this->getParent()->hasParent() ? $this->getParentObject()->$getter()->getId() : null,
+                ]),
                 'class' => 'pull-right',
             ];
         } elseif ($action === 'list' && !$this->hasParent()) {

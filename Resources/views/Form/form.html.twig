@@ -2,28 +2,16 @@
 
 {% block form_row %}
 {% spaceless %}
-        {% if form.count == false %}
-            <div class="{% if form.vars.name != 'settings' %}form-group{% endif %}{% if form.vars.errors|length > 0 %} error{% endif %}">
-                {% if form.vars.label != ' ' %}{{ form_label(form) }}{% endif %}
-                {{ form_widget(form) }}
-                {# View uploaded file button #}
-                {#{% if form.parent.vars.value.filename is defined and form.parent.vars.value.filename and form.name == 'file' %}
-                    <div class="btn-toolbar" style="display: inline">
-                        <a class="btn btn-mini" target="_blank" href="{{ form.parent.vars.value.pathname('filename') }}">{{ 'View file'|trans }}</a>
-                        {% if form.parent.vars.value.locale is defined %}
-                            {%  set url = path(app.request.attributes.get('_admin')~'_deleteUpload', {'locale': form.parent.vars.value.locale, 'id': app.request.attributes.get('id')}) %}
-                        {% else %}
-                            {%  set url = path(app.request.attributes.get('_admin')~'_deleteUpload', {'id': app.request.attributes.get('id')}) %}
-                        {% endif %}
-                        <a class="btn btn-danger btn-mini msi_admin_admin_deleteUpload" href="{{ url }}">{{ 'Delete file'|trans }}</a>
-                    </div>
-                {% endif %}#}
-                {#{{ form_errors(form) }}#}
-            </div>
-        {% else %}
-            {{ form_errors(form) }}
+    <div class="form-group{% if form.vars.errors|length %} has-error{% endif %}">
+        <div class="col-lg-3">
+            {{ form_label(form) }}
+        </div>
+        <div class="col-lg-9">
             {{ form_widget(form) }}
-        {% endif %}
+            {% if form.vars.attr['data-help'] is defined %}<span class="help-block">{{ attr['data-help'] }}</span>{% endif %}
+            {{ form_errors(form) }}
+        </div>
+    </div>
 {% endspaceless %}
 {% endblock form_row %}
 
@@ -31,66 +19,46 @@
 
 {% block form_label %}
 {% spaceless %}
-    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' col-lg-3 control-label')|trim}) %}
-    {% if not compound %}
-        {% set label_attr = label_attr|merge({'for': id}) %}
+    {% if label is not sameas(false) %}
+        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' control-label')|trim}) %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {% endif %}
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
     {% endif %}
-    {% if required %}
-        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
-    {% endif %}
-    {% if label is empty %}
-        {% set label = name|humanize %}
-    {% endif %}
-    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
 {% endspaceless %}
 {% endblock form_label %}
 
 {# Misc #}
 
-{% block field_errors %}
+{% block form_errors %}
 {% spaceless %}
     {% if errors|length > 0 %}
         {% for error in errors %}
-            <span class="help-block" style="color: #b94a48;">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</span>
+            <span class="help-block">{{ error.message }}</span>
         {% endfor %}
     {% endif %}
 {% endspaceless %}
-{% endblock field_errors %}
+{% endblock form_errors %}
 
 {# Widgets #}
 
 {% block form_widget_simple %}
 {% spaceless %}
     {% set type = type|default('text') %}
-    <div class="col-lg-6">
-        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-        {% if attr['data-help'] is defined %}<span class="help-block">{{ attr['data-help'] }}</span>{% endif %}
-    </div>
-    <div class="col-lg-3">
-        {{ form_errors(form) }}
-    </div>
+    <input class="form-control" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
 {% endspaceless %}
 {% endblock form_widget_simple %}
 
-{% block widget_attributes %}
-{% spaceless %}
-    id="{{ id }}" name="{{ full_name }}"{% if read_only %} readonly="readonly"{% endif %}{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}{% if max_length %} maxlength="{{ max_length }}"{% endif %}{% if pattern %} pattern="{{ pattern }}"{% endif %}
-
-    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
-
-    {% for attrname, attrvalue in attr %}{% if attrname in ['placeholder', 'title'] %}{{ attrname }}="{{ attrvalue|trans({}, translation_domain) }}" {% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %}
-{% endspaceless %}
-{% endblock widget_attributes %}
-
 {% block textarea_widget %}
 {% spaceless %}
-    <div class="col-lg-{% if attr.class is defined %}12{% else %}6{% endif %}">
-        <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
-        {% if attr['data-help'] is defined %}<span class="help-block"><small>{{ attr['data-help'] }}</small></span>{% endif %}
-    </div>
-    <div class="col-lg-3">
-        {{ form_errors(form) }}
-    </div>
+    <textarea{% if attr.class is not defined %} class="form-control"{% endif %} {{ block('widget_attributes') }}>{{ value }}</textarea>
     {% if attr.class is not defined %}
         <div class="char-count" style="margin-top:5px;line-height:20px;"></div>
     {% endif %}
@@ -99,7 +67,6 @@
 
 {% block choice_widget_collapsed %}
 {% spaceless %}
-    <div class="col-lg-6">
     <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
         {% if empty_value is not none %}
             <option value=""{% if required %} disabled="disabled"{% if value is empty %} selected="selected"{% endif %}{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
@@ -114,26 +81,19 @@
         {% set options = choices %}
         {{ block('choice_widget_options') }}
     </select>
-    </div>
-    <div class="col-lg-3">
-        {{ form_errors(form) }}
-    </div>
+    {{ form_errors(form) }}
 {% endspaceless %}
 {% endblock choice_widget_collapsed %}
 
 {% block checkbox_widget %}
 {% spaceless %}
-    <div class="col-lg-{% if multiple is defined %}9{% else %}6{% endif %}">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-                {% if multiple is defined %}{{ label|trans }}{% endif %}
-            </label>
-        </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+            {% if multiple is defined %}{{ label|trans }}{% endif %}
+        </label>
     </div>
-    <div class="col-lg-3">
-        {{ form_errors(form) }}
-    </div>
+    {{ form_errors(form) }}
 {% endspaceless %}
 {% endblock checkbox_widget %}
 
@@ -153,28 +113,13 @@
         <button class="btn btn-default btn-small btn-select-all">{{ 'All'|trans }}</button>
         <button class="btn btn-default btn-small btn-select-none">{{ 'None'|trans }}</button>
     </div>
-    <div class="form-group">
-        {{ form_label(form) }}
-        <div class="clearfix"></div>
-        <div {{ block('widget_container_attributes') }}>
-        {% for child in form %}
-            {{ form_widget(child, {'multiple': 'multiple'}) }}
-        {% endfor %}
-        </div>
-    </div>
+    {#<div {{ block('widget_container_attributes') }}>#}
+    {% for child in form %}
+        {{ form_widget(child, {'multiple': 'multiple'}) }}
+    {% endfor %}
+    {#</div>#}
 {% endspaceless %}
 {% endblock choice_widget_expanded %}
-
-{% block field_rows %}
-{% spaceless %}
-    <div class="form-group">
-        <div class="controls" style="margin-left: 155px;">{{ form_errors(form) }}</div>
-    </div>
-    {% for child in form %}
-        {{ form_row(child) }}
-    {% endfor %}
-{% endspaceless %}
-{% endblock field_rows %}
 
 {% block collection_widget %}
 {% spaceless %}

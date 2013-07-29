@@ -21,7 +21,9 @@
                     <div class="tab-pane fade{% if loop.index == 1 %} active in{% endif %}" id="translation2{{ translation.vars.value.locale }}">
                         {{ form_row(translation.title) }}
                         <div class="form-group">
-                            {{ form_widget(translation.body) }}
+                            <div class="col-lg-12">
+                                {{ form_widget(translation.body) }}
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

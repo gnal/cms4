@@ -35,7 +35,7 @@ h4, h5 {
     border-radius: 4px;
 }
 
-#content form {
+#content form, #sidebar form {
     margin-bottom: 20px;
 }
 
@@ -176,7 +176,7 @@ select {
 /* boostrap */
 
 .chzn-container {
-    min-width: 220px;
+    min-width: 100%;
 }
 
 .tab-content {
