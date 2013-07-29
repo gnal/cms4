@@ -1,0 +1,9 @@
+<ul class="nav nav-pills nav-stacked">
+    {% if admin.object.id %}
+        <li class="active"><a href="#tab1" data-toggle="tab">{{ 'Content'|trans }}</a></li>
+    {% endif %}
+        <li><a href="#tab2" data-toggle="tab">{{ 'Settings'|trans }}</a></li>
+    {% if app.user.isSuperAdmin %}
+        <li><a href="#tab3" data-toggle="tab">{{ 'ACL'|trans }}</a></li>
+    {% endif %}
+</ul>

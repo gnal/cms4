@@ -1,7 +1,7 @@
 {% extends 'MsiAdminBundle:Admin:index.html.twig' %}
 
 {% block sidebar %}
-<ul id="sortable1" class="unstyled" data-url="{{ admin.genUrl('sort') }}">
+<ul id="sortable1" class="list-unstyled" data-url="{{ admin.genUrl('sort') }}">
     {% for item in admin.grid.rows %}
         {% set l = loop.index %}
         <li id="{{ item.id }}" data-lvl="{{ item.lvl }}" data-lft="{{ item.lft }}" data-rgt="{{ item.rgt }}">

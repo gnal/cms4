@@ -14,7 +14,7 @@ class MenuRootAdmin extends Admin
         $this->options = [
             'search_fields' => ['a.id', 't.name'],
             'form_template' => 'MsiAdminBundle:MenuRoot:form.html.twig',
-            'sidebar_template' => 'MsiAdminBundle:MenuRoot:sidebar_nav.html.twig',
+            'sidebar_template' => 'MsiAdminBundle:MenuRoot:sidebar.html.twig',
         ];
     }
 

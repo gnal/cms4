@@ -179,6 +179,11 @@ select {
     min-width: 100%;
 }
 
+.chzn-container-single .chzn-single {
+    height: 31px;
+    line-height: 30px;
+}
+
 .tab-content {
     overflow: visible;
 }
