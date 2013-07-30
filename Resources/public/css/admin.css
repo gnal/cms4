@@ -13,13 +13,13 @@ a:hover {
 h2 {
     margin: 0 0 0;
     font-size: 24.5px;
-    line-height: 30px;
+    line-height: 38px;
 }
 
 h4, h5 {
     margin: 0 0 0;
     margin-bottom: 20px;
-    line-height: 30px;
+    line-height: 38px;
 }
 
 /* content */
@@ -186,10 +186,6 @@ select {
 
 .tab-content {
     overflow: visible;
-}
-
-.btn-toolbar {
-    margin: 0;
 }
 
 .modal form {
