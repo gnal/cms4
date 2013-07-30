@@ -3,6 +3,13 @@
     <thead>
         <tr>
         {% for column in grid.columns %}
+            {% if column.name == '' %}
+                {% for child in grid.admin.children if grid.admin.hasChildren() %}
+                    <th>
+                        {#{{ child.label(2) }}#}
+                    </th>
+                {% endfor %}
+            {% endif %}
             <th>{{ column.get('label')|capitalize|trans }}</th>
         {% endfor %}
         </tr>
@@ -17,6 +24,13 @@
                 </div>
             </td>#}
             {% for column in grid.columns %}
+                {% if column.name == '' %}
+                    {% for child in grid.admin.children if grid.admin.hasChildren() %}
+                        <td>
+                            <a class="btn btn-default btn-small" href="{{ child.genUrl('list', {'parentId': row.id}) }}">{{ child.label(2) }}</a>
+                        </td>
+                    {% endfor %}
+                {% endif %}
                 <td {% for attrname,attrvalue in column.options.attr %}{{attrname}}="{{attrvalue}}" {% endfor %}id="td{{ loop.index~row.id }}">
                 {% include 'MsiAdminBundle:Column:'~column.type~'.html.twig' with {'i': loop.index, 'column': column.resolveRow(row)} %}
                 </td>
