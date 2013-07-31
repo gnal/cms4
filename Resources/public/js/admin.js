@@ -16,12 +16,12 @@
         }
         loadingCellIds.push(cellId);
 
-        $this.html('<i class="'+iconTrue+' icon-spin icon-2x"></i>');
+        $this.html('<i class="'+iconTrue+' icon-spin icon-large"></i>');
 
         $.ajax($this.data('url'), {
             success: function() {
                 if ($this.hasClass(BadgeTrue)) {
-                    var i = '<i class="icon-2x"><span class="hide">0</span></i>';
+                    var i = '<i class="icon-large"><span class="hide">0</span></i>';
                     $this
                         .removeClass(BadgeTrue)
                         .addClass(BadgeFalse)
@@ -31,7 +31,7 @@
                         .removeClass(iconTrue)
                         .addClass(iconFalse);
                 } else {
-                    var i = '<i class="icon-2x"><span class="hide">1</span></i>';
+                    var i = '<i class="icon-large"><span class="hide">1</span></i>';
                     $this
                         .removeClass(BadgeFalse)
                         .addClass(BadgeTrue)
