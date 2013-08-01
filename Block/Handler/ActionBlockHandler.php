@@ -3,7 +3,7 @@
 namespace Msi\AdminBundle\Block\Handler;
 
 use Msi\AdminBundle\Block\BaseBlockHandler;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\Fragment\FragmentHandler;
 use Msi\AdminBundle\Entity\Block;
 use Msi\AdminBundle\Entity\Page;
 use Symfony\Component\Form\FormBuilder;
@@ -11,12 +11,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ActionBlockHandler extends BaseBlockHandler
 {
-    protected $kernel;
+    protected $fragmentHandler;
     protected $actions;
 
-    public function __construct($actions, HttpKernelInterface $kernel)
+    public function __construct($actions, FragmentHandler $fragmentHandler)
     {
-        $this->kernel = $kernel;
+        $this->fragmentHandler = $fragmentHandler;
         $this->actions = $actions;
     }
 
@@ -33,7 +33,7 @@ class ActionBlockHandler extends BaseBlockHandler
             }
         }
 
-        return $this->kernel->render($settings['action'], $options);
+        return $this->fragmentHandler->render($settings['action'], $options);
     }
 
     public function buildForm(FormBuilder $builder)
