@@ -188,18 +188,6 @@ select {
     overflow: visible;
 }
 
-.modal form {
-    margin-bottom: 0;
-}
-
-.form-actions {
-    margin-top: 0;
-}
-
-.form-horizontal .form-actions {
-    padding-left: 200px;
-}
-
 /*.alert-wrap {
     position: absolute;
     left: 50%;
@@ -280,7 +268,7 @@ select {
 }
 
 /* responsive */
-@media (max-width: 767px) {
+/*@media (max-width: 767px) {
     body {
         padding-right: 0;
         padding-left: 0;
@@ -298,7 +286,7 @@ select {
     .navbar-fixed-bottom .navbar-inner {
         padding: 0;
     }
-}
+}*/
 
 /* font awesome */
 
