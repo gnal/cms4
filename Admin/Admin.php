@@ -109,6 +109,13 @@ abstract class Admin
         return ucfirst($parts[0]).ucfirst($parts[1]).'Bundle';
     }
 
+    public function setAction($action)
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
     public function getAction()
     {
         preg_match('@[a-z]+$@', $this->container->get('request')->attributes->get('_route'), $matches);
