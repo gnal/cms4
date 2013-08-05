@@ -19,7 +19,7 @@ trait Uploadable
 
         $suffix = method_exists($this, 'getUploadDirSuffix') ? '/'.$this->getUploadDirSuffix() : '';
 
-        return strtolower($class.'-'.array_search($fieldName, $this->getUploadFields()).$suffix);
+        return strtolower($class.'-'.$fieldName.$suffix);
     }
 
     public function getPathname($fieldName, $prefix = '')
