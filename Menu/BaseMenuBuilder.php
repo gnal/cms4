@@ -44,7 +44,7 @@ class BaseMenuBuilder extends ContainerAware
 
     public function buildArray($node, &$array)
     {
-        $locale = $this->container->get('request')->getLocale() === 'fr' ? 1 : 0;
+        $locale = $this->container->get('request')->getLocale() === 'fr' ? 0 : 0;
 
         foreach ($node['children'] as $child) {
             $route = $child['translations'][$locale]['route'];
