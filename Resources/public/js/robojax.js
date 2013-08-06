@@ -8,14 +8,14 @@ if ( typeof Object.create !== 'function' ) {
 
 (function($, window, undefined) {
     "use strict";
-
     var Robojax = {
         init: function(options) {
             var self = this;
-
+            // el could be the modal perhaps?
             self.options = $.extend({}, $.robojax.options, options);
-            self.$modal = $('div#robojaxModal');
-            self.$modalBody = self.$modal.children('.modal-body');
+            self.$modal = $('div.modal');
+            self.$modalBody = self.$modal.find('.modal-body');
+            self.$body = $('body');
             self.ready = true;
 
             self.listen();
@@ -25,33 +25,19 @@ if ( typeof Object.create !== 'function' ) {
         {
             var self = this;
 
-            $('body').on('click', 'a.robojax', function(e) {
+            self.$body.on('click', '.robojax', function(e) {
                 e.preventDefault();
-                if (self.ready === false) {
-                    return;
-                }
-                var $this = $(this);
-                self.clickedLink = $this;
-                self.ready = false;
-                self.execute($this);
+                self.execute($(this));
             });
 
-            $('body').on('click', 'a.robojax_submit', function(e) {
+            self.$body.on('click', '.robojax_submit', function(e) {
                 e.preventDefault();
-                if (self.ready === false) {
-                    return;
-                }
-                self.ready = false;
-                self.submitForm();
+                self.submitForm($(this));
             });
 
-            $('body').on('submit', 'div.modal div.modal-body form', function(e) {
+            self.$body.on('submit', self.$modal.find('form'), function(e) {
                 e.preventDefault();
-                if (self.ready === false) {
-                    return;
-                }
-                self.ready = false;
-                self.submitForm();
+                self.submitForm($(this));
             });
         },
 
@@ -59,71 +45,55 @@ if ( typeof Object.create !== 'function' ) {
         {
             var self = this;
 
-            if ($this.hasClass('delete')) {
-                self.delete($this);
+            if (self.ready === false) {
                 return;
             }
+            self.ready = false;
 
             // self.$modalBody
             //     .empty()
             //     .html('<div class="text-center"><img style="padding: 40px;" src="/bundles/msiadmin/img/ajax-loader3.gif" alt="ajax-loader"></div>')
             // ;
 
-            // self.$modal.modal('show');
-
-            self.options.beforeRequest(self.clickedLink);
+            self.$modal.modal('show');
 
             $.ajax($this.attr('href'), {
-                success: function(data) {
+                success: function(response) {
                     self.ready = true;
-                    self.options.success(self.clickedLink, data);
-                    // self.$modalBody
-                    //     .html($(data).find('form.form-crud'))
-                    // ;
+                    self.options.clickSuccess($this, response);
+                    self.$modalBody
+                        .html($(response).find('form.form-crud'))
+                    ;
                 }
             });
         },
 
-        delete: function($this)
+        submitForm: function($this)
         {
             var self = this;
 
-            $('#loader').removeClass('hide');
+            if (self.ready === false) {
+                return;
+            }
+            self.ready = false;
 
-            $.ajax($this.attr('href'), {
-                success: function (data) {
-                    self.ready = true;
+            var $form = self.$modal.find('form');
 
-                    self.options.success(self.clickedLink, data);
-                }
-            });
-        },
+            $form.css('visibility', 'hidden');
 
-        submitForm: function()
-        {
-            var self = this;
-
-            var $form = $('div.modal div.modal-body form');
-
-            $form
-                .css('visibility', 'hidden');
-
-            self.$modalBody
-                .css('background', 'url(/bundles/msiadmin/img/ajax-loader3.gif) no-repeat center center #fff');
+            self.$modalBody.css('background', 'url(/bundles/msiadmin/img/ajax-loader3.gif) no-repeat center center #fff');
 
             $.ajax($form.attr('action'), {
                 type: 'POST',
                 data: $form.serialize(),
-                success: function (data) {
+                success: function (response) {
                     self.ready = true;
-
-                    self.$modalBody
-                        .css('background', '#fff');
-                    if (data.entity) {
+                    self.$modalBody.css('background', '#fff');
+                    if (response.entity) {
                         self.$modal.modal('hide');
-                        self.options.success(self.clickedLink, data);
+                        self.options.submitSuccess($this, response);
                     } else {
-                        self.$modal.children('.modal-body').html($(data).find('form.form-crud'));
+                        self.$modalBody.html($(response).find('form.form-crud'));
                     }
                 }
             });
@@ -136,7 +106,7 @@ if ( typeof Object.create !== 'function' ) {
     };
 
     $.robojax.options = {
-        beforeRequest: function() {},
-        success: function() {}
+        clickSuccess: function() {},
+        submitSuccess: function() {}
     };
 })(jQuery, window);
