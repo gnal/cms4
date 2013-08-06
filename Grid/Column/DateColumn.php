@@ -14,7 +14,7 @@ class DateColumn extends BaseColumn
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'format' => 'Y/m/d',
+            'format' => 'Y-m-d',
         ));
     }
 }
