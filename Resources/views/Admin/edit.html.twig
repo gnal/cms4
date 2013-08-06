@@ -1,6 +1,6 @@
 {% extends 'MsiAdminBundle::layout.html.twig' %}
 
-{% block title %}<i class="icon-pencil"></i> {{ admin.label(1) }} <small>{{ admin.object|truncate }}</small>{% endblock title %}
+{% block title %}<i class="icon-pencil"></i> {{ admin.label(1) }} <small>{{ admin.object }}</small>{% endblock title %}
 
 {% block actions %}
 <button class="btn btn-primary msi_admin_save"><i class="icon-ok icon-large"></i> {{ 'save'|trans }}</button>
@@ -19,4 +19,8 @@
 {{ parent() }}
 {% include admin.container.getParameter('msi_admin.tiny_mce') %}
 <script src="{{ asset('bundles/msiadmin/js/save.js') }}"></script>
+
+{% if admin.getOption('form_js_template') %}
+{% include admin.getOption('form_js_template') %}
+{% endif %}
 {% endblock js %}

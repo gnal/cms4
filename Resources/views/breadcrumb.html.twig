@@ -1,7 +1,5 @@
+{% if crumbs|length %}
 <ul class="breadcrumb">
-<li>
-    <a href="{{ path('msi_admin_dashboard') }}"><i class="icon-home"></i> {{ 'Home'|trans }}</a>
-</li>
 {% for crumb in crumbs %}
     <li{% if crumb.class is defined %} class="{{ crumb.class }}"{% endif %}>
         {% if crumb.path %}
@@ -12,3 +10,4 @@
     </li>
 {% endfor %}
 </ul>
+{% endif %}

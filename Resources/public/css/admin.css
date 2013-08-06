@@ -13,13 +13,13 @@ a:hover {
 h2 {
     margin: 0 0 0;
     font-size: 24.5px;
-    line-height: 30px;
+    line-height: 38px;
 }
 
 h4, h5 {
     margin: 0 0 0;
     margin-bottom: 20px;
-    line-height: 30px;
+    line-height: 38px;
 }
 
 /* content */
@@ -188,22 +188,6 @@ select {
     overflow: visible;
 }
 
-.btn-toolbar {
-    margin: 0;
-}
-
-.modal form {
-    margin-bottom: 0;
-}
-
-.form-actions {
-    margin-top: 0;
-}
-
-.form-horizontal .form-actions {
-    padding-left: 200px;
-}
-
 /*.alert-wrap {
     position: absolute;
     left: 50%;
@@ -284,7 +268,7 @@ select {
 }
 
 /* responsive */
-@media (max-width: 767px) {
+/*@media (max-width: 767px) {
     body {
         padding-right: 0;
         padding-left: 0;
@@ -302,7 +286,7 @@ select {
     .navbar-fixed-bottom .navbar-inner {
         padding: 0;
     }
-}
+}*/
 
 /* font awesome */
 
@@ -312,4 +296,13 @@ select {
 
 .btn [class^="icon-"], .btn [class*=" icon-"] {
     vertical-align: middle;
+}
+
+img {
+    width: auto\9;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+    -ms-interpolation-mode: bicubic;
 }

@@ -2,16 +2,20 @@
 
 {% block form_row %}
 {% spaceless %}
-    <div class="form-group{% if form.vars.errors|length %} has-error{% endif %}">
-        <div class="col-lg-3">
-            {{ form_label(form) }}
+    {% if form.count %}
+        {{ form_widget(form) }}
+    {% else %}
+        <div class="form-group{% if form.vars.errors|length %} has-error{% endif %}">
+            <div class="col-lg-3">
+                {{ form_label(form) }}
+            </div>
+            <div class="col-lg-9">
+                {{ form_widget(form) }}
+                {% if form.vars.attr['data-help'] is defined %}<span class="help-block">{{ attr['data-help'] }}</span>{% endif %}
+                {{ form_errors(form) }}
+            </div>
         </div>
-        <div class="col-lg-9">
-            {{ form_widget(form) }}
-            {% if form.vars.attr['data-help'] is defined %}<span class="help-block">{{ attr['data-help'] }}</span>{% endif %}
-            {{ form_errors(form) }}
-        </div>
-    </div>
+    {% endif %}
 {% endspaceless %}
 {% endblock form_row %}
 
@@ -52,13 +56,13 @@
 {% block form_widget_simple %}
 {% spaceless %}
     {% set type = type|default('text') %}
-    <input class="form-control" type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    <input type="{{ type }}" {{ block('widget_attributes') }} class="form-control" {% if value is not empty %}value="{{ value }}" {% endif %}/>
 {% endspaceless %}
 {% endblock form_widget_simple %}
 
 {% block textarea_widget %}
 {% spaceless %}
-    <textarea{% if attr.class is not defined %} class="form-control"{% endif %} {{ block('widget_attributes') }}>{{ value }}</textarea>
+    <textarea {{ block('widget_attributes') }} class="form-control">{{ value }}</textarea>
     {% if attr.class is not defined %}
         <div class="char-count" style="margin-top:5px;line-height:20px;"></div>
     {% endif %}
@@ -67,7 +71,7 @@
 
 {% block choice_widget_collapsed %}
 {% spaceless %}
-    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+    <select {{ block('widget_attributes') }} class="form-control"{% if multiple %} multiple="multiple"{% endif %}>
         {% if empty_value is not none %}
             <option value=""{% if required %} disabled="disabled"{% if value is empty %} selected="selected"{% endif %}{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
         {% endif %}
@@ -81,7 +85,6 @@
         {% set options = choices %}
         {{ block('choice_widget_options') }}
     </select>
-    {{ form_errors(form) }}
 {% endspaceless %}
 {% endblock choice_widget_collapsed %}
 
@@ -121,30 +124,24 @@
 {% endspaceless %}
 {% endblock choice_widget_expanded %}
 
+{# TRANSLATIONS COLLECTIONS #}
+
 {% block collection_widget %}
 {% spaceless %}
     {% if prototype is defined %}
         {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
     {% endif %}
-    {{ block('form_collection_widget') }}
-{% endspaceless %}
-{% endblock collection_widget %}
-
-{% block form_collection_widget %}
-{% spaceless %}
-    <div {{ block('widget_container_attributes') }}>
-        {{ block('collection_field_rows') }}
-        {{ form_rest(form) }}
+    <ul class="nav nav-tabs">
+        {% for child in form %}
+        <li{% if loop.index == 1 %} class="active"{% endif %}><a href="#trans{{ child.vars.value.locale }}" data-toggle="tab">{{ child.vars.value.locale|trans|capitalize }}</a></li>
+        {% endfor %}
+    </ul>
+    <div class="tab-content">
+        {% for child in form %}
+            <div class="tab-pane fade{% if loop.index == 1 %} active in{% endif %}" id="trans{{ child.vars.value.locale }}">
+                {{ form_row(child) }}
+            </div>
+        {% endfor %}
     </div>
 {% endspaceless %}
-{% endblock form_collection_widget %}
-
-{% block collection_field_rows %}
-{% spaceless %}
-    {{ form_errors(form) }}
-    {% for child in form %}
-        <h6 style="margin-bottom:20px;border-bottom:1px solid #eeeeee;">{{ child.vars.value.locale|upper }}</h6>
-        {{ form_row(child) }}
-    {% endfor %}
-{% endspaceless %}
-{% endblock collection_field_rows %}
+{% endblock %}

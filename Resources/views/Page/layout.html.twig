@@ -17,7 +17,7 @@
 {% endblock meta_description %}
 
 {% block brand %}
-{{ site.translation.brand }}
+{{ site.translation.brand|raw }}
 {% endblock brand %}
 
 {% block title %}{% if page.showTitle %}{{ page.translation.title }}{% endif %}{% endblock %}

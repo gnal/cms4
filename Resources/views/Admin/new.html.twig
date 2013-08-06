@@ -20,4 +20,8 @@
 {{ parent() }}
 {% include admin.container.getParameter('msi_admin.tiny_mce') %}
 <script src="{{ asset('bundles/msiadmin/js/save.js') }}"></script>
+
+{% if admin.getOption('form_js_template') %}
+{% include admin.getOption('form_js_template') %}
+{% endif %}
 {% endblock js %}

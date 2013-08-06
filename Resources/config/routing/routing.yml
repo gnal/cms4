@@ -15,3 +15,7 @@ msi_page_show:
 tinymce_login:
     pattern: /_tinymce/login
     defaults: { _controller: MsiAdminBundle:Default:tinymcelogin }
+
+msi_admin_menu_node_admin_sort:
+    pattern: /admin/menu-node/sort.html
+    defaults: { _controller: MsiAdminBundle:Admin/MenuNode:sort, _admin: msi_admin_menu_node_admin }

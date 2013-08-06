@@ -94,7 +94,7 @@ services:
 
     msi_admin.block.action:
         class: Msi\AdminBundle\Block\Handler\ActionBlockHandler
-        arguments: [ %msi_admin.block.actions%, @http_kernel ]
+        arguments: [ %msi_admin.block.actions%, @fragment.handler ]
 
     msi_admin.block.template:
         class: Msi\AdminBundle\Block\Handler\TemplateBlockHandler

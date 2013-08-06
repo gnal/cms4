@@ -158,7 +158,7 @@ class Manager
         $row = $this->getMasterQueryBuilder($where, $join, $orderBy)->getQuery()->getOneOrNullResult();
 
         if (!$row && $throw) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException($this->getClass().' where '.http_build_query($where).' not found.');
         }
 
         return $row;

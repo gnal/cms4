@@ -49,7 +49,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->scalarNode('site_class')
-                    ->isRequired()
+                    ->defaultValue('Msi\AdminBundle\Entity\Site')
                     ->cannotBeEmpty()
                 ->end()
             ->end();
@@ -60,7 +60,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->scalarNode('menu_class')
-                    ->isRequired()
+                    ->defaultValue('Msi\AdminBundle\Entity\Menu')
                     ->cannotBeEmpty()
                 ->end()
             ->end();
@@ -71,7 +71,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->scalarNode('page_class')
-                    ->isRequired()
+                    ->defaultValue('Msi\AdminBundle\Entity\Page')
                     ->cannotBeEmpty()
                 ->end()
                 ->arrayNode('page_layouts')
@@ -86,7 +86,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->scalarNode('block_class')
-                    ->isRequired()
+                    ->defaultValue('Msi\AdminBundle\Entity\Block')
                     ->cannotBeEmpty()
                 ->end()
                 ->arrayNode('block_actions')
