@@ -63,19 +63,21 @@
         e.preventDefault();
     });
 
-    $table.on('click', 'a.msi_admin_admin_delete', function(e) {
+    $('body').on('click', '.msi_admin_delete', function(e) {
+        e.preventDefault();
         var $this = $(this);
         if (!window.confirm('Are you sure you want to delete this entry?')) {
             return;
         }
+        $this.closest('tr').addClass('danger');
         $.ajax($this.attr('href'), {
             type: 'POST',
             success: function(response) {
-                $table.html($(response).find('table.table').html());
-                $('#gridCount').html($(response).find('#gridCount').html());
+                $this.closest('tr').remove();
+                // $table.html($(response).find('#grid').html());
+                // $('#gridCount').html($(response).find('#gridCount').html());
             }
         });
-        e.preventDefault();
     });
 
     $('form#limitForm select').on('change', function() {

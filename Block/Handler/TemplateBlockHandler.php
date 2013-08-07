@@ -4,8 +4,8 @@ namespace Msi\AdminBundle\Block\Handler;
 
 use Msi\AdminBundle\Block\BaseBlockHandler;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Msi\AdminBundle\Entity\Block;
-use Msi\AdminBundle\Entity\Page;
+use Msi\AdminBundle\Model\Block;
+use Msi\AdminBundle\Model\Page;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints\NotBlank;
 

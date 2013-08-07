@@ -4,10 +4,11 @@ namespace Msi\AdminBundle\Block\Handler;
 
 use Msi\AdminBundle\Block\BaseBlockHandler;
 use Symfony\Component\HttpKernel\Fragment\FragmentHandler;
-use Msi\AdminBundle\Entity\Block;
-use Msi\AdminBundle\Entity\Page;
+use Msi\AdminBundle\Model\Block;
+use Msi\AdminBundle\Model\Page;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\HttpKernel\Controller\ControllerReference;
 
 class ActionBlockHandler extends BaseBlockHandler
 {
@@ -23,7 +24,7 @@ class ActionBlockHandler extends BaseBlockHandler
     public function execute(Block $block, Page $page)
     {
         $settings = $block->getSettings();
-        $options = [];
+        $options['query'] = [];
 
         if (isset($settings['query'])) {
             $parts = explode('&', trim($settings['query']));
@@ -33,7 +34,7 @@ class ActionBlockHandler extends BaseBlockHandler
             }
         }
 
-        return $this->fragmentHandler->render($settings['action'], $options);
+        return $this->fragmentHandler->render(new ControllerReference($settings['action'], [], $options['query']));
     }
 
     public function buildForm(FormBuilder $builder)

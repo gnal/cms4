@@ -50,10 +50,10 @@ if ( typeof Object.create !== 'function' ) {
             }
             self.ready = false;
 
-            // self.$modalBody
-            //     .empty()
-            //     .html('<div class="text-center"><img style="padding: 40px;" src="/bundles/msiadmin/img/ajax-loader3.gif" alt="ajax-loader"></div>')
-            // ;
+            self.$modalBody
+                .empty()
+                .html('<div class="text-center"><img style="padding: 40px;" src="/bundles/msiadmin/img/ajax-loader3.gif" alt="ajax-loader"></div>')
+            ;
 
             self.$modal.modal('show');
 
