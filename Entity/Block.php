@@ -17,13 +17,7 @@ class Block extends BaseBlock
      */
     protected $id;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Page", inversedBy="blocks", cascade={"persist"})
-     */
     protected $pages;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Msi\UserBundle\Entity\Group")
-     */
     protected $operators;
 }

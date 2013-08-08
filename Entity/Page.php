@@ -17,14 +17,7 @@ class Page extends BasePage
      */
     protected $id;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Block", mappedBy="pages")
-     */
     protected $blocks;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Site")
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     */
     protected $site;
 }

@@ -117,3 +117,15 @@ services:
 
     msi_admin.class_analyzer:
         class: Msi\AdminBundle\Tools\ClassAnalyzer
+
+    msi_admin.page_listener:
+        class: Msi\AdminBundle\EventListener\PageListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    msi_admin.block_listener:
+        class: Msi\AdminBundle\EventListener\BlockListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }
