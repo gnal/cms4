@@ -50,6 +50,10 @@ abstract class Page
      */
     protected $published;
 
+    protected $blocks;
+
+    protected $site;
+
     public function __construct()
     {
         $this->showTitle = true;

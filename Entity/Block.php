@@ -16,8 +16,4 @@ class Block extends BaseBlock
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    protected $pages;
-
-    protected $operators;
 }

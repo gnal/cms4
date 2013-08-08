@@ -47,6 +47,10 @@ abstract class Block
 
     protected $rendered;
 
+    protected $pages;
+
+    protected $operators;
+
     public function __construct()
     {
         $this->rendered = false;

@@ -16,8 +16,4 @@ class Page extends BasePage
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    protected $blocks;
-
-    protected $site;
 }
