@@ -32,10 +32,6 @@ class Menu extends BaseMenu
      */
     protected $children;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Page")
-     * @ORM\JoinColumn(onDelete="SET NULL")
-     */
     protected $page;
 
     /**

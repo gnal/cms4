@@ -129,3 +129,9 @@ services:
         arguments: [ @service_container ]
         tags:
             - { name: doctrine.event_subscriber }
+
+    msi_admin.menu_listener:
+        class: Msi\AdminBundle\EventListener\MenuListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }
