@@ -71,7 +71,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->scalarNode('page_class')
-                    ->defaultValue('Msi\AdminBundle\Entity\Page')
+                    ->isRequired()
                     ->cannotBeEmpty()
                 ->end()
                 ->arrayNode('page_layouts')

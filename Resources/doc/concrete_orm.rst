@@ -93,10 +93,10 @@ Page class
 
     <?php
 
-    namespace Acme\AdminBundle\Entity;
+    namespace Msi\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Msi\AdminBundle\Entity\Page as BasePage;
+    use Msi\AdminBundle\Model\Page as BasePage;
 
     /**
      * @ORM\Entity
@@ -109,21 +109,6 @@ Page class
          * @ORM\GeneratedValue(strategy="AUTO")
          */
         protected $id;
-
-        /**
-         * @ORM\ManyToMany(targetEntity="Block", mappedBy="pages")
-         */
-        protected $blocks;
-
-        /**
-         * @ORM\ManyToOne(targetEntity="Site")
-         */
-        protected $site;
-
-        /**
-         * @ORM\OneToMany(targetEntity="PageTranslation", mappedBy="object", cascade={"persist", "remove"})
-         */
-        protected $translations;
     }
 
 PageTranslation class
@@ -133,10 +118,10 @@ PageTranslation class
 
     <?php
 
-    namespace Acme\AdminBundle\Entity;
+    namespace Msi\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Msi\AdminBundle\Entity\PageTranslation as BasePageTranslation;
+    use Msi\AdminBundle\Model\PageTranslation as BasePageTranslation;
 
     /**
      * @ORM\Entity
@@ -149,11 +134,6 @@ PageTranslation class
          * @ORM\GeneratedValue(strategy="AUTO")
          */
         protected $id;
-
-        /**
-         * @ORM\ManyToOne(targetEntity="Page", inversedBy="translations")
-         */
-        protected $object;
     }
 
 Block class
