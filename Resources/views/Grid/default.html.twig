@@ -27,7 +27,7 @@
                 {% if column.name == '' %}
                     {% for child in grid.admin.children if grid.admin.hasChildren() %}
                         <td>
-                            <a class="btn btn-default btn-small" href="{{ child.genUrl('list', {'parentId': row.id}) }}">{{ child.label(2) }}</a>
+                            <a class="btn btn-default" href="{{ child.genUrl('list', {'parentId': row.id}) }}">{{ child.label(2) }}</a>
                         </td>
                     {% endfor %}
                 {% endif %}
