@@ -29,6 +29,8 @@ class PageAdmin extends Admin
 
     public function buildForm(FormBuilder $builder)
     {
+        $builder->add('published');
+
         $collection = $this->container->get('router')->getRouteCollection();
         $choices = [];
         foreach ($collection->all() as $name => $route) {

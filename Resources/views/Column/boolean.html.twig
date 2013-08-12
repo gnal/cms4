@@ -1,5 +1,5 @@
 {% if column.options.toggle %}
-<a href="#" class="msi_admin_admin_change{% if column.value %} label {{ column.options.btn_true }}{% else %} label {{ column.options.btn_false }}{% endif %}" data-url="{{ admin.genUrl('toggle', {'id': column.object.id, 'field': column.name}) }}" data-icon-true="{{ column.options.icon_true }}" data-icon-false="{{ column.options.icon_false }}" data-btn-true="{{ column.options.btn_true }}" data-btn-false="{{ column.options.btn_false }}">
+<a href="#" class="msi_admin_admin_change{% if column.value %} btn {{ column.options.btn_true }}{% else %} btn {{ column.options.btn_false }}{% endif %}" data-url="{{ admin.genUrl('toggle', {'id': column.object.id, 'field': column.name}) }}" data-icon-true="{{ column.options.icon_true }}" data-icon-false="{{ column.options.icon_false }}" data-btn-true="{{ column.options.btn_true }}" data-btn-false="{{ column.options.btn_false }}">
 {% endif %}
     {% if column.value %}
         <i class="{{ column.options.icon_true }} icon-large"></i>

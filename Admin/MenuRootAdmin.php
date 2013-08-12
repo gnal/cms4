@@ -29,6 +29,8 @@ class MenuRootAdmin extends Admin
 
     public function buildForm(FormBuilder $builder)
     {
+        $builder->add('published');
+
         if ($this->container->get('security.context')->getToken()->getUser()->isSuperAdmin()) {
             $builder->add('operators', 'entity', [
                 'class' => 'MsiUserBundle:Group',

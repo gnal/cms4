@@ -33,6 +33,8 @@ class MenuNodeAdmin extends Admin
 
     public function buildForm(FormBuilder $builder)
     {
+        $builder->add('published');
+
         $qb = $this->getObjectManager()->getFindByQueryBuilder(
             ['a.menu' => $this->container->get('request')->query->get('parentId')],
             ['a.translations' => 't', 'a.children' => 'c'],
