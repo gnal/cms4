@@ -48,11 +48,6 @@ class PageListener implements EventSubscriber
                 'fieldName'    => 'blocks',
                 'targetEntity' => $this->container->getParameter('msi_admin.block.class'),
                 'mappedBy' => 'pages',
-                // 'joinColumns' => [
-                //     [
-                //         'onDelete' => 'CASCADE',
-                //     ],
-                // ],
             ]);
         }
     }
