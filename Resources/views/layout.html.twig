@@ -1,8 +1,7 @@
 {% extends 'MsiAdminBundle:Page:layout.html.twig' %}
 
 {% block css %}
-{#<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">#}
-<link href="{{ asset('bundles/msiadmin/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css" rel="stylesheet">
 <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('bundles/msiadmin/vendor/chosen/chosen.css') }}">
 <link rel="stylesheet" href="{{ asset('bundles/msiadmin/vendor/eternicode-bootstrap-datepicker/css/datepicker.css') }}">
@@ -14,8 +13,7 @@
 {% block js %}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
-{#<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>#}
-<script src="{{ asset('bundles/msiadmin/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/js/bootstrap.min.js"></script>
 <script src="{{ asset('bundles/msiadmin/vendor/chosen/chosen.jquery.min.js') }}"></script>
 <script src="{{ asset('bundles/msiadmin/vendor/eternicode-bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('bundles/msiadmin/vendor/eternicode-bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js') }}"></script>
@@ -41,21 +39,25 @@ $('.datepicker').datepicker({
 </div>#}
 
 <div class="navbar navbar-fixed-top navbar-inverse">
-    <a class="navbar-brand" href="{{ path('msi_admin_dashboard') }}">{{ block('brand') }}</a>
-    {% if is_granted('ROLE_ADMIN') %}
-    <ul class="nav navbar-nav pull-right">
-        <li><a href="{{ path('fos_user_profile_show') }}">{{ app.user.username }}</a></li>
-        <li><a title="{{ 'Log out'|trans }}" href="{{ path('fos_user_security_logout') }}"><i class="icon-signout icon-large"></i></a></li>
-    </ul>
-    {{ knp_menu_render('MsiAdminBundle:MenuBuilder:adminMenu', {'allow_safe_labels': true, 'depth': 3, 'currentClass': 'active'}) }}
-    {% endif %}
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ path('msi_admin_dashboard') }}">{{ block('brand') }}</a>
+        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+        <ul class="nav navbar-nav pull-right">
+            <li><a href="{{ path('fos_user_profile_show') }}">{{ app.user.username }}</a></li>
+            <li><a title="{{ 'Log out'|trans }}" href="{{ path('fos_user_security_logout') }}"><i class="icon-signout icon-large"></i></a></li>
+        </ul>
+        {{ knp_menu_render('MsiAdminBundle:MenuBuilder:adminMenu', {'allow_safe_labels': true, 'depth': 3, 'currentClass': 'active'}) }}
+        {% endif %}
+    </div>
 </div>
 
-<div class="container-fluid" style="margin: 0 15px;">
+<div class="container">
     {% set sidebar = block('sidebar') %}
     <div class="row">
         {% if sidebar %}
-        <div class="col-lg-3">
+        <div class="col-md-3">
             <div id="sidebar">
                 {{ msi_block_render('admin_sidebar_top', page) }}
                 {{ sidebar|raw }}
@@ -64,7 +66,7 @@ $('.datepicker').datepicker({
             </div>
         </div>
         {% endif %}
-        <div class="{% if sidebar %}col-lg-9{% else %}col-lg-12{% endif %}">
+        <div class="{% if sidebar %}col-md-9{% else %}col-md-12{% endif %}">
             <div id="content">
                 <div class="page-header">
                     {#<div class="alert-wrap">
@@ -85,11 +87,11 @@ $('.datepicker').datepicker({
 
                     {% set actions = block('actions') %}
                     <div class="row">
-                        <div class="col-lg-{% if actions %}6{% else %}12{% endif %}">
+                        <div class="col-md-{% if actions %}6{% else %}12{% endif %}">
                             <h2>{{ block('title')|raw }}{{ block('title_suffix') }}</h2>
                         </div>
                         {% if actions %}
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <div class="pull-right btn-toolbar">
                                 {{ block('actions') }}
                             </div>

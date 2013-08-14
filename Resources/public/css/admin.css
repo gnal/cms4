@@ -6,6 +6,11 @@ body {
     background: #eeeeee;
 }
 
+.container {
+    width: 100% !important;
+    max-width: 95% !important;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -300,6 +305,10 @@ select {
 
 .btn [class^="icon-"], .btn [class*=" icon-"] {
     vertical-align: middle;
+}
+
+.btn-default {
+    background: #eee;
 }
 
 img {

@@ -1,6 +1,6 @@
 msi_admin_dashboard:
     pattern: /admin/
-    defaults: { _controller: MsiAdminBundle:Default:dashboard }
+    defaults: { _controller: MsiAdminBundle:Dashboard:dashboard }
 
 msi_admin_limit:
     pattern: /change-limit

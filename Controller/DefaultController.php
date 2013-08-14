@@ -7,11 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    public function dashboardAction()
-    {
-        return $this->render('MsiAdminBundle:Default:dashboard.html.twig');
-    }
-
     public function limitAction()
     {
         $limit = intval($this->getRequest()->request->get('limit'));

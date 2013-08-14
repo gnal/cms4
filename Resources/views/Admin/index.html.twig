@@ -33,16 +33,16 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-lg-1">
+    <div class="col-md-1">
         <span class="help-block">page</span>
     </div>
-    <div class="col-lg-3">
+    <div class="col-md-3">
         {% include 'MsiAdminBundle:Pager:pager.html.twig' %}
     </div>
-    <div class="col-lg-3">
+    <div class="col-md-3">
         <span class="help-block">of {{ pager.countPages }} page{% if pager.countPages > 1 %}s{% endif %}</span>
     </div>
-    <div class="col-lg-5">
+    <div class="col-md-5">
         {% if admin.getOption('search_fields')|length %}
         <form novalidate method="GET" action="{{ admin.genUrl('list') }}">
             {% if admin.hasParent() %}
@@ -61,10 +61,10 @@
 </div>
 {% include 'MsiAdminBundle:Grid:default.html.twig' with {'grid': admin.getGrid()} %}
 <div class="row">
-    <div class="col-lg-1">
+    <div class="col-md-1">
         <span class="help-block">view</span>
     </div>
-    <div class="col-lg-2">
+    <div class="col-md-2">
         <form id="limitForm" novalidate method="POST" action="{{ path('msi_admin_limit') }}">
             <select name="limit" class="notchosen form-control">
                 <option {% if app.session.get('limit') == 10 %}selected=selected{% endif %} value="10">10</option>
@@ -74,7 +74,7 @@
             </select>
         </form>
     </div>
-    <div class="col-lg-9">
+    <div class="col-md-9">
         <span id="gridCount" class="help-block">rows per page | {{ pager.count|number_format }} row{% if pager.count > 1 %}s{% endif %} in total</span>
     </div>
 </div>

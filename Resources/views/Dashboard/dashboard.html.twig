@@ -1,0 +1,16 @@
+{% extends 'MsiAdminBundle::layout.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block js %}
+{{ parent() }}
+<script src="{{ asset('/bundles/msiadmin/vendor/tiny_mce/plugins/filemanager/js/mcfilemanager.js') }}"></script>
+<script src="{{ asset('/bundles/msiadmin/vendor/tiny_mce/plugins/imagemanager/js/mcimagemanager.js') }}"></script>
+{% endblock js %}
+
+{% block content %}
+<p>
+    <a class="btn btn-default" href="javascript:mcImageManager.open();">Image manager</a>
+    <a class="btn btn-default" href="javascript:mcFileManager.open();">File manager</a>
+</p>
+{% endblock content %}
