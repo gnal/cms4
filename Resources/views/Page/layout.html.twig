@@ -1,24 +1,30 @@
 {% extends '::base.html.twig' %}
 
 {% block meta_keywords %}
-    {% if page.translation.metaKeywords %}
-        {{ page.translation.metaKeywords }}
-    {% else %}
-        {{ site.translation.metaKeywords }}
-    {% endif %}
+{% spaceless %}
+{% if page.translation.metaKeywords %}
+    {{ page.translation.metaKeywords }}
+{% else %}
+    {{ site.translation.metaKeywords }}
+{% endif %}
+{% endspaceless %}
 {% endblock meta_keywords %}
 
 {% block meta_description %}
-    {% if page.translation.metaDescription %}
-        {{ page.translation.metaDescription }}
-    {% else %}
-        {{ site.translation.metaDescription }}
-    {% endif %}
+{% spaceless %}
+{% if page.translation.metaDescription %}
+    {{ page.translation.metaDescription }}
+{% else %}
+    {{ site.translation.metaDescription }}
+{% endif %}
+{% endspaceless %}
 {% endblock meta_description %}
 
 {% block brand %}
 {{ site.translation.brand|raw }}
 {% endblock brand %}
+
+{% block head_title %}{{ page.translation.title }}{% endblock %}
 
 {% block title %}{% if page.showTitle %}{{ page.translation.title }}{% endif %}{% endblock %}
 

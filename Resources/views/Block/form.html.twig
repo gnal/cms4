@@ -1,5 +1,5 @@
 {% form_theme form 'MsiAdminBundle:Form:form.html.twig' %}
-
+{{ form_row(form.published) }}
 <div class="tab-content">
     {% if admin.object.id %}
     <div class="tab-pane fade active in" id="tab1">

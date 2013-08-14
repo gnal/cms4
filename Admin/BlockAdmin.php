@@ -31,6 +31,7 @@ class BlockAdmin extends Admin
 
     public function buildForm(FormBuilder $builder)
     {
+        $builder->add('published');
         $builder->add('name');
 
         if ($typeId = $this->getObject()->getType()) {

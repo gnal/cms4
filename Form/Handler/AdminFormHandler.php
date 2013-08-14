@@ -27,7 +27,7 @@ class AdminFormHandler
         if (in_array($this->request->getMethod(), array('POST', 'PUT'))) {
             // for uploadify
             if ($this->request->files->all() && !$this->request->files->get($form->getName())) {
-                $this->request->files->replace([$form->getName() => ['file' => $this->request->files->get('file')]]);
+                $this->request->files->replace([$form->getName() => ['filenameFile' => $this->request->files->get('file')]]);
             }
 
             $form->bind($this->request);
