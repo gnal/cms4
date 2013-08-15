@@ -43,20 +43,28 @@ class BaseMenuBuilder extends ContainerAware
 
     public function buildArray($node, &$array)
     {
-        foreach ($node['translations'] as $k => $translation) {
-            if ($this->container->get('request')->getLocale() === $translation['locale']) {
-                $key = $k;
-                break;
-            }
-        }
         foreach ($node['children'] as $child) {
-            $route = $child['translations'][$key]['route'];
+            foreach ($child['translations'] as $k => $translation) {
+                if ($this->container->get('request')->getLocale() === $translation['locale']) {
+                    $childLocale = $k;
+                    break;
+                }
+            }
+            if ($child['page']) {
+                foreach ($child['page']['translations'] as $k => $translation) {
+                    if ($this->container->get('request')->getLocale() === $translation['locale']) {
+                        $pageLocale = $k;
+                        break;
+                    }
+                }
+            }
+            $route = $child['translations'][$childLocale]['route'];
             $options = [];
 
             if ($child['page']) {
                 if (!$child['page']['route']) {
                     $options['route'] = 'msi_page_show';
-                    $options['routeParameters'] = ['slug' => $child['page']['translations'][$key]['slug']];
+                    $options['routeParameters'] = ['slug' => $child['page']['translations'][$pageLocale]['slug']];
                 } else {
                     $options['route'] = $child['page']['route'];
                 }
@@ -75,10 +83,10 @@ class BaseMenuBuilder extends ContainerAware
                 'published' => $child['published'],
             ];
 
-            $array['children'][$child['translations'][$key]['name']] = $options;
+            $array['children'][$child['translations'][$childLocale]['name']] = $options;
 
             if (count($child['children'])) {
-                $this->buildArray($child, $array['children'][$child['translations'][$key]['name']]);
+                $this->buildArray($child, $array['children'][$child['translations'][$childLocale]['name']]);
             }
         }
     }
