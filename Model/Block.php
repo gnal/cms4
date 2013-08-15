@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 abstract class Block
 {
     use \Msi\AdminBundle\Doctrine\Extension\Model\Translatable;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Sortable;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Publishable;
 
     /**
      * @ORM\Column()
@@ -31,19 +33,9 @@ abstract class Block
     protected $name;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    protected $position;
-
-    /**
      * @ORM\Column(type="array")
      */
     protected $settings;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    protected $published;
 
     protected $rendered;
 
@@ -54,9 +46,7 @@ abstract class Block
     public function __construct()
     {
         $this->rendered = false;
-        $this->published = false;
         $this->settings = array();
-        $this->position = time();
         $this->pages = new ArrayCollection();
         $this->translations = new ArrayCollection();
         $this->operators = new ArrayCollection();
@@ -70,18 +60,6 @@ abstract class Block
     public function setRendered($rendered)
     {
         $this->rendered = $rendered;
-
-        return $this;
-    }
-
-    public function getPublished()
-    {
-        return $this->published;
-    }
-
-    public function setPublished($published)
-    {
-        $this->published = $published;
 
         return $this;
     }
@@ -111,18 +89,6 @@ abstract class Block
     public function setPages($pages)
     {
         $this->pages = $pages;
-
-        return $this;
-    }
-
-    public function getPosition()
-    {
-        return $this->position;
-    }
-
-    public function setPosition($position)
-    {
-        $this->position = $position;
 
         return $this;
     }
