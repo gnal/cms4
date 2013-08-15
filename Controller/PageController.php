@@ -13,6 +13,7 @@ class PageController extends ContainerAware
         $criteria = [
             'a.published' => true,
             'a.site' => $this->container->get('msi_admin.provider')->getSite(),
+            't.locale' => $request->getLocale(),
         ];
 
         $criteria['t.slug'] = $request->attributes->get('slug');
@@ -22,13 +23,15 @@ class PageController extends ContainerAware
             ['a.translations' => 't', 'a.blocks' => 'b'],
             ['b.position' => 'ASC']
         );
-        $qb->andWhere($qb->expr()->isNull('a.route'));
-        $page = $qb->getQuery()->getOneOrNullResult();
 
-        if (!$page) {
+        $qb->andWhere($qb->expr()->isNull('a.route'));
+
+        $parameters['page'] = $qb->getQuery()->getOneOrNullResult();
+
+        if (!$parameters['page']) {
             throw new NotFoundHttpException();
         }
 
-        return $this->container->get('templating')->renderResponse($page->getTemplate(), ['page' => $page]);
+        return $this->container->get('templating')->renderResponse($page->getTemplate(), $parameters);
     }
 }

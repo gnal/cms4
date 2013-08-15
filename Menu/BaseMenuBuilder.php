@@ -2,22 +2,20 @@
 
 namespace Msi\AdminBundle\Menu;
 
-use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BaseMenuBuilder extends ContainerAware
 {
     protected $walkers = [];
 
-    protected function getMenu(FactoryInterface $factory, $name)
+    protected function getMenu($name)
     {
-        $root = $this->container->get('msi_admin.menu_root_manager')->findRootByName($name)[0];
+        $node = $this->container->get('msi_admin.menu_root_manager')->findRootByName($name)[0];
 
-        return $this->create($factory, $root, $name);
+        return $this->create($node);
     }
 
-    public function create(FactoryInterface $factory, $node)
+    public function create($node)
     {
         $array = [
             'name' => $node['translations'][0]['name'],
@@ -29,10 +27,11 @@ class BaseMenuBuilder extends ContainerAware
 
         $this->buildArray($node, $array);
 
-        $item = $factory->createFromArray($array);
+        $item = $this->container->get('knp_menu.array_loader')->load($array);
 
         if (!$item->getExtra('published')) {
-            return $factory->createItem('default');
+            // return $this->container->get('knp_menu.array_loader')->load('default');
+            return null;
         }
 
         $this->addWalker('removeUnpublished');
@@ -44,16 +43,20 @@ class BaseMenuBuilder extends ContainerAware
 
     public function buildArray($node, &$array)
     {
-        $locale = $this->container->get('request')->getLocale() === 'fr' ? 0 : 0;
-
+        foreach ($node['translations'] as $k => $translation) {
+            if ($this->container->get('request')->getLocale() === $translation['locale']) {
+                $key = $k;
+                break;
+            }
+        }
         foreach ($node['children'] as $child) {
-            $route = $child['translations'][$locale]['route'];
+            $route = $child['translations'][$key]['route'];
             $options = [];
 
             if ($child['page']) {
                 if (!$child['page']['route']) {
                     $options['route'] = 'msi_page_show';
-                    $options['routeParameters'] = ['slug' => $child['page']['translations'][$locale]['slug']];
+                    $options['routeParameters'] = ['slug' => $child['page']['translations'][$key]['slug']];
                 } else {
                     $options['route'] = $child['page']['route'];
                 }
@@ -72,10 +75,10 @@ class BaseMenuBuilder extends ContainerAware
                 'published' => $child['published'],
             ];
 
-            $array['children'][$child['translations'][$locale]['name']] = $options;
+            $array['children'][$child['translations'][$key]['name']] = $options;
 
             if (count($child['children'])) {
-                $this->buildArray($child, $array['children'][$child['translations'][$locale]['name']]);
+                $this->buildArray($child, $array['children'][$child['translations'][$key]['name']]);
             }
         }
     }
