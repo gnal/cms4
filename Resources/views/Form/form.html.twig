@@ -116,11 +116,11 @@
         <button class="btn btn-default btn-select-all">{{ 'All'|trans }}</button>
         <button class="btn btn-default btn-select-none">{{ 'None'|trans }}</button>
     </div>
-    {#<div {{ block('widget_container_attributes') }}>#}
+    <div>
     {% for child in form %}
         {{ form_widget(child, {'multiple': 'multiple'}) }}
     {% endfor %}
-    {#</div>#}
+    </div>
 {% endspaceless %}
 {% endblock choice_widget_expanded %}
 

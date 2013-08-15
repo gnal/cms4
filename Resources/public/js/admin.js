@@ -69,11 +69,11 @@
         if (!window.confirm('Are you sure you want to delete this entry?')) {
             return;
         }
-        $this.closest('tr').addClass('danger');
+        $this.closest('tr').remove();
         $.ajax($this.attr('href'), {
             type: 'POST',
             success: function(response) {
-                $this.closest('tr').remove();
+                // $this.closest('tr').remove();
                 // $table.html($(response).find('#grid').html());
                 // $('#gridCount').html($(response).find('#gridCount').html());
             }
@@ -84,13 +84,13 @@
         $(this).closest('form').submit();
     });
 
-    $('.btn-select-all').on('click', function(e) {
-        $(this).closest('.btn-toolbar').next('.form-group').find('input').prop('checked', true);
+    $('body').on('click', '.btn-select-all', function(e) {
+        $(this).closest('.btn-toolbar').next('div').find('input').prop('checked', true);
         e.preventDefault();
     });
 
-    $('.btn-select-none').on('click', function(e) {
-        $(this).closest('.btn-toolbar').next('.form-group').find('input').prop('checked', false);
+    $('body').on('click', '.btn-select-none', function(e) {
+        $(this).closest('.btn-toolbar').next('div').find('input').prop('checked', false);
         e.preventDefault();
     });
 
