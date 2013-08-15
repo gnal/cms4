@@ -32,6 +32,6 @@ class PageController extends ContainerAware
             throw new NotFoundHttpException();
         }
 
-        return $this->container->get('templating')->renderResponse($page->getTemplate(), $parameters);
+        return $this->container->get('templating')->renderResponse($parameters['page']->getTemplate(), $parameters);
     }
 }
