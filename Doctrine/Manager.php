@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Msi\AdminBundle\Tools\ClassAnalyzer;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class Manager
 {
@@ -169,6 +170,13 @@ class Manager
         $rows = $this->getMasterQueryBuilder($where, $join, $orderBy, $limit, $offset)->getQuery()->execute();
 
         return $rows;
+    }
+
+    public function findAllPaginator(array $where = [], array $join = [], array $orderBy = [], $limit = null, $offset = null)
+    {
+        $qb = $this->getMasterQueryBuilder($where, $join, $orderBy, $limit, $offset);
+
+        return new Paginator($qb);
     }
 
     public function getMasterQueryBuilder(array $where = [], array $join = [], array $orderBy = [], $limit = null, $offset = null)
