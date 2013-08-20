@@ -167,16 +167,15 @@ class Manager
 
     public function findAll(array $where = [], array $join = [], array $orderBy = [], $limit = null, $offset = null)
     {
-        $rows = $this->getMasterQueryBuilder($where, $join, $orderBy, $limit, $offset)->getQuery()->execute();
+        $q = $this->getMasterQueryBuilder($where, $join, $orderBy, $limit, $offset)->getQuery();
 
-        return $rows;
-    }
+        if (null !== $limit) {
+            $results = (new Paginator($q))->getIterator()->getArrayCopy();
+        } else {
+            $results = $q->execute();
+        }
 
-    public function findAllPaginator(array $where = [], array $join = [], array $orderBy = [], $limit = null, $offset = null)
-    {
-        $qb = $this->getMasterQueryBuilder($where, $join, $orderBy, $limit, $offset);
-
-        return new Paginator($qb);
+        return $results;
     }
 
     public function getMasterQueryBuilder(array $where = [], array $join = [], array $orderBy = [], $limit = null, $offset = null)
