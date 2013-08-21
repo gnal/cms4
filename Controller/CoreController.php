@@ -312,7 +312,7 @@ class CoreController extends Controller
 
         //     return new JsonResponse($data);
         // } else {
-            return $this->redirect($this->admin->getSaveAndQuitUrl());
+            return $this->redirect($this->admin->getSaveAndQuitRoute());
         // }
     }
 

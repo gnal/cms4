@@ -33,16 +33,10 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-1">
-        <span class="help-block">page</span>
-    </div>
-    <div class="col-md-3">
+    <div class="col-md-6">
         {% include 'MsiAdminBundle:Pager:pager.html.twig' %}
     </div>
-    <div class="col-md-3">
-        <span class="help-block">of {{ pager.countPages }} page{% if pager.countPages > 1 %}s{% endif %}</span>
-    </div>
-    <div class="col-md-5">
+    <div class="col-md-6">
         {% if admin.getOption('search_fields')|length %}
         <form novalidate method="GET" action="{{ admin.genUrl('list') }}">
             {% if admin.hasParent() %}
@@ -61,21 +55,19 @@
 </div>
 {% include 'MsiAdminBundle:Grid:default.html.twig' with {'grid': admin.getGrid()} %}
 <div class="row">
-    <div class="col-md-1">
-        <span class="help-block">view</span>
-    </div>
-    <div class="col-md-2">
-        <form id="limitForm" novalidate method="POST" action="{{ path('msi_admin_limit') }}">
-            <select name="limit" class="notchosen form-control">
-                <option {% if app.session.get('limit') == 10 %}selected=selected{% endif %} value="10">10</option>
-                <option {% if app.session.get('limit', 25) == 25 %}selected=selected{% endif %} value="25">25</option>
-                <option {% if app.session.get('limit') == 50 %}selected=selected{% endif %} value="50">50</option>
-                <option {% if app.session.get('limit') == 100 %}selected=selected{% endif %} value="100">100</option>
-            </select>
+    <div class="col-md-6">
+        <form id="limitForm" class="form-inline" novalidate method="POST" action="{{ path('msi_admin_limit') }}">
+            <div class="input-group">
+                <span class="input-group-addon">view</span>
+                <select name="limit" class="notchosen form-control">
+                    <option {% if app.session.get('limit') == 10 %}selected=selected{% endif %} value="10">10</option>
+                    <option {% if app.session.get('limit', 25) == 25 %}selected=selected{% endif %} value="25">25</option>
+                    <option {% if app.session.get('limit') == 50 %}selected=selected{% endif %} value="50">50</option>
+                    <option {% if app.session.get('limit') == 100 %}selected=selected{% endif %} value="100">100</option>
+                </select>
+                <span id="gridCount" class="input-group-addon">rows per page | {{ pager.count|number_format }} row{% if pager.count > 1 %}s{% endif %} in total</span>
+            </div>
         </form>
-    </div>
-    <div class="col-md-9">
-        <span id="gridCount" class="help-block">rows per page | {{ pager.count|number_format }} row{% if pager.count > 1 %}s{% endif %} in total</span>
     </div>
 </div>
 {% endblock %}

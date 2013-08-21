@@ -3,7 +3,7 @@
     <thead>
         <tr>
         {% for column in grid.columns %}
-            {% if column.name == '' %}
+            {% if column.name == '' and column.options.children %}
                 {% for child in grid.admin.children if grid.admin.hasChildren() %}
                     <th>
                         {#{{ child.label(2) }}#}
@@ -24,7 +24,7 @@
                 </div>
             </td>#}
             {% for column in grid.columns %}
-                {% if column.name == '' %}
+                {% if column.name == '' and column.options.children %}
                     {% for child in grid.admin.children if grid.admin.hasChildren() %}
                         <td>
                             <a class="btn btn-default" href="{{ child.genUrl('list', {'parentId': row.id}) }}">{{ child.label(2) }}</a>

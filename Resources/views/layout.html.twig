@@ -38,7 +38,7 @@ $('.datepicker').datepicker({
     </div>
 </div>#}
 
-<div class="navbar navbar-fixed-top navbar-inverse">
+<div class="navbar navbar-fixed-top navbar-default">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ path('msi_admin_dashboard') }}">{{ block('brand') }}</a>
@@ -79,7 +79,7 @@ $('.datepicker').datepicker({
                         {% for flashMessage in app.session.flashbag.get('success') %}
                         {#<div class="alert-wrap">#}
                             <div class="alert alert-success fade in">
-                                <i class="icon-ok-sign"></i> <span>{{ flashMessage }}</span>
+                                <i class="icon-large icon-ok-sign"></i> <span>{{ flashMessage }}</span>
                             </div>
                         {#</div>#}
                         {% endfor %}

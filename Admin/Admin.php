@@ -328,9 +328,9 @@ abstract class Admin
         }
     }
 
-    public function getSaveAndQuitUrl()
+    public function getSaveAndQuitRoute()
     {
-        return $this->genUrl('list');
+        return $this->genUrl($this->getOption('wq_route'), ['id' => $this->getOption('wq_route') === 'show' ? $this->getObject()->getId() : null]);
     }
 
     public function genUrl($route, $parameters = array(), $mergePersistentParameters = true, $absolute = false)
@@ -455,8 +455,7 @@ abstract class Admin
             'search_fields'        => [],
             'order_by'             => ['a.id' => 'DESC'],
             'uploadify'            => false,
-            'show_children'        => true,
-            'save_quit_url'        => $this->genUrl('list'),
+            'wq_route'             => 'list',
         ]);
 
         $resolver->setOptional([
