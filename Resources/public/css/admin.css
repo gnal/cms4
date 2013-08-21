@@ -274,6 +274,20 @@ img {
     -ms-interpolation-mode: bicubic;
 }
 
-.well .form-group:last-child {
+.well .form-group:last-child, .modal .form-group:last-child {
     margin-bottom: 0;
+}
+
+body.modal-open,
+.modal-open .navbar-fixed-top,
+.modal-open .navbar-fixed-bottom {
+    margin-right: 0;
+}
+
+.modal {
+    overflow-y: visible;
+}
+
+.modal-footer {
+    margin-top: 0;
 }

@@ -52,8 +52,10 @@ if ( typeof Object.create !== 'function' ) {
 
             self.$modalBody
                 .empty()
-                .html('<div class="text-center"><img style="padding: 40px;" src="/bundles/msiadmin/img/ajax-loader3.gif" alt="ajax-loader"></div>')
+                .html('<div class="text-center"><i class="icon-spinner icon-4x icon-spin"></i></div>')
             ;
+
+            self.$modal.find('.modal-title').html($this.data('modal-title'));
 
             self.$modal.modal('show');
 
@@ -81,16 +83,16 @@ if ( typeof Object.create !== 'function' ) {
 
             $form.css('visibility', 'hidden');
 
-            self.$modalBody.css('background', 'url(/bundles/msiadmin/img/ajax-loader3.gif) no-repeat center center #fff');
+            self.$modalBody
+                .html('<div class="text-center"><i class="icon-spinner icon-4x icon-spin"></i></div>')
+            ;
 
             $.ajax($form.attr('action'), {
                 type: 'POST',
                 data: $form.serialize(),
                 success: function (response) {
                     self.ready = true;
-                    self.$modalBody.css('background', '#fff');
                     if (response.entity) {
-                        self.$modal.modal('hide');
                         self.options.submitSuccess($this, response);
                     } else {
                         self.$modalBody.html($(response).find('form.form-crud'));
