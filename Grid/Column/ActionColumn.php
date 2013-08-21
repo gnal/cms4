@@ -13,6 +13,7 @@ class ActionColumn extends BaseColumn
             'delete' => true,
             'edit' => true,
             'children' => true,
+            'attr' => ['class' => 'text-right'],
         ]);
     }
 }
