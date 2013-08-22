@@ -3,7 +3,6 @@
     var $body = $('body');
     var $form = $('form.form-crud');
     $body.on('click', '.msi_admin_save', function(e) {
-        console.log('dada');
         $form.submit();
         e.preventDefault();
     });
