@@ -8,9 +8,11 @@
 {% endblock actions %}
 
 {% block content %}
-<form novalidate class="form-crud form-horizontal" action="{{ admin.genUrl('edit', {'id': admin.object.id}) }}" method="POST" {{ form_enctype(form) }}>
-    {% include admin.getOption('form_template') %}
-</form>
+<div class="well">
+    <form novalidate class="form-crud form-horizontal" action="{{ admin.genUrl('edit', {'id': admin.object.id}) }}" method="POST" {{ form_enctype(form) }}>
+            {% include admin.getOption('form_template') %}
+    </form>
+</div>
 {% endblock %}
 
 {% block sidebar %}{% include admin.getOption('sidebar_template') %}{% endblock %}

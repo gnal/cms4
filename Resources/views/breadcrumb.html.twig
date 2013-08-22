@@ -1,13 +1,9 @@
-{% if crumbs|length %}
-<ul class="breadcrumb">
-{% for crumb in crumbs %}
-    <li{% if crumb.class is defined %} class="{{ crumb.class }}"{% endif %}>
-        {% if crumb.path %}
-            <a href="{{ crumb.path }}">{{ crumb.label|truncate(60)|raw }}</a>
-        {% else %}
-            {{ crumb.label|truncate(60)|raw }}
-        {% endif %}
-    </li>
-{% endfor %}
-</ul>
+{% if breadcrumb.all|length %}
+    <ol class="breadcrumb">
+        {% for crumb in breadcrumb.all %}
+            {% set attr = crumb.options.attr %}
+            {% if crumb.url == null %}{% set attr = attr|merge({class: 'active'}) %}{% endif %}
+            <li{% for attrname, attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>{% if crumb.url %}<a href="{{ crumb.url }}">{{ crumb.label|truncate(90)|raw }}</a>{% else %}{{ crumb.label|truncate(90)|raw }}{% endif %}</li>
+        {% endfor %}
+    </ol>
 {% endif %}

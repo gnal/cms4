@@ -139,3 +139,6 @@ services:
     knp_menu.array_loader:
         class: Knp\Menu\Loader\ArrayLoader
         arguments: [ @knp_menu.factory ]
+
+    msi_admin.breadcrumb.factory:
+        class: Msi\AdminBundle\Breadcrumb\BreadcrumbFactory

@@ -182,7 +182,7 @@ abstract class Admin
         if (!$this->object) {
             $this->object = $this->objectManager->findOneOrCreate(
                 $this->container->getParameter('msi_admin.app_locales'),
-                $this->container->get('request')->query->get('id')
+                $this->container->get('request')->get('id')
             );
         }
 
@@ -194,7 +194,7 @@ abstract class Admin
         if (!$this->parentObject) {
             $this->parentObject = $this->getParent()->objectManager->findOneOrCreate(
                 $this->container->getParameter('msi_admin.app_locales'),
-                $this->container->get('request')->query->get('parentId')
+                $this->container->get('request')->get('parentId')
             );
         }
 
@@ -362,7 +362,65 @@ abstract class Admin
         }
     }
 
-    public function buildParentBreadcrumb(&$crumbs, $parent, $object)
+    public function buildBreadcrumb($action = null)
+    {
+        // $action = $action ?: $this->getAction();
+
+        // if ($this->hasParent()) $this->buildParentBreadcrumb($crumbs, $this->getParent(), $this->getParentObject());
+
+        // $crumbs[] = [
+        //     'label' => '<i class="icon-folder-open"></i> '.$this->getLabel(2),
+        //     'path' => 'list' !== $action ? $this->genUrl('list') : '',
+        //     'class' => 'list' === $action ? 'active' : '',
+        // ];
+
+        // if ($action === 'new') {
+        //     $crumbs[] = array('label' => '<i class="icon-plus"></i> '.$this->getLabel(1), 'path' => '', 'class' => 'active');
+        // }
+
+        // if ($action === 'edit') {
+        //     $crumbs[] = array('label' => '<i class="icon-pencil"></i> '.$this->getObject(), 'path' => '', 'class' => 'active');
+        // }
+
+        // if ($action === 'show') {
+        //     $crumbs[] = array('label' => $this->getObject(), 'path' => '', 'class' => 'active');
+        // }
+
+        // if ($action === 'list' && $this->hasParent()) {
+        //     $getter = 'get'.ucfirst($this->getParent()->getParentFieldName());
+        //     $crumbs[] = [
+        //         'label' => $this->container->get('translator')->trans('Back'),
+        //         'path' => $this->getParent()->genUrl('edit', [
+        //             'id' => $this->getParentObject()->getId(),
+        //             'parentId' => $this->getParent()->hasParent() ? $this->getParentObject()->$getter()->getId() : null,
+        //         ]),
+        //         'class' => 'pull-right',
+        //     ];
+        // } elseif ($action === 'list' && !$this->hasParent()) {
+        // } else {
+        //     $collection = $this->container->get('router')->getRouteCollection();
+        //     foreach ($collection->all() as $name => $route) {
+        //         if ($this->getId().'_show' === $name) {
+        //             $hasShow = true;
+        //             break;
+        //         }
+        //     }
+        //     if ($action === 'edit' && !empty($hasShow)) {
+        //         $path = $this->genUrl('show', ['id' => $this->getObject()->getId()]);
+        //     } else {
+        //         $path = $this->genUrl('list');
+        //     }
+        //     $crumbs[] = [
+        //         'label' => $this->container->get('translator')->trans('Back'),
+        //         'path' => $path,
+        //         'class' => 'pull-right',
+        //     ];
+        // }
+
+        // return $this->buildNewBreadcrumb();
+    }
+
+    public function buildParentBreadcrumb(&$breadcrumb, $parent, $object)
     {
         if (!$parent) {
             return;
@@ -370,82 +428,89 @@ abstract class Admin
 
         if ($parent->hasParent()) {
             $getter = 'get'.ucfirst($parent->getParentFieldName());
-            $this->buildParentBreadcrumb($crumbs, $parent->getParent(), $object->$getter());
+            $this->buildParentBreadcrumb($breadcrumb, $parent->getParent(), $object->$getter());
         }
 
-        $crumbs[] = [
-            'label' => '<i class="icon-folder-open"></i> '.$parent->getLabel(2),
-            'path' => $parent->genUrl('list', [
+        $breadcrumb->add(
+            '<span class="icon-folder-open-alt icon-large"></span> '.$parent->getLabel(2),
+            $parent->genUrl('list', [
                 'parentId' => $parent->hasParent() ? $object->$getter()->getId() : null,
             ], false)
 
-        ];
+        );
 
-        $crumbs[] = [
-            'label' => '<i class="icon-pencil"></i> '.$object,
-            'path' => $parent->genUrl('edit', [
+        $breadcrumb->add(
+            '<span class="icon-file-alt icon-large"></span> '.$object,
+            $parent->hasShow() ? $parent->genUrl('show', [
                 'id' => $object->getId(),
                 'parentId' => $parent->hasParent() ? $object->$getter()->getId() : null,
-            ], false)
-        ];
+            ], false) : null
+        );
     }
 
-    public function buildBreadcrumb($action = null)
+    public function buildBaseBreadcrumb($action)
+    {
+        $breadcrumb = $this->container->get('msi_admin.breadcrumb.factory')->create();
+
+        if ($this->hasParent()) {
+            $this->buildParentBreadcrumb($breadcrumb, $this->getParent(), $this->getParentObject());
+        }
+
+        $breadcrumb
+            ->add('<span class="icon-folder-open-alt icon-large"></span> '.$this->getLabel(2), $action === 'list' ? null : $this->genUrl('list'))
+        ;
+
+        return $breadcrumb;
+    }
+
+    public function buildListBreadcrumb($breadcrumb)
+    {
+    }
+
+    public function buildNewBreadcrumb($breadcrumb)
+    {
+        $breadcrumb
+            ->add('<span class="icon-plus icon-large"></span>')
+        ;
+    }
+
+    public function buildEditBreadcrumb($breadcrumb)
+    {
+        $breadcrumb
+            ->add('<span class="icon-file-alt icon-large"></span> '.$this->getObject(), $this->hasShow() ? $this->genUrl('show', ['id' => $this->getObject()->getId()]) : null)
+            ->add('<span class="icon-pencil icon-large"></span>')
+        ;
+    }
+
+    public function buildShowBreadcrumb($breadcrumb)
+    {
+        $breadcrumb
+            ->add('<span class="icon-file-alt icon-large"></span> '.$this->getObject())
+        ;
+    }
+
+    public function getBreadcrumb($action = null)
     {
         $action = $action ?: $this->getAction();
 
-        if ($this->hasParent()) $this->buildParentBreadcrumb($crumbs, $this->getParent(), $this->getParentObject());
+        $breadcrumb = $this->buildBaseBreadcrumb($action);
 
-        $crumbs[] = [
-            'label' => '<i class="icon-folder-open"></i> '.$this->getLabel(2),
-            'path' => 'list' !== $action ? $this->genUrl('list') : '',
-            'class' => 'list' === $action ? 'active' : '',
-        ];
+        $method = 'build'.ucfirst($action).'Breadcrumb';
+        $this->$method($breadcrumb);
 
-        if ($action === 'new') {
-            $crumbs[] = array('label' => '<i class="icon-plus"></i> '.$this->getLabel(1), 'path' => '', 'class' => 'active');
-        }
+        return $breadcrumb;
+    }
 
-        if ($action === 'edit') {
-            $crumbs[] = array('label' => '<i class="icon-pencil"></i> '.$this->getObject(), 'path' => '', 'class' => 'active');
-        }
-
-        if ($action === 'show') {
-            $crumbs[] = array('label' => $this->getObject(), 'path' => '', 'class' => 'active');
-        }
-
-        if ($action === 'list' && $this->hasParent()) {
-            $getter = 'get'.ucfirst($this->getParent()->getParentFieldName());
-            $crumbs[] = [
-                'label' => $this->container->get('translator')->trans('Back'),
-                'path' => $this->getParent()->genUrl('edit', [
-                    'id' => $this->getParentObject()->getId(),
-                    'parentId' => $this->getParent()->hasParent() ? $this->getParentObject()->$getter()->getId() : null,
-                ]),
-                'class' => 'pull-right',
-            ];
-        } elseif ($action === 'list' && !$this->hasParent()) {
-        } else {
-            $collection = $this->container->get('router')->getRouteCollection();
-            foreach ($collection->all() as $name => $route) {
-                if ($this->getId().'_show' === $name) {
-                    $hasShow = true;
-                    break;
-                }
+    public function hasShow()
+    {
+        $collection = $this->container->get('router')->getRouteCollection();
+        foreach ($collection->all() as $name => $route) {
+            if ($this->getId().'_show' === $name) {
+                return true;
             }
-            if ($action === 'edit' && !empty($hasShow)) {
-                $path = $this->genUrl('show', ['id' => $this->getObject()->getId()]);
-            } else {
-                $path = $this->genUrl('list');
-            }
-            $crumbs[] = [
-                'label' => $this->container->get('translator')->trans('Back'),
-                'path' => $path,
-                'class' => 'pull-right',
-            ];
         }
 
-        return $crumbs;
+        return false;
     }
 
     protected function init()

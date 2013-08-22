@@ -331,6 +331,6 @@ class CoreController extends Controller
 
     protected function addSuccessFlash()
     {
-        $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('success!', ['%label%' => strtolower($this->admin->getLabel(1))]));
+        $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('alert_success', ['%label%' => strtolower($this->admin->getLabel(1))]));
     }
 }

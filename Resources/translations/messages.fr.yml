@@ -88,6 +88,7 @@ of: de
 view: afficher
 page: page|pages
 result: résultat|résultats
+alert_success: Les modifications ont été enregistrées.
 
 # index
 results_per_page: résultats par page

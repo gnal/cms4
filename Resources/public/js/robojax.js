@@ -11,7 +11,7 @@ if ( typeof Object.create !== 'function' ) {
     var Robojax = {
         init: function(options) {
             var self = this;
-            // el could be the modal perhaps?
+
             self.options = $.extend({}, $.robojax.options, options);
             self.$modal = $('div.modal');
             self.$modalBody = self.$modal.find('.modal-body');
@@ -108,7 +108,7 @@ if ( typeof Object.create !== 'function' ) {
     };
 
     $.robojax.options = {
-        clickSuccess: null,
-        submitSuccess: null
+        clickSuccess: function() {},
+        submitSuccess: function() {}
     };
 })(jQuery, window);

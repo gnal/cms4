@@ -87,6 +87,7 @@ of: of
 view: view
 page: page|pages
 result: result|results
+alert_success: The changes have been saved.
 
 # index
 results_per_page: results per page

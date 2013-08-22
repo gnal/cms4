@@ -76,11 +76,9 @@ $('.datepicker').datepicker({
 
                 {% if app.session.started %}
                     {% for flashMessage in app.session.flashbag.get('success') %}
-                    {#<div class="alert-wrap">#}
                         <div class="alert alert-success fade in">
                             <i class="icon-large icon-ok-sign"></i> <span>{{ flashMessage }}</span>
                         </div>
-                    {#</div>#}
                     {% endfor %}
                 {% endif %}
 
@@ -100,7 +98,9 @@ $('.datepicker').datepicker({
             </div>
 
             {% block breadcrumb %}
-                {% include 'MsiAdminBundle::breadcrumb.html.twig' with {'crumbs': admin is defined ? admin.buildBreadcrumb : [] } %}
+                {% if admin is defined %}
+                    {% include 'MsiAdminBundle::breadcrumb.html.twig' with {'breadcrumb': admin.breadcrumb} %}
+                {% endif %}
             {% endblock breadcrumb %}
 
             {{ msi_block_render('content_top', page) }}
