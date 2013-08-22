@@ -83,6 +83,9 @@ en: English
 success!: The %label% has been saved.
 
 # misc
+edit: edit
+delete: delete
+view: view
 of: of
 view: view
 page: page|pages
