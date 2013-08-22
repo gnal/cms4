@@ -56,17 +56,20 @@
 <br>
 {% include 'MsiAdminBundle:Grid:default.html.twig' with {'grid': admin.getGrid()} %}
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
+        <p>{{ pager.from|number_format }}-{{ pager.to|number_format }} de {{ pager.count|number_format }} {{ 'result'|transchoice(pager.count) }}</p>
+    </div>
+    <div class="col-md-4">
         <form id="limitForm" class="form-inline" novalidate method="POST" action="{{ path('msi_admin_limit') }}">
             <div class="input-group">
-                <span class="input-group-addon">view</span>
+                <span class="input-group-addon">{{ 'view'|trans }}</span>
                 <select name="limit" class="notchosen form-control">
                     <option {% if app.session.get('limit') == 10 %}selected=selected{% endif %} value="10">10</option>
                     <option {% if app.session.get('limit', 25) == 25 %}selected=selected{% endif %} value="25">25</option>
                     <option {% if app.session.get('limit') == 50 %}selected=selected{% endif %} value="50">50</option>
                     <option {% if app.session.get('limit') == 100 %}selected=selected{% endif %} value="100">100</option>
                 </select>
-                <span id="gridCount" class="input-group-addon">rows per page | {{ pager.count|number_format }} row{% if pager.count > 1 %}s{% endif %} in total</span>
+                <span id="gridCount" class="input-group-addon">{{ 'results_per_page'|trans }}</span>
             </div>
         </form>
     </div>

@@ -108,7 +108,7 @@ if ( typeof Object.create !== 'function' ) {
     };
 
     $.robojax.options = {
-        clickSuccess: function() {},
-        submitSuccess: function() {}
+        clickSuccess: null,
+        submitSuccess: null
     };
 })(jQuery, window);

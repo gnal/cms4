@@ -79,8 +79,15 @@ Open in a new tab: Ouvrir dans un nouvel onglet
 Groups: Groupes
 Body: Contenu
 Whitelist: Liste blanche
-
 fr: Français
 en: Anglais
-
 success!: The %label% has been saved.
+
+# misc
+of: de
+view: afficher
+page: page|pages
+result: résultat|résultats
+
+# index
+results_per_page: résultats par page

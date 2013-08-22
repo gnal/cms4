@@ -426,9 +426,21 @@ abstract class Admin
             ];
         } elseif ($action === 'list' && !$this->hasParent()) {
         } else {
+            $collection = $this->container->get('router')->getRouteCollection();
+            foreach ($collection->all() as $name => $route) {
+                if ($this->getId().'_show' === $name) {
+                    $hasShow = true;
+                    break;
+                }
+            }
+            if ($action === 'edit' && !empty($hasShow)) {
+                $path = $this->genUrl('show', ['id' => $this->getObject()->getId()]);
+            } else {
+                $path = $this->genUrl('list');
+            }
             $crumbs[] = [
                 'label' => $this->container->get('translator')->trans('Back'),
-                'path' => $this->genUrl('list'),
+                'path' => $path,
                 'class' => 'pull-right',
             ];
         }

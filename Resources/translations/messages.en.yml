@@ -78,8 +78,15 @@ Open in a new tab: Open in a new tab
 Groups: Groups
 Body: Body
 Whitelist: Whitelist
-
 fr: French
 en: English
-
 success!: The %label% has been saved.
+
+# misc
+of: of
+view: view
+page: page|pages
+result: result|results
+
+# index
+results_per_page: results per page
