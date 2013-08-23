@@ -63,6 +63,9 @@ if ( typeof Object.create !== 'function' ) {
                 success: function(response) {
                     self.ready = true;
                     self.options.clickSuccess($this, response);
+                    if ($this.hasClass('robojax_delete')) {
+                        return;
+                    }
                     self.$modalBody
                         .html($(response).find('form.form-crud'))
                     ;
