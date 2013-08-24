@@ -280,3 +280,25 @@ body.modal-open,
     -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+
+/*.nav-stacked>li {
+    margin: 0 0 -1px !important;
+}
+
+.nav-pills>li>a {
+    border-radius: 0;
+    border: 1px solid #ddd;
+    color: #555555;
+}
+
+.nav-pills>li:first-child>a {
+    border-radius: 4px 4px 0 0;
+}
+
+.nav-pills>li:last-child>a {
+    border-radius: 0 0 4px 4px;
+}
+
+.nav-pills>li.active>a {
+    border: 0;
+}*/

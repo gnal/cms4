@@ -32,6 +32,8 @@
 {% endblock %}
 
 {% block content %}
+<div class="panel panel-default">
+    <div class="panel-body">
 <div class="row">
     <div class="col-md-6">
         {% include 'MsiAdminBundle:Pager:pager.html.twig' %}
@@ -53,8 +55,9 @@
         {% endif %}
     </div>
 </div>
-<br>
+</div>
 {% include 'MsiAdminBundle:Grid:default.html.twig' with {'grid': admin.getGrid()} %}
+<div class="panel-body">
 <div class="row">
     <div class="col-md-8">
         <p>{{ pager.from|number_format }}-{{ pager.to|number_format }} de {{ pager.count|number_format }} {{ 'result'|transchoice(pager.count) }}</p>
@@ -73,6 +76,8 @@
             </div>
         </form>
     </div>
+</div>
+</div>
 </div>
 {% endblock %}
 

@@ -12,8 +12,9 @@ class BooleanColumn extends BaseColumn
             'toggle' => true,
             'btn_true' => 'btn-success',
             'btn_false' => 'btn-default',
-            'icon_true' => 'icon-ok',
-            'icon_false' => 'icon-ok',
+            'icon_true' => 'icon-ok-circle',
+            'icon_false' => 'icon-ok-circle',
+            'attr' => ['class' => 'text-center'],
         ]);
     }
 }

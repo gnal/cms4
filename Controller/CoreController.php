@@ -210,7 +210,8 @@ class CoreController extends Controller
 
         $this->admin->getObjectManager()->toggle($this->admin->getObject(), $this->getRequest());
 
-        return $this->getResponse();
+        // return $this->getResponse();
+        return new Response();
     }
 
     public function sortAction(Request $request)

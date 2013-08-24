@@ -1,44 +1,41 @@
-<table id="grid" class="{% if admin.hasTrait('Sortable') %}table-sortable {% endif %}table table-bordered table-striped">
-    {# Head #}
-    <thead>
-        <tr>
+<table style="border-bottom: 1px solid #ddd;" id="grid" class="{% if admin.hasTrait('Sortable') %}table-sortable {% endif %}table table-striped table-condensed">
+{# Head #}
+<thead>
+    <tr>
+    {% for column in grid.columns %}
+        {% if column.name == '' and column.options.children %}
+            {% for child in grid.admin.children if grid.admin.hasChildren() %}
+                <th>
+                    {#{{ child.label(2) }}#}
+                </th>
+            {% endfor %}
+        {% endif %}
+        <th>{{ column.get('label')|capitalize|trans }}</th>
+    {% endfor %}
+    </tr>
+</thead>
+{# Body #}
+<tbody>
+{% for row in grid.rows %}
+    <tr id="tr{{ row.id }}" data-row="{{ loop.index }}">
+        {#<td class="span1">
+            <div class="text-center">
+                <input data-row-id="<?php echo $row->getId() ?>" style="margin-top: 0;" type=checkbox>
+            </div>
+        </td>#}
         {% for column in grid.columns %}
             {% if column.name == '' and column.options.children %}
                 {% for child in grid.admin.children if grid.admin.hasChildren() %}
-                    <th>
-                        {#{{ child.label(2) }}#}
-                    </th>
+                    <td>
+                        <a class="btn btn-default btn-sm" href="{{ child.genUrl('list', {'parentId': row.id}) }}">{{ child.label(2) }}</a>
+                    </td>
                 {% endfor %}
             {% endif %}
-            <th>{{ column.get('label')|capitalize|trans }}</th>
+            <td {% for attrname,attrvalue in column.options.attr %}{{attrname}}="{{attrvalue}}" {% endfor %}id="td{{ loop.index~row.id }}">
+            {% include 'MsiAdminBundle:Column:'~column.type~'.html.twig' with {'i': loop.index, 'column': column.resolveRow(row)} %}
+            </td>
         {% endfor %}
-        </tr>
-    </thead>
-    {# Body #}
-    <tbody>
-    {% for row in grid.rows %}
-        <tr id="tr{{ row.id }}" data-row="{{ loop.index }}">
-            {#<td class="span1">
-                <div class="text-center">
-                    <input data-row-id="<?php echo $row->getId() ?>" style="margin-top: 0;" type=checkbox>
-                </div>
-            </td>#}
-            {% for column in grid.columns %}
-                {% if column.name == '' and column.options.children %}
-                    {% for child in grid.admin.children if grid.admin.hasChildren() %}
-                        <td>
-                            <a class="btn btn-default" href="{{ child.genUrl('list', {'parentId': row.id}) }}">{{ child.label(2) }}</a>
-                        </td>
-                    {% endfor %}
-                {% endif %}
-                <td {% for attrname,attrvalue in column.options.attr %}{{attrname}}="{{attrvalue}}" {% endfor %}id="td{{ loop.index~row.id }}">
-                {% include 'MsiAdminBundle:Column:'~column.type~'.html.twig' with {'i': loop.index, 'column': column.resolveRow(row)} %}
-                </td>
-            {% endfor %}
-        </tr>
-    {% endfor %}
-    </tbody>
-    {#<tfoot>
-        <tr><td colspan={{ grid.columns|length }}></td></tr>
-    </tfoot>#}
+    </tr>
+{% endfor %}
+</tbody>
 </table>

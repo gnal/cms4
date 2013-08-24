@@ -16,7 +16,7 @@
         }
         loadingCellIds.push(cellId);
 
-        $this.html('<i class="'+iconTrue+' icon-spin icon-large"></i>');
+        $this.html('<i class="icon-spinner icon-spin icon-large"></i>');
 
         $.ajax($this.data('url'), {
             success: function() {

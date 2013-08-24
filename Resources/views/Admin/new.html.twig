@@ -10,7 +10,7 @@
 
 {% block content %}
 <div class="well">
-    <form novalidate class="form-crud form-horizontal" action="{{ admin.genUrl('new') }}" method="POST" {{ form_enctype(form) }}>
+    <form novalidate class="form-crud" action="{{ admin.genUrl('new') }}" method="POST" {{ form_enctype(form) }}>
         {% include admin.getOption('form_template') %}
     </form>
 </div>
