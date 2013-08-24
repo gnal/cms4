@@ -5,7 +5,7 @@
         <fieldset>
             {{ form_row(form.host) }}
             {{ form_row(form.isDefault) }}
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-pills">
                 {% for translation in form.translations %}
                 <li{% if loop.index == 1 %} class="active"{% endif %}><a href="#translation1{{ translation.get('value').locale }}" data-toggle="tab">{{ translation.get('value').locale|trans|capitalize }}</a></li>
                 {% endfor %}
@@ -30,7 +30,7 @@
 
     <div class="tab-pane fade" id="tab3">
         <fieldset>
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-pills">
                 {% for translation in form.translations %}
                 <li{% if loop.index == 1 %} class="active"{% endif %}><a href="#translation2{{ translation.get('value').locale }}" data-toggle="tab">{{ translation.get('value').locale|trans|capitalize }}</a></li>
                 {% endfor %}

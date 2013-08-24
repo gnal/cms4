@@ -183,7 +183,7 @@
     {% if prototype is defined %}
         {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
     {% endif %}
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-pills">
         {% for child in form %}
         <li{% if loop.index == 1 %} class="active"{% endif %}><a href="#trans{{ child.vars.value.locale }}" data-toggle="tab">{{ child.vars.value.locale|trans|capitalize }}</a></li>
         {% endfor %}

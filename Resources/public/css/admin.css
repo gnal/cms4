@@ -16,20 +16,7 @@ a:hover {
 
 h2 {
     margin: 0 0 0;
-    font-size: 24.5px;
-    line-height: 38px;
-}
-
-h4, h5 {
-    margin: 0 0 0;
-    margin-bottom: 20px;
-    line-height: 38px;
-}
-
-.page-header {
-    margin: 0 0 20px;
-    border: 0;
-    padding: 0 0;
+    font-size: 24px;
 }
 
 #sidebar select {
@@ -50,7 +37,7 @@ h4, h5 {
     vertical-align: middle;
 }
 
-form .nav-tabs {
+form .nav-tabs, form .nav-pills {
     margin-bottom: 20px;
 }
 
@@ -302,3 +289,9 @@ body.modal-open,
 .nav-pills>li.active>a {
     border: 0;
 }*/
+
+.alert-danger-important {
+color: #b94a48 !important;
+background-color: #f2dede !important;
+border-color: #eed3d7 !important;
+}
