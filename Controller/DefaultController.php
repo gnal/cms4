@@ -26,6 +26,15 @@ class DefaultController extends Controller
         return $this->redirect($url);
     }
 
+    public function workingLocaleAction()
+    {
+        $locale = $this->getRequest()->query->get('locale');
+
+        $this->get('session')->set('working_locale', $locale);
+
+        return $this->redirect($_SERVER['HTTP_REFERER'] ?: $this->generateUrl('msi_admin_dashboard'));
+    }
+
     public function tinymceloginAction()
     {
         if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {

@@ -1,11 +1,11 @@
 {% if app_locales|length > 1 %}
-<div class="navbar-btn btn-group pull-right">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        {{ working_locale|trans }} <span class="caret"></span>
+<div class="btn-group pull-right">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <span class="icon-flag icon-large"></span> {{ working_locale|trans }} <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
         {% for l in app_locales if l != working_locale %}
-            <li><a data-locale="{{ l }}" class="switch_data_locale" href="#">{{ l|trans }}</a></li>
+            <li><a href="{{ path('msi_admin_working_locale', {'locale': l}) }}"><span class="icon-flag icon-large"></span> {{ l|trans }}</a></li>
         {% endfor %}
     </ul>
 </div>

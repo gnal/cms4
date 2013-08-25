@@ -41,18 +41,6 @@ class Manager
         $this->em->flush();
     }
 
-    public function createTranslations($entity, array $locales)
-    {
-        $class = $this->class.'Translation';
-        foreach ($locales as $locale) {
-            if (!$entity->hasTranslation($locale)) {
-                $translation = new $class();
-                $translation->setLocale($locale)->setObject($entity);
-                $entity->getTranslations()->add($translation);
-            }
-        }
-    }
-
     public function toggle($entity, $request)
     {
         $field = $request->query->get('field');

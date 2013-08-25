@@ -18,7 +18,7 @@ services:
     msi_admin.provider:
         class: Msi\AdminBundle\Provider\Provider
         scope: request
-        arguments: [ @request, @msi_admin.site_manager ]
+        arguments: [ @request, @msi_admin.site_manager, @service_container ]
 
     msi_admin.bouncer:
         class: Msi\AdminBundle\Bouncer\Bouncer

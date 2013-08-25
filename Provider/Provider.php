@@ -10,11 +10,13 @@ class Provider
     protected $siteManager;
     protected $site;
     protected $request;
+    protected $container;
 
-    public function __construct(Request $request, $siteManager)
+    public function __construct(Request $request, $siteManager, $container)
     {
         $this->siteManager = $siteManager;
         $this->request = $request;
+        $this->container = $container;
         $site = null;
     }
 
@@ -41,5 +43,10 @@ class Provider
         }
 
         return $this->site;
+    }
+
+    public function getWorkingLocale()
+    {
+        return $this->container->get('session')->get('working_locale', $this->getSite()->getLocale());
     }
 }

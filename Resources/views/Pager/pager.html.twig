@@ -9,7 +9,7 @@
         <span class="input-group-addon">{{ 'of'|trans }} {{ pager.countPages|number_format }} {{ 'page'|transchoice(pager.countPages) }}</span>
         <div class="input-group-btn">
             <a class="btn-default btn{% if page == pager.countPages %} disabled{% endif %}" href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': page != pager.countPages ? page + 1 : pager.countPages})) }}"><i class="icon-chevron-right icon-large"></i></a>
-            <button class="btn-default btn{% if pager.countPages <= 1 %} disabled{% endif %}" type=submit><i class="icon-search icon-large"></i></button>
+            {#<button class="btn-default btn{% if pager.countPages <= 1 %} disabled{% endif %}" type=submit><i class="icon-search icon-large"></i></button>#}
         </div>
     </div>
 </form>

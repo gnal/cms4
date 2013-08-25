@@ -6,6 +6,10 @@ msi_admin_limit:
     pattern: /change-limit
     defaults: { _controller: MsiAdminBundle:Default:limit }
 
+msi_admin_working_locale:
+    pattern: /change-working-locale
+    defaults: { _controller: MsiAdminBundle:Default:workingLocale }
+
 msi_page_show:
     pattern: /{_locale}/{slug}
     defaults: { _controller: MsiAdminBundle:Page:show, slug: ~ }

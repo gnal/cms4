@@ -45,12 +45,16 @@ $('.datepicker').datepicker({
             <a class="navbar-brand" href="{{ path('msi_admin_dashboard') }}">{{ block('brand') }}</a>
         </div>
         {% if is_granted('ROLE_ADMIN') %}
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{ path('fos_user_profile_show') }}">{{ app.user.username }}</a></li>
-            <li><a title="{{ 'Log out'|trans }}" href="{{ path('fos_user_security_logout') }}"><i class="icon-signout icon-large"></i></a></li>
-        </ul>
-        {% include 'MsiAdminBundle::working_locale_btn.html.twig' %}
-        {{ knp_menu_render('MsiAdminBundle:MenuBuilder:adminMenu', {'allow_safe_labels': true, 'depth': 3, 'currentClass': 'active'}) }}
+            <div class="navbar-btn btn-group navbar-right">
+                <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default">{{ app.user.username }}</a>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ path('fos_user_security_logout') }}">{{ 'sign_out'|trans }}</a></li>
+                </ul>
+            </div>
+            {{ knp_menu_render('MsiAdminBundle:MenuBuilder:adminMenu', {'allow_safe_labels': true, 'depth': 3, 'currentClass': 'active'}) }}
         {% endif %}
     </div>
 </div>
@@ -77,16 +81,17 @@ $('.datepicker').datepicker({
                 {% endfor %}
             {% endif %}
 
-            {% set actions = block('actions') %}
             <div class="row" style="margin-bottom: 20px;">
                 <div class="col-md-12">
                     <h2>{{ block('title')|raw }}{{ block('title_suffix') }}</h2>
                 </div>
             </div>
 
+            {% set actions = block('actions') %}
             {% if actions %}
             <div class="row" style="margin-bottom: 20px;">
                 <div class="col-md-12">
+                    {% include 'MsiAdminBundle::working_locale_btn.html.twig' %}
                     {{ actions|raw }}
                 </div>
             </div>
@@ -101,6 +106,7 @@ $('.datepicker').datepicker({
             {{ msi_block_render('content_top', page) }}
             {{ block('page_content') }}
             {{ msi_block_render('content_bottom', page) }}
+
             <div class="clearfix"></div>
         </div>
     </div>

@@ -92,6 +92,7 @@ view: view
 page: page|pages
 result: result|results
 alert_success: The changes have been saved.
+sign_out: Sign out
 
 # index
 results_per_page: results per page

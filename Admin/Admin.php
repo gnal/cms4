@@ -182,7 +182,7 @@ abstract class Admin
         if (!$this->object) {
             $where = $this->getRequest()->get('id') ? ['a.id' => $this->getRequest()->get('id')] : [];
             $this->object = $this->objectManager->findOrCreate(
-                $this->getRequest()->query->get('locale', $this->getRequest()->getLocale()),
+                $this->container->get('msi_admin.provider')->getWorkingLocale(),
                 $where
             );
         }
@@ -195,7 +195,7 @@ abstract class Admin
         if (!$this->parentObject) {
             $where = $this->getRequest()->get('parentId') ? ['a.id' => $this->getRequest()->get('parentId')] : [];
             $this->parentObject = $this->getParent()->objectManager->findOrCreate(
-                $this->getRequest()->query->get('locale', $this->getRequest()->getLocale()),
+                $this->container->get('msi_admin.provider')->getWorkingLocale(),
                 $where
             );
         }
