@@ -45,11 +45,6 @@ abstract class Page
      */
     protected $showTitle;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    protected $published;
-
     protected $blocks;
 
     protected $site;
@@ -57,21 +52,8 @@ abstract class Page
     public function __construct()
     {
         $this->showTitle = true;
-        $this->published = false;
         $this->blocks = new ArrayCollection();
         $this->translations = new ArrayCollection();
-    }
-
-    public function getPublished()
-    {
-        return $this->published;
-    }
-
-    public function setPublished($published)
-    {
-        $this->published = $published;
-
-        return $this;
     }
 
     public function getShowTitle()

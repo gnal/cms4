@@ -11,7 +11,7 @@ class PageController extends ContainerAware
     public function showAction(Request $request)
     {
         $criteria = [
-            'a.published' => true,
+            't.published' => true,
             'a.site' => $this->container->get('msi_admin.provider')->getSite(),
             't.locale' => $request->getLocale(),
         ];

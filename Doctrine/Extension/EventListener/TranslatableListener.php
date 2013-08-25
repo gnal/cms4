@@ -4,6 +4,7 @@ namespace Msi\AdminBundle\Doctrine\Extension\EventListener;
 
 use Doctrine\ORM\Events;
 use Doctrine\Common\EventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Msi\AdminBundle\Doctrine\Extension\BaseListener;
@@ -73,6 +74,29 @@ class TranslatableListener extends BaseListener
                     ],
                 ]);
             }
+
+            $name = $metadata->getTableName().'_unique_translation';
+            if (!$this->hasUniqueTranslationConstraint($metadata, $name)) {
+                $metadata->setPrimaryTable([
+                    'uniqueConstraints' => [[
+                        'name' => $name,
+                        'columns' => ['object_id', 'locale' ]
+                    ]],
+                ]);
+            }
         }
+    }
+
+    private function hasUniqueTranslationConstraint(ClassMetadata $classMetadata, $name)
+    {
+        if (isset($classMetadata->table['uniqueConstraints'])) {
+            foreach ($classMetadata->table['uniqueConstraints'] as $value) {
+                if (isset($value['name']) && $value['name'] === $name) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

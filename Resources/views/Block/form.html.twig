@@ -1,51 +1,38 @@
 {% form_theme form 'MsiAdminBundle:Form:form.html.twig' %}
-{{ form_row(form.published) }}
 <div class="tab-content">
     {% if admin.object.id %}
     <div class="tab-pane fade active in" id="tab1">
-        <fieldset>
-            {% if admin.container.get(admin.object.type).name == 'text' %}
-            <ul class="nav nav-pills">
-                {% for translation in form.translations %}
-                <li{% if loop.index == 1 %} class="active"{% endif %}><a href="#translation1{{ translation.get('value').locale }}" data-toggle="tab">{{ translation.get('value').locale|trans|capitalize }}</a></li>
-                {% endfor %}
-            </ul>
-            <div class="tab-content">
-                {% for translation in form.translations %}
-                    <div class="tab-pane fade{% if loop.index == 1 %} active in{% endif %}" id="translation1{{ translation.get('value').locale }}">
-                        {{ form_widget(translation.settings.body) }}
-                    </div>
-                {% endfor %}
-            </div>
-            {% elseif admin.container.get(admin.object.type).name == 'action' %}
-                {{ form_row(form.settings.action) }}
-                {{ form_row(form.settings.query) }}
-            {% elseif admin.container.get(admin.object.type).name == 'template' %}
-                {{ form_row(form.settings.template) }}
-            {% elseif admin.container.get(admin.object.type).name == 'menu' %}
-                {{ form_row(form.settings.menu) }}
-                {{ form_row(form.settings.class) }}
-            {% endif %}
-        </fieldset>
+        {% if admin.container.get(admin.object.type).name == 'text' %}
+        {% for translation in form.translations %}
+            {{ form_widget(translation.settings.body) }}
+        {% endfor %}
+        {% elseif admin.container.get(admin.object.type).name == 'action' %}
+            {{ form_row(form.settings.action) }}
+            {{ form_row(form.settings.query) }}
+        {% elseif admin.container.get(admin.object.type).name == 'template' %}
+            {{ form_row(form.settings.template) }}
+        {% elseif admin.container.get(admin.object.type).name == 'menu' %}
+            {{ form_row(form.settings.menu) }}
+            {{ form_row(form.settings.class) }}
+        {% endif %}
     </div>
     {% endif %}
 
     <div class="tab-pane fade{% if admin.object.id == null %} active in{% endif %}" id="tab2">
-        <fieldset>
-            {{ form_row(form.name) }}
-            {{ form_row(form.type) }}
-            {{ form_row(form.slot) }}
-            {% if admin.object.id %}
+        {% for translation in form.translations %}
+            {{ form_widget(translation.published) }}
+        {% endfor %}
+        {{ form_row(form.name) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.slot) }}
+        {% if admin.object.id %}
             {{ form_row(form.pages) }}
-            {% endif %}
-        </fieldset>
+        {% endif %}
     </div>
 
     {% if app.user.isSuperAdmin %}
     <div class="tab-pane fade" id="tab3">
-        <fieldset>
-            {{ form_row(form.operators) }}
-        </fieldset>
+        {{ form_row(form.operators) }}
     </div>
     {% endif %}
 </div>

@@ -13,7 +13,6 @@ abstract class Block
 {
     use \Msi\AdminBundle\Doctrine\Extension\Model\Translatable;
     use \Msi\AdminBundle\Doctrine\Extension\Model\Sortable;
-    use \Msi\AdminBundle\Doctrine\Extension\Model\Publishable;
 
     /**
      * @ORM\Column()

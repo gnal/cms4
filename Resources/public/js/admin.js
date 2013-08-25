@@ -110,8 +110,10 @@
 
     // Helper function to add query string params to url
 
-    jQuery.parameterize = function(url, params) {
+    jQuery.parameterize = function(params, url) {
         var url = url || window.location.href;
+
+        url = url.replace('#', '');
 
         if (url.match(/\?/)) {
             var hasQuery = true;
@@ -122,6 +124,13 @@
 
         var i = 0;
         for (var x in params) {
+            // if query already has this parameters then replace it instead of appending it
+            if (url.indexOf('?'+x+'=') != -1 || url.indexOf('&'+x+'=') != -1) {
+                var regex = new RegExp('\\?'+x+'=[a-z]{2}');
+                url = url.replace(regex, '?'+x+'='+params[x]);
+                continue;
+            }
+
             if (!hasQuery && i === 0) {
                 url += x+'='+params[x];
             } else {
@@ -132,4 +141,9 @@
 
         return url;
     };
+
+    $('body').on('click', '.switch_data_locale', function(e) {
+        e.preventDefault();
+        window.location.href = $.parameterize({locale: $(this).data('locale')});
+    });
 })(jQuery);

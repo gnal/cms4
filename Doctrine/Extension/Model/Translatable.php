@@ -16,7 +16,7 @@ trait Translatable
             throw new \Exception('A translatable entity must have at least one translation. Translatable entity '.get_class($this).' has no translation.');
         }
 
-        if (null !== $locale) {
+        if ($locale) {
             foreach ($this->getTranslations() as $translation) {
                 if ($locale === $translation->getLocale()) {
                     return $translation;
@@ -30,7 +30,21 @@ trait Translatable
             }
         }
 
-        return $this->getTranslations()->first();
+        if ($this->getTranslations()->count()) {
+            return $this->getTranslations()->first();
+        }
+
+        return $this->createTranslation($locale ?: $this->requestLocale);
+    }
+
+    public function createTranslation($locale)
+    {
+        $class = get_class($this).'Translation';
+        $translation = new $class();
+        $translation->setLocale($locale)->setObject($this);
+        $this->getTranslations()->add($translation);
+
+        return $translation;
     }
 
     public function hasTranslation($locale)

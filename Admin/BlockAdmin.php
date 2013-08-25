@@ -22,7 +22,6 @@ class BlockAdmin extends Admin
     public function buildGrid(GridBuilder $builder)
     {
         $builder
-            ->add('published', 'boolean')
             ->add('name')
             ->add('type')
             ->add('', 'action')
@@ -31,7 +30,6 @@ class BlockAdmin extends Admin
 
     public function buildForm(FormBuilder $builder)
     {
-        $builder->add('published');
         $builder->add('name');
 
         if ($typeId = $this->getObject()->getType()) {
@@ -81,6 +79,8 @@ class BlockAdmin extends Admin
 
     public function buildTranslationForm(FormBuilder $builder)
     {
+        $builder->add('published', 'checkbox');
+
         if ($typeId = $this->getObject()->getType()) {
             $blockHandler = $this->container->get($typeId);
             $settingsBuilder = $this->container->get('form.factory')->createBuilder();

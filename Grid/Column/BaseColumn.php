@@ -30,7 +30,7 @@ abstract class BaseColumn
 
     abstract public function setDefaultOptions(OptionsResolverInterface $resolver);
 
-    public function resolveRow($row)
+    public function resolveRow($row, $workingLocale)
     {
         $this->object = $row;
 
@@ -45,25 +45,25 @@ abstract class BaseColumn
             // Else translation
             } else if (!property_exists($this->object, $this->name) && !method_exists($this->object, 'get'.ucfirst($this->name))) {
                 // translation fallback
-                $this->value = $this->object->getTranslation()->$getter();
-                if (!$this->value) {
-                    foreach ($this->object->getTranslations() as $translation) {
-                        if ($this->value = $translation->$getter()) {
-                            break;
-                        }
-                    }
-                }
-                foreach ($this->object->getTranslations() as $translation) {
-                    $this->translationValues[$translation->getLocale()] = $translation->$getter();
-                }
-                // order translation in the good order par rapport a la request locale
-                $requestLocale = $this->object->getRequestLocale();
-                if (isset($this->translationValues[$requestLocale])) {
-                    $foo = $this->translationValues[$requestLocale];
-                    unset($this->translationValues[$requestLocale]);
-                    $this->translationValues[$requestLocale] = $foo;
-                    $this->translationValues = array_reverse($this->translationValues);
-                }
+                $this->value = $this->object->getTranslation($workingLocale)->$getter();
+                // if (!$this->value) {
+                //     foreach ($this->object->getTranslations() as $translation) {
+                //         if ($this->value = $translation->$getter()) {
+                //             break;
+                //         }
+                //     }
+                // }
+                // foreach ($this->object->getTranslations() as $translation) {
+                //     $this->translationValues[$translation->getLocale()] = $translation->$getter();
+                // }
+                // // order translation in the good order par rapport a la request locale
+                // $requestLocale = $this->object->getRequestLocale();
+                // if (isset($this->translationValues[$requestLocale])) {
+                //     $foo = $this->translationValues[$requestLocale];
+                //     unset($this->translationValues[$requestLocale]);
+                //     $this->translationValues[$requestLocale] = $foo;
+                //     $this->translationValues = array_reverse($this->translationValues);
+                // }
             // Else normal value
             } else {
                 if (is_array($this->object->$getter())) {
@@ -71,10 +71,6 @@ abstract class BaseColumn
                 } else {
                     $this->value = $this->object->$getter();
                 }
-            }
-
-            if (null !== $this->value) {
-                $this->fixValue();
             }
         }
 
@@ -119,9 +115,5 @@ abstract class BaseColumn
     public function set($name, $val)
     {
         $this->options[$name] = $val;
-    }
-
-    public function fixValue()
-    {
     }
 }

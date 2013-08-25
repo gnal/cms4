@@ -17,11 +17,22 @@ class BaseMenuBuilder extends ContainerAware
 
     public function create($node)
     {
+        foreach ($node['translations'] as $k => $translation) {
+            if ($this->container->get('request')->getLocale() === $translation['locale']) {
+                $nodeLocale = $k;
+                break;
+            }
+        }
+
+        if (!$node['translations'][$nodeLocale]['published']) {
+            return $this->container->get('knp_menu.array_loader')->load([]);
+        }
+
         $array = [
-            'name' => $node['translations'][0]['name'],
+            'name' => $node['translations'][$nodeLocale]['name'],
             'extras' => [
                 'groups' => $node['operators'],
-                'published' => $node['published'],
+                'published' => $node['translations'][$nodeLocale]['published'],
             ],
         ];
 
@@ -80,7 +91,7 @@ class BaseMenuBuilder extends ContainerAware
 
             $options['extras'] = [
                 'groups' => $child['operators'],
-                'published' => $child['published'],
+                'published' => $child['translations'][$childLocale]['published'],
             ];
 
             $array['children'][$child['translations'][$childLocale]['name']] = $options;

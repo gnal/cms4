@@ -1,0 +1,12 @@
+{% if app_locales|length > 1 %}
+<div class="navbar-btn btn-group pull-right">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        {{ working_locale|trans }} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        {% for l in app_locales if l != working_locale %}
+            <li><a data-locale="{{ l }}" class="switch_data_locale" href="#">{{ l|trans }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

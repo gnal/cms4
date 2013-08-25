@@ -129,16 +129,23 @@ class Manager
         return $this;
     }
 
-    public function findOneOrCreate(array $locales, $id = null)
+    public function findOrCreate($locale, array $where = [], array $join = [], array $orderBy = [], $throw = true)
     {
-        if ($id) {
-            $object = $this->getOneBy(['a.id' => $id]);
+        if (isset($where['a.id'])) {
+            $object = $this->find($where, $join, $orderBy, $throw);
         } else {
             $object = $this->create();
         }
 
         if ($this->classAnalyzer->hasTrait($this->getMetadata()->reflClass, 'Msi\AdminBundle\Doctrine\Extension\Model\Translatable')) {
-            $this->createTranslations($object, $locales);
+            // need to remove the translations that we aren't working with or else they will be in the form and cause errors
+            foreach ($object->getTranslations() as $key => $value) {
+                if ($value->getLocale() !== $locale) {
+                    $object->getTranslations()->remove($key);
+                }
+            }
+            // here if our object doesn't have a translation for the working locale we create it
+            if (!$object->hasTranslation($locale)) $object->createTranslation($locale);
         }
 
         return $object;

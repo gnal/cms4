@@ -2,6 +2,9 @@
 {# Head #}
 <thead>
     <tr>
+    {% if grid.admin.isTranslatable %}
+        <th>{{ 'Published'|trans }}</th>
+    {% endif %}
     {% for column in grid.columns %}
         {% if column.name == '' and column.options.children %}
             {% for child in grid.admin.children if grid.admin.hasChildren() %}
@@ -18,11 +21,21 @@
 <tbody>
 {% for row in grid.rows %}
     <tr id="tr{{ row.id }}" data-row="{{ loop.index }}">
-        {#<td class="span1">
-            <div class="text-center">
-                <input data-row-id="<?php echo $row->getId() ?>" style="margin-top: 0;" type=checkbox>
-            </div>
-        </td>#}
+        {% if grid.admin.isTranslatable %}
+            <td>
+                {% if row.hasTranslation(working_locale) %}
+                    <a href="#" class="msi_admin_admin_change btn btn-sm{% if row.translation(working_locale).published %} btn-success{% else %} btn-default{% endif %}" data-url="{{ admin.genUrl('toggle', {'id': row.id, 'field': 'published', 'locale': working_locale}) }}" data-icon-true="icon-check" data-icon-false="icon-check-empty" data-btn-true="btn-success" data-btn-false="btn-default">
+                        {% if row.translation(working_locale).published %}
+                            <i class="icon-check icon-large"></i>
+                        {% else %}
+                            <i class="icon-check-empty icon-large"></i>
+                        {% endif %}
+                    </a>
+                {% else %}
+                    <span class="label label-danger">n'a pas de traduction</span>
+                {% endif %}
+            </td>
+        {% endif %}
         {% for column in grid.columns %}
             {% if column.name == '' and column.options.children %}
                 {% for child in grid.admin.children if grid.admin.hasChildren() %}
@@ -32,7 +45,7 @@
                 {% endfor %}
             {% endif %}
             <td {% for attrname,attrvalue in column.options.attr %}{{attrname}}="{{attrvalue}}" {% endfor %}id="td{{ loop.index~row.id }}">
-            {% include 'MsiAdminBundle:Column:'~column.type~'.html.twig' with {'i': loop.index, 'column': column.resolveRow(row)} %}
+            {% include 'MsiAdminBundle:Column:'~column.type~'.html.twig' with {'i': loop.index, 'column': column.resolveRow(row, working_locale)} %}
             </td>
         {% endfor %}
     </tr>

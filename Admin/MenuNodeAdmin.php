@@ -25,7 +25,6 @@ class MenuNodeAdmin extends Admin
     public function buildGrid(GridBuilder $builder)
     {
         $builder
-            ->add('published', 'boolean')
             ->add('name', 'tree')
             ->add('', 'action')
         ;
@@ -33,8 +32,6 @@ class MenuNodeAdmin extends Admin
 
     public function buildForm(FormBuilder $builder)
     {
-        $builder->add('published');
-
         $qb = $this->getObjectManager()->getFindByQueryBuilder(
             ['a.menu' => $this->container->get('request')->query->get('parentId')],
             ['a.translations' => 't', 'a.children' => 'c'],
@@ -88,6 +85,7 @@ class MenuNodeAdmin extends Admin
     public function buildTranslationForm(FormBuilder $builder)
     {
         $builder
+            ->add('published', 'checkbox')
             ->add('name')
             ->add('route', 'text', ['label' => 'Url'])
         ;
@@ -96,10 +94,10 @@ class MenuNodeAdmin extends Admin
     public function buildListQuery(QueryBuilder $qb)
     {
         $qb->resetDQLPart('where');
-        $qb->andWhere('a.menu = :eqMatch2');
+        $qb->andWhere('a.menu = :eqMatch1');
         $qb->andWhere('a.lvl != 0');
         $qb->addOrderBy('a.lft', 'ASC');
-        $qb->andWhere('t.locale = :eqMatch1');
+        // $qb->andWhere('t.locale = :eqMatch1');
     }
 
     public function prePersist($entity)

@@ -261,7 +261,7 @@ class CoreController extends Controller
         // translations
         if ($this->admin->hasTrait('Translatable')) {
             $join['a.translations'] = 't';
-            $where['t.locale'] = $this->getRequest()->getLocale();
+            // $where['t.locale'] = $this->getRequest()->query->get('locale', $this->getRequest()->getLocale());
         }
 
         // nested crud

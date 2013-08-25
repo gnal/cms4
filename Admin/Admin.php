@@ -180,9 +180,10 @@ abstract class Admin
     public function getObject()
     {
         if (!$this->object) {
-            $this->object = $this->objectManager->findOneOrCreate(
-                $this->container->getParameter('msi_admin.app_locales'),
-                $this->container->get('request')->get('id')
+            $where = $this->getRequest()->get('id') ? ['a.id' => $this->getRequest()->get('id')] : [];
+            $this->object = $this->objectManager->findOrCreate(
+                $this->getRequest()->query->get('locale', $this->getRequest()->getLocale()),
+                $where
             );
         }
 
@@ -192,9 +193,10 @@ abstract class Admin
     public function getParentObject()
     {
         if (!$this->parentObject) {
-            $this->parentObject = $this->getParent()->objectManager->findOneOrCreate(
-                $this->container->getParameter('msi_admin.app_locales'),
-                $this->container->get('request')->get('parentId')
+            $where = $this->getRequest()->get('parentId') ? ['a.id' => $this->getRequest()->get('parentId')] : [];
+            $this->parentObject = $this->getParent()->objectManager->findOrCreate(
+                $this->getRequest()->query->get('locale', $this->getRequest()->getLocale()),
+                $where
             );
         }
 
@@ -338,6 +340,7 @@ abstract class Admin
         if (true === $mergePersistentParameters) {
             $query = $this->container->get('request')->query;
             $persistant = array(
+                'locale' => $query->get('locale'),
                 'page' => $query->get('page'),
                 'q' => $query->get('q'),
                 'parentId' => $query->get('parentId'),
@@ -470,7 +473,7 @@ abstract class Admin
     public function buildNewBreadcrumb($breadcrumb)
     {
         $breadcrumb
-            ->add('<span class="icon-plus icon-large"></span>')
+            ->add('<span class="icon-plus icon-large"></span> '.ucfirst($this->container->get('translator')->trans('add')))
         ;
     }
 
@@ -478,7 +481,7 @@ abstract class Admin
     {
         $breadcrumb
             ->add('<span class="icon-file-alt icon-large"></span> '.$this->getObject(), $this->hasShow() ? $this->genUrl('show', ['id' => $this->getObject()->getId()]) : null)
-            ->add('<span class="icon-pencil icon-large"></span>')
+            ->add('<span class="icon-pencil icon-large"></span> '.ucfirst($this->container->get('translator')->trans('edit')))
         ;
     }
 
@@ -528,6 +531,11 @@ abstract class Admin
         }
 
         return $user;
+    }
+
+    public function getRequest()
+    {
+        return $this->container->get('request');
     }
 
     protected function init()

@@ -176,24 +176,13 @@
 {% endspaceless %}
 {% endblock choice_widget_expanded %}
 
-{# TRANSLATIONS COLLECTIONS #}
-
 {% block collection_widget %}
 {% spaceless %}
     {% if prototype is defined %}
         {% set attr = attr|merge({'data-prototype': form_row(prototype) }) %}
     {% endif %}
-    <ul class="nav nav-pills">
-        {% for child in form %}
-        <li{% if loop.index == 1 %} class="active"{% endif %}><a href="#trans{{ child.vars.value.locale }}" data-toggle="tab">{{ child.vars.value.locale|trans|capitalize }}</a></li>
-        {% endfor %}
-    </ul>
-    <div class="tab-content">
-        {% for child in form %}
-            <div class="tab-pane fade{% if loop.index == 1 %} active in{% endif %}" id="trans{{ child.vars.value.locale }}">
-                {{ form_row(child) }}
-            </div>
-        {% endfor %}
-    </div>
+    {% for child in form %}
+        {{ form_row(child) }}
+    {% endfor %}
 {% endspaceless %}
-{% endblock %}
+{% endblock collection_widget %}

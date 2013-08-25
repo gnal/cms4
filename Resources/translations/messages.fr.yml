@@ -84,6 +84,7 @@ en: Anglais
 success!: The %label% has been saved.
 
 # misc
+add: ajouter
 edit: modifier
 delete: supprimer
 view: afficher

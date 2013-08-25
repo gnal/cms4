@@ -21,7 +21,6 @@ class PageAdmin extends Admin
     public function buildGrid(GridBuilder $builder)
     {
         $builder
-            ->add('published', 'boolean')
             ->add('title')
             ->add('', 'action')
         ;
@@ -29,8 +28,6 @@ class PageAdmin extends Admin
 
     public function buildForm(FormBuilder $builder)
     {
-        $builder->add('published');
-
         $collection = $this->container->get('router')->getRouteCollection();
         $choices = [];
         foreach ($collection->all() as $name => $route) {
@@ -68,6 +65,7 @@ class PageAdmin extends Admin
     public function buildTranslationForm(FormBuilder $builder)
     {
         $builder
+            ->add('published', 'checkbox')
             ->add('title')
             ->add('body', 'textarea', [
                 'attr' => [

@@ -7,12 +7,12 @@
         e.preventDefault();
     });
     $body.on('click', '.msi_admin_save_add', function(e) {
-        $form.attr('action', $.parameterize($form.attr('action'), {'alt': 'add'}));
+        $form.attr('action', $.parameterize({'alt': 'add'}));
         $form.submit();
         e.preventDefault();
     });
     $body.on('click', '.msi_admin_save_quit', function(e) {
-        $form.attr('action', $.parameterize($form.attr('action'), {'alt': 'quit'}));
+        $form.attr('action', $.parameterize({'alt': 'quit'}));
         $form.submit();
         e.preventDefault();
     });

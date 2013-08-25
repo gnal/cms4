@@ -8,7 +8,11 @@
     {% endfor %}
 
     {% if grid.admin.isGranted('update') and column.options.edit %}
-        <a title="{{ 'Edit'|trans }}" href="{{ grid.admin.genUrl('edit', {'id': row.id}) }}" class="btn btn-sm btn-default"><i class="icon-large icon-pencil"></i> {{ 'edit'|trans|capitalize }}</a>
+        {% if grid.admin.isTranslatable and row.hasTranslation(working_locale) == false %}
+            <a title="{{ 'Add'|trans }}" href="{{ grid.admin.genUrl('edit', {'id': row.id}) }}" class="btn btn-sm btn-danger"><i class="icon-large icon-pencil"></i> {{ 'edit'|trans|capitalize }}</a>
+        {% else %}
+            <a title="{{ 'Edit'|trans }}" href="{{ grid.admin.genUrl('edit', {'id': row.id}) }}" class="btn btn-sm btn-default"><i class="icon-large icon-pencil"></i> {{ 'edit'|trans|capitalize }}</a>
+        {% endif %}
     {% endif %}
 
     {% if grid.admin.isGranted('delete') and column.options.delete %}
