@@ -12,9 +12,9 @@ trait Translatable
 
     public function getTranslation($locale = null)
     {
-        if ($this->getTranslations()->count() === 0) {
-            throw new \Exception('A translatable entity must have at least one translation. Translatable entity '.get_class($this).' has no translation.');
-        }
+        // if ($this->getTranslations()->count() === 0) {
+        //     throw new \Exception('A translatable entity must have at least one translation. Translatable entity '.get_class($this).' has no translation.');
+        // }
 
         if ($locale) {
             foreach ($this->getTranslations() as $translation) {

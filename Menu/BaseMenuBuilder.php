@@ -10,9 +10,13 @@ class BaseMenuBuilder extends ContainerAware
 
     protected function getMenu($name)
     {
-        $node = $this->container->get('msi_admin.menu_root_manager')->findRootByName($name)[0];
+        $node = $this->container->get('msi_admin.menu_root_manager')->findRootByName($name);
 
-        return $this->create($node);
+        if (!isset($node[0])) {
+            return $this->container->get('knp_menu.array_loader')->load([]);
+        }
+
+        return $this->create($node[0]);
     }
 
     public function create($node)
