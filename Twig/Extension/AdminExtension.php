@@ -98,7 +98,7 @@ class AdminExtension extends \Twig_Extension
             if ($block->getRendered() === true) {
                 continue;
             }
-            if (!$block->getPublished()) {
+            if (!$block->getTranslation()->getPublished()) {
                 continue;
             }
             if ($block->getSlot() !== $slot) {

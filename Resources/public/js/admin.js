@@ -9,7 +9,7 @@
             iconFalse = $this.data('icon-false'),
             BadgeTrue = $this.data('btn-true'),
             BadgeFalse = $this.data('btn-false'),
-            cellId = $this.closest('td').attr('id');
+            cellId = $this.closest('tr').attr('id');
 
         if ($.inArray(cellId, loadingCellIds) !== -1) {
             return;
@@ -18,7 +18,7 @@
 
         $this.html('<i class="icon-spinner icon-spin icon-large"></i>');
 
-        $.ajax($this.data('url'), {
+        $.ajax($this.attr('href'), {
             success: function() {
                 if ($this.hasClass(BadgeTrue)) {
                     var i = '<i class="icon-large"><span class="hide">0</span></i>';
@@ -126,15 +126,15 @@
         for (var x in params) {
             // if query already has this parameters then replace it instead of appending it
             if (url.indexOf('?'+x+'=') != -1 || url.indexOf('&'+x+'=') != -1) {
-                var regex = new RegExp('\\?'+x+'=[a-z]{2}');
+                var regex = new RegExp(x+'=[a-z]+');
                 url = url.replace(regex, '?'+x+'='+params[x]);
                 continue;
-            }
-
-            if (!hasQuery && i === 0) {
-                url += x+'='+params[x];
             } else {
-                url += '&'+x+'='+params[x];
+                if (!hasQuery && i === 0) {
+                    url += x+'='+params[x];
+                } else {
+                    url += '&'+x+'='+params[x];
+                }
             }
             i++;
         }
