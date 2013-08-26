@@ -1,0 +1,26 @@
+<table class="table table-condensed">
+{# Head #}
+<thead>
+    <tr>
+        {% for column in grid.columns if column.type != 'boolean' %}
+            <th>{{ column.get('label')|capitalize|trans }}</th>
+        {% endfor %}
+    </tr>
+</thead>
+{# Body #}
+<tbody>
+{% for row in grid.rows %}
+    <tr>
+        {% for column in grid.columns if column.type != 'boolean' %}
+            <td {% for attrname,attrvalue in column.options.attr %}{{attrname}}="{{attrvalue}}"{% endfor %}>
+                {% if column.name == '' %}
+                    <a href="{{ grid.admin.genUrl('edit', {'q': null, 'a': null, 'id': row.id, 'parentId': grid.admin.getParentEntityId(row)}) }}" class="btn btn-sm btn-default"><i class="icon-large icon-pencil"></i> {{ 'edit'|trans|capitalize }}</a>
+                {% else %}
+                    {% include 'MsiAdminBundle:Column:'~column.type~'.html.twig' with {'i': loop.index, 'column': column.resolveRow(row, working_locale)} %}
+                {% endif %}
+            </td>
+        {% endfor %}
+    </tr>
+{% endfor %}
+</tbody>
+</table>

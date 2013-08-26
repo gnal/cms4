@@ -16,7 +16,7 @@ class MenuNodeAdmin extends Admin
             'sidebar_template' => 'MsiAdminBundle:MenuNode:sidebar.html.twig',
             'index_template' => 'MsiAdminBundle:MenuNode:index.html.twig',
             'controller' => 'MsiAdminBundle:Admin/MenuNode:',
-            'search_fields' => ['a.id', 't.name'],
+            'search_fields' => ['a.id', 'translations.name'],
             'form_template' => 'MsiAdminBundle:MenuNode:form.html.twig',
             'order_by' => [],
         ];

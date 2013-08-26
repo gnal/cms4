@@ -82,6 +82,16 @@ abstract class Admin
     {
     }
 
+    public function getSearchFields()
+    {
+        foreach ($this->getOption('search_fields') as $field) {
+            $parts = explode('.', $field);
+            $dada[$parts[0]] = $parts[1];
+        }
+
+        return $dada;
+    }
+
     public function getLabel($number = 1, $locale = null)
     {
         return $this->container->get('translator')->transChoice('entity.'.$this->getClassName(), $number, [], 'messages', $locale);
@@ -190,8 +200,20 @@ abstract class Admin
         return $this->object;
     }
 
-    public function getParentObject()
+    public function getParentObject($child = null)
     {
+        if (!$this->hasParent()) {
+            return null;
+        }
+
+        if ($child) {
+            $getter = 'get'.ucfirst($this->getParentFieldName());
+            $parentStuff = $child->$getter();
+            $parentClass = $this->getParent()->getClass();
+
+            return $parentStuff instanceof $parentClass ? $child->$getter() : null;
+        }
+
         if (!$this->parentObject) {
             $where = $this->getRequest()->get('parentId') ? ['a.id' => $this->getRequest()->get('parentId')] : [];
             $this->parentObject = $this->getParent()->objectManager->findOrCreate(
@@ -201,6 +223,21 @@ abstract class Admin
         }
 
         return $this->parentObject;
+    }
+
+    public function getParentEntityId($child = null)
+    {
+        if (!$this->hasParent()) {
+            return null;
+        }
+
+        if ($child) {
+            $getter = 'get'.ucfirst($this->getParentFieldName());
+            $parentStuff = $child->$getter();
+            $parentClass = $this->getParent()->getClass();
+
+            return $parentStuff instanceof $parentClass ? $child->$getter()->getId() : null;
+        }
     }
 
     public function getOption($key, $default = null)

@@ -12,7 +12,7 @@ class SiteAdmin extends Admin
         $this->options = [
             'form_template' => 'MsiAdminBundle:Site:form.html.twig',
             'sidebar_template' => 'MsiAdminBundle:Site:sidebar.html.twig',
-            'search_fields' => ['a.id', 'a.host', 't.brand'],
+            // 'search_fields' => ['a.id', 'a.host', 'translations.brand'],
         ];
     }
 

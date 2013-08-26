@@ -13,8 +13,8 @@ class PageAdmin extends Admin
         $this->options = [
             'form_template' => 'MsiAdminBundle:Page:form.html.twig',
             'sidebar_template' => 'MsiAdminBundle:Page:sidebar.html.twig',
-            'search_fields' => ['a.id', 't.title'],
-            'order_by'      => ['t.title' => 'ASC'],
+            'search_fields' => ['translations.title'],
+            'order_by'      => ['translations.title' => 'ASC'],
         ];
     }
 
@@ -99,7 +99,7 @@ class PageAdmin extends Admin
 
     public function buildListQuery(QueryBuilder $qb)
     {
-        $qb->addOrderBy('t.title', 'ASC');
+        $qb->addOrderBy('translations.title', 'ASC');
     }
 
     public function prePersist($entity)

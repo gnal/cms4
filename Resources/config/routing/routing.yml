@@ -10,12 +10,6 @@ msi_admin_working_locale:
     pattern: /change-working-locale
     defaults: { _controller: MsiAdminBundle:Default:workingLocale }
 
-msi_page_show:
-    pattern: /{_locale}/{slug}
-    defaults: { _controller: MsiAdminBundle:Page:show, slug: ~ }
-    requirements:
-        _locale: fr|en
-
 tinymce_login:
     pattern: /_tinymce/login
     defaults: { _controller: MsiAdminBundle:Default:tinymcelogin }
@@ -23,3 +17,13 @@ tinymce_login:
 msi_admin_menu_node_admin_sort:
     pattern: /admin/menu-node/sort.html
     defaults: { _controller: MsiAdminBundle:Admin/MenuNode:sort, _admin: msi_admin_menu_node_admin }
+
+msi_admin_search_index:
+    pattern: /admin/search.html
+    defaults: { _controller: MsiAdminBundle:Search:index }
+
+msi_page_show:
+    pattern: /{_locale}/{slug}
+    defaults: { _controller: MsiAdminBundle:Page:show, slug: ~ }
+    requirements:
+        _locale: fr|en
