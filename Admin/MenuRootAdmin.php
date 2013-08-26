@@ -12,7 +12,6 @@ class MenuRootAdmin extends Admin
     public function configure()
     {
         $this->options = [
-            'search_fields' => ['a.id', 'translations.name'],
             'form_template' => 'MsiAdminBundle:MenuRoot:form.html.twig',
             'sidebar_template' => 'MsiAdminBundle:MenuRoot:sidebar.html.twig',
         ];

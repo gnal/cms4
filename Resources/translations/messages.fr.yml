@@ -94,6 +94,12 @@ page: page|pages
 result: résultat|résultats
 alert_success: Les modifications ont été enregistrées.
 sign_out: Se déconnecter
+search: recherche
+summary: sommaire
 
 # index
 results_per_page: résultats par page
+
+# Search
+search:
+    results: Résultats de recherche pour

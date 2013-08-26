@@ -13,7 +13,7 @@ class BlockAdmin extends Admin
     public function configure()
     {
         $this->options = [
-            'search_fields' => ['a.id', 'a.type', 'a.name', 'a.slot'],
+            'search_fields' => ['a.type', 'a.name', 'a.slot'],
             'form_template' => 'MsiAdminBundle:Block:form.html.twig',
             'sidebar_template' => 'MsiAdminBundle:Block:sidebar.html.twig',
         ];

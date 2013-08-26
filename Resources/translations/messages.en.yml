@@ -93,6 +93,12 @@ page: page|pages
 result: result|results
 alert_success: The changes have been saved.
 sign_out: Sign out
+search: search
+summary: summary
 
 # index
 results_per_page: results per page
+
+# Search
+search:
+    results: Search results for

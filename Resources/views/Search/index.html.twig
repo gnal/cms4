@@ -1,6 +1,6 @@
 {% extends 'MsiAdminBundle::layout.html.twig' %}
 
-{% block title %}Search{% endblock %}
+{% block title %}{{ 'search'|trans|capitalize }}{% endblock %}
 
 {% block content %}
 <div id="msi_admin_search_index">
@@ -20,11 +20,11 @@
     </div>
 
     {% if q %}
-        <p class="lead">{{ 'search.search_results'|trans }} <strong>{{ q }}</strong></p>
+        <p class="lead">{{ 'search.results'|trans }} <strong>{{ q }}</strong></p>
 
         <ul class="nav nav-pills">
             <li{% if a == null %} class="active"{% endif %}><a href="{{ path('msi_admin_search_index', {'q': q}) }}">
-                Summary
+                {{ 'summary'|trans|capitalize }}
             </a></li>
             {% for e in results if e.results|length %}
                 <li{% if a == e.admin.id %} class="active"{% endif %}><a href="{{ path('msi_admin_search_index', {'q': q, 'a': e.admin.id}) }}">
