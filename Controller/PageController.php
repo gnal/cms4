@@ -25,7 +25,7 @@ class PageController extends ContainerAware
                 'a.blocks' => 'blocks',
                 'blocks.translations' => 'blocks_translations',
             ],
-            ['b.position' => 'ASC']
+            ['blocks.position' => 'ASC']
         );
 
         $qb->andWhere($qb->expr()->isNull('a.route'));
