@@ -2,7 +2,7 @@
 {# Head #}
 <thead>
     <tr>
-    {% if grid.admin.isTranslatable %}
+    {% if admin.hasTrait('Publishable') and admin.hasTrait('Translatable') %}
         <th>{{ 'Published'|trans }}</th>
     {% endif %}
     {% for column in grid.columns %}
@@ -21,7 +21,7 @@
 <tbody>
 {% for row in grid.rows %}
     <tr id="tr{{ row.id }}" data-row="{{ loop.index }}">
-        {% if grid.admin.isTranslatable %}
+        {% if admin.hasTrait('Publishable') and admin.hasTrait('Translatable') %}
             <td>
                 {% if row.hasTranslation(working_locale) %}
                     <a href="{{ admin.genUrl('toggle', {'id': row.id, 'field': 'published', 'locale': working_locale}) }}" class="msi_admin_admin_change btn btn-sm{% if row.translation(working_locale).published %} btn-success{% else %} btn-default{% endif %}" data-icon-true="icon-check" data-icon-false="icon-check-empty" data-btn-true="btn-success" data-btn-false="btn-default">

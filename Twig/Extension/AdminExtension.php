@@ -25,8 +25,6 @@ class AdminExtension extends \Twig_Extension
     {
         $globals = [];
 
-        $globals['app_locales'] = $this->container->getParameter('msi_admin.app_locales');
-
         if (!$this->container->isScopeActive('request')) {
             return $globals;
         }
@@ -36,7 +34,6 @@ class AdminExtension extends \Twig_Extension
         $site = $this->container->get('msi_admin.provider')->getSite();
         $globals['site'] = $site;
 
-        $globals['app_locales'] = $this->container->getParameter('msi_admin.app_locales');
         $globals['working_locale'] = $this->container->get('msi_admin.provider')->getWorkingLocale();
 
         // set page
