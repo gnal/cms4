@@ -36,12 +36,15 @@ class AdminExtension extends \Twig_Extension
 
         $globals['working_locale'] = $this->container->get('msi_admin.provider')->getWorkingLocale();
 
-        // set page
-        $page = $this->container->get('msi_admin.page_manager')->findByRoute($request->attributes->get('_route'));
+        $page = $this->container->get('msi_cms.page_manager')->findByRoute($request->attributes->get('_route'));
         if (!$page) {
-            $page = $this->container->get('msi_admin.page_manager')->findOrCreate($globals['working_locale']);
+            $page = $this->container->get('msi_cms.page_manager')->findOrCreate($globals['working_locale']);
         }
         $globals['page'] = $page;
+
+        if ($admin = $request->attributes->get('_admin')) {
+            $globals['admin'] = $this->container->get($admin);
+        }
 
         return $globals;
     }

@@ -93,15 +93,12 @@ $('.datepicker').datepicker({
                 </div>
             </div>
 
-            {% set actions = block('actions') %}
-            {% if actions %}
             <div class="row" style="margin-bottom: 20px;">
                 <div class="col-md-12">
                     {% include 'MsiAdminBundle::working_locale_btn.html.twig' %}
-                    {{ actions|raw }}
+                    {{ block('actions') }}
                 </div>
             </div>
-            {% endif %}
 
             {% block breadcrumb %}
                 {% if admin is defined %}

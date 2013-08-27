@@ -44,27 +44,11 @@ abstract class BaseColumn
                 $this->value = $this->object->$getter($pieces[1]);
             // Else translation
             } else if (!property_exists($this->object, $this->name) && !method_exists($this->object, 'get'.ucfirst($this->name))) {
-                // translation fallback
+                // how the translation fallback works
+                // we always create object with only 1 translation to start with
+                // if we created in french and didnt add english yet, the gettranslation method will simply
+                // return the french translation
                 $this->value = $this->object->getTranslation($workingLocale)->$getter();
-                // if (!$this->value) {
-                //     foreach ($this->object->getTranslations() as $translation) {
-                //         if ($this->value = $translation->$getter()) {
-                //             break;
-                //         }
-                //     }
-                // }
-                // foreach ($this->object->getTranslations() as $translation) {
-                //     $this->translationValues[$translation->getLocale()] = $translation->$getter();
-                // }
-                // // order translation in the good order par rapport a la request locale
-                // $requestLocale = $this->object->getRequestLocale();
-                // if (isset($this->translationValues[$requestLocale])) {
-                //     $foo = $this->translationValues[$requestLocale];
-                //     unset($this->translationValues[$requestLocale]);
-                //     $this->translationValues[$requestLocale] = $foo;
-                //     $this->translationValues = array_reverse($this->translationValues);
-                // }
-            // Else normal value
             } else {
                 if (is_array($this->object->$getter())) {
                     $this->value = implode(', ', $this->object->$getter());

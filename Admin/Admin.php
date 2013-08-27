@@ -133,9 +133,16 @@ abstract class Admin
         return $matches[0];
     }
 
-    public function hasTrait($traitName, $namespace = 'Msi\AdminBundle\Doctrine\Extension\Model\\')
+    public function hasTrait($traitName, $translation = false, $namespace = 'Msi\AdminBundle\Doctrine\Extension\Model\\')
     {
-        return $this->container->get('msi_admin.class_analyzer')->hasTrait($this->getMetadata()->reflClass, $namespace.$traitName);
+        if ($translation) {
+            $em = $this->container->get('doctrine')->getManager();
+            $class = $em->getClassMetadata($this->getMetadata()->reflClass->name.'Translation')->reflClass;
+        } else {
+            $class = $this->getMetadata()->reflClass;
+        }
+
+        return $this->container->get('msi_admin.class_analyzer')->hasTrait($class, $namespace.$traitName);
     }
 
     public function isSortable()
@@ -238,6 +245,8 @@ abstract class Admin
 
             return $parentStuff instanceof $parentClass ? $child->$getter()->getId() : null;
         }
+
+        return $this->getParentObject() ? $this->getParentObject()->getId() : null;
     }
 
     public function getOption($key, $default = null)

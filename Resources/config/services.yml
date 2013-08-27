@@ -18,7 +18,7 @@ services:
     msi_admin.provider:
         class: Msi\AdminBundle\Provider\Provider
         scope: request
-        arguments: [ @request, @msi_admin.site_manager, @service_container ]
+        arguments: [ @request, @msi_cms.site_manager, @service_container ]
 
     msi_admin.bouncer:
         class: Msi\AdminBundle\Bouncer\Bouncer
@@ -94,15 +94,15 @@ services:
 
     msi_admin.block.action:
         class: Msi\AdminBundle\Block\Handler\ActionBlockHandler
-        arguments: [ %msi_admin.block.actions%, @fragment.handler ]
+        arguments: [ %msi_cms.block.actions%, @fragment.handler ]
 
     msi_admin.block.template:
         class: Msi\AdminBundle\Block\Handler\TemplateBlockHandler
-        arguments: [ %msi_admin.block.templates%, @templating ]
+        arguments: [ %msi_cms.block.templates%, @templating ]
 
     msi_admin.block.menu:
         class: Msi\AdminBundle\Block\Handler\MenuBlockHandler
-        arguments: [ @knp_menu.factory, @knp_menu.renderer.list, @msi_admin.menu_root_manager ]
+        arguments: [ @knp_menu.factory, @knp_menu.renderer.list, @msi_cms.menu_root_manager ]
 
     msi_admin._voter:
         class: Msi\AdminBundle\Security\Voter\AclVoter
@@ -117,24 +117,6 @@ services:
 
     msi_admin.class_analyzer:
         class: Msi\AdminBundle\Tools\ClassAnalyzer
-
-    msi_admin.page_listener:
-        class: Msi\AdminBundle\EventListener\PageListener
-        arguments: [ @service_container ]
-        tags:
-            - { name: doctrine.event_subscriber }
-
-    msi_admin.block_listener:
-        class: Msi\AdminBundle\EventListener\BlockListener
-        arguments: [ @service_container ]
-        tags:
-            - { name: doctrine.event_subscriber }
-
-    msi_admin.menu_listener:
-        class: Msi\AdminBundle\EventListener\MenuListener
-        arguments: [ @service_container ]
-        tags:
-            - { name: doctrine.event_subscriber }
 
     knp_menu.array_loader:
         class: Knp\Menu\Loader\ArrayLoader

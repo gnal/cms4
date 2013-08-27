@@ -59,10 +59,10 @@
 {% include 'MsiAdminBundle:Grid:default.html.twig' with {'grid': admin.getGrid()} %}
 <div class="panel-body">
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <p>{{ pager.from|number_format }}-{{ pager.to|number_format }} de {{ pager.count|number_format }} {{ 'result'|transchoice(pager.count) }}</p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form id="limitForm" class="form-inline" novalidate method="POST" action="{{ path('msi_admin_limit') }}">
             <div class="input-group">
                 <span class="input-group-addon">{{ 'view'|trans }}</span>

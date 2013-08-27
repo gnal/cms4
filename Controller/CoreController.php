@@ -30,13 +30,6 @@ class CoreController extends Controller
         $this->admin = $this->get($this->get('request')->attributes->get('_admin'));
     }
 
-    public function render($view, array $parameters = [], Response $response = null)
-    {
-        $parameters['admin'] = $this->admin;
-
-        return $this->get('templating')->renderResponse($view, $parameters, $response);
-    }
-
     public function listAction(Request $request)
     {
         $this->isGranted('read');

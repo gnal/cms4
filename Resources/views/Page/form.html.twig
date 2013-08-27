@@ -4,7 +4,7 @@
         {% for translation in form.translations %}
             {{ form_row(translation.published) }}
         {% endfor %}
-        {% if admin.container.parameter('msi_admin.multisite') %}{{ form_row(form.site) }}{% endif %}
+        {% if admin.container.parameter('msi_cms.multisite') %}{{ form_row(form.site) }}{% endif %}
         {{ form_row(form.template) }}
         {{ form_row(form.showTitle) }}
     </div>
