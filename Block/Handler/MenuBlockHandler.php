@@ -3,8 +3,8 @@
 namespace Msi\AdminBundle\Block\Handler;
 
 use Msi\AdminBundle\Block\BaseBlockHandler;
-use Msi\AdminBundle\Model\Block;
-use Msi\AdminBundle\Model\Page;
+use Msi\CmsBundle\Model\Block;
+use Msi\CmsBundle\Model\Page;
 use Symfony\Component\Form\FormBuilder;
 use Knp\Menu\Renderer\RendererInterface;
 use Knp\Menu\FactoryInterface;

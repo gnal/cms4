@@ -96,7 +96,7 @@ Page class
     namespace Msi\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Msi\AdminBundle\Model\Page as BasePage;
+    use Msi\CmsBundle\Model\Page as BasePage;
 
     /**
      * @ORM\Entity
@@ -121,7 +121,7 @@ PageTranslation class
     namespace Msi\AdminBundle\Entity;
 
     use Doctrine\ORM\Mapping as ORM;
-    use Msi\AdminBundle\Model\PageTranslation as BasePageTranslation;
+    use Msi\CmsBundle\Model\PageTranslation as BasePageTranslation;
 
     /**
      * @ORM\Entity
