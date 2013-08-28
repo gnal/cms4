@@ -24,7 +24,7 @@
         {% if admin.hasTrait('Publishable', true) and admin.hasTrait('Translatable') %}
             <td>
                 {% if row.hasTranslation(working_locale) %}
-                    <a href="{{ admin.genUrl('toggle', {'id': row.id, 'field': 'published', 'locale': working_locale}) }}" class="msi_admin_admin_change btn btn-sm{% if row.translation(working_locale).published %} btn-success{% else %} btn-default{% endif %}" data-icon-true="icon-check" data-icon-false="icon-check-empty" data-btn-true="btn-success" data-btn-false="btn-default">
+                    <a href="{{ admin.genUrl('toggle', {'id': row.id, 'field': 'published', 'locale': working_locale}) }}" class="msi_admin_admin_change btn btn-xs{% if row.translation(working_locale).published %} btn-success{% else %} btn-default{% endif %}" data-icon-true="icon-check" data-icon-false="icon-check-empty" data-btn-true="btn-success" data-btn-false="btn-default">
                         {% if row.translation(working_locale).published %}
                             <i class="icon-check icon-large"></i>
                         {% else %}
@@ -40,7 +40,7 @@
             {% if column.name == '' and column.options.children %}
                 {% for child in admin.children if admin.hasChildren() %}
                     <td>
-                        <a class="btn btn-default btn-sm" href="{{ child.genUrl('list', {'parentId': row.id}) }}">{{ child.label(2) }}</a>
+                        <a class="btn btn-default btn-xs" href="{{ child.genUrl('list', {'parentId': row.id}) }}">{{ child.label(2) }}</a>
                     </td>
                 {% endfor %}
             {% endif %}
