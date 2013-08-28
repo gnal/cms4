@@ -35,7 +35,7 @@ if ( typeof Object.create !== 'function' ) {
                 self.submitForm($(this));
             });
 
-            self.$body.on('submit', self.$modal.find('form'), function(e) {
+            self.$body.on('submit', 'div.modal-body form', function(e) {
                 e.preventDefault();
                 self.submitForm($(this));
             });

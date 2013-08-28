@@ -52,7 +52,7 @@ class AdminLoader implements LoaderInterface
         $namespace = preg_replace(['|^[a-z]+_[a-z]+_|', '|_admin$|', '|_|'], ['', '', '-'], $id);
 
         $prefix = '/admin/'.$namespace;
-        $suffix = '.html';
+        $suffix = '';
 
         $names = [
             'list',
