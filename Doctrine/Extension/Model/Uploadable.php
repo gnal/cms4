@@ -2,6 +2,8 @@
 
 namespace Msi\AdminBundle\Doctrine\Extension\Model;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 trait Uploadable
 {
     public function getUploadDir($fieldName)
@@ -31,5 +33,17 @@ trait Uploadable
         $getter = 'get'.ucfirst($fieldName);
 
         return '/uploads/'.$this->getUploadDir($fieldName).'/'.$prefix.$this->$getter();
+    }
+
+    public function generateFileName(UploadedFile $file)
+    {
+        return [
+            'filename' => uniqid(time()),
+        ];
+    }
+
+    public function getUploadFields()
+    {
+        return ['filename'];
     }
 }

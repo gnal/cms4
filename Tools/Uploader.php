@@ -56,7 +56,8 @@ class Uploader
             }
 
             $setter = 'set'.ucfirst($fieldName);
-            $entity->$setter(uniqid(time()).'.'.$file->guessExtension());
+
+            $entity->$setter($entity->generateFileName($file)[$fieldName].'.'.$file->guessExtension());
         }
     }
 

@@ -2,23 +2,12 @@
 
 <div class="tab-content">
     <div class="tab-pane fade active in" id="tab1">
-        <fieldset>
-            {{ form_row(form.host) }}
-            {{ form_row(form.isDefault) }}
-            <ul class="nav nav-pills">
-                {% for translation in form.translations %}
-                <li{% if loop.index == 1 %} class="active"{% endif %}><a href="#translation1{{ translation.get('value').locale }}" data-toggle="tab">{{ translation.get('value').locale|trans|capitalize }}</a></li>
-                {% endfor %}
-            </ul>
-            <div class="tab-content">
-                {% for translation in form.translations %}
-                    <div class="tab-pane fade{% if loop.index == 1 %} active in{% endif %}" id="translation1{{ translation.get('value').locale }}">
-                        {{ form_row(translation.brand) }}
-                        {{ form_row(translation.offlineMessage) }}
-                    </div>
-                {% endfor %}
-            </div>
-        </fieldset>
+        {{ form_row(form.host) }}
+        {{ form_row(form.isDefault) }}
+        {% for translation in form.translations %}
+            {{ form_row(translation.brand) }}
+            {{ form_row(translation.offlineMessage) }}
+        {% endfor %}
     </div>
 
     <div class="tab-pane fade" id="tab2">
@@ -29,21 +18,10 @@
     </div>
 
     <div class="tab-pane fade" id="tab3">
-        <fieldset>
-            <ul class="nav nav-pills">
-                {% for translation in form.translations %}
-                <li{% if loop.index == 1 %} class="active"{% endif %}><a href="#translation2{{ translation.get('value').locale }}" data-toggle="tab">{{ translation.get('value').locale|trans|capitalize }}</a></li>
-                {% endfor %}
-            </ul>
-            <div class="tab-content">
-                {% for translation in form.translations %}
-                    <div class="tab-pane fade{% if loop.index == 1 %} active in{% endif %}" id="translation2{{ translation.get('value').locale }}">
-                        {{ form_row(translation.metaKeywords) }}
-                        {{ form_row(translation.metaDescription) }}
-                    </div>
-                {% endfor %}
-            </div>
-        </fieldset>
+        {% for translation in form.translations %}
+            {{ form_row(translation.metaKeywords) }}
+            {{ form_row(translation.metaDescription) }}
+        {% endfor %}
     </div>
 </div>
 
