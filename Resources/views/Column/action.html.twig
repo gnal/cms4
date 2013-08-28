@@ -1,21 +1,21 @@
 <div style="white-space: nowrap;">
     {#{% for child in grid.admin.children if grid.admin.hasChildren() and column.options.children %}
-        <a title="{{ child.label(2) }}" href="{{ child.genUrl('list', {'parentId': row.id}) }}" class="btn btn-sm btn-default"><i class="icon-large icon-folder-close"></i></a>
+        <a title="{{ child.label(2) }}" href="{{ child.genUrl('list', {'parentId': row.id}) }}" class="btn btn-xs btn-default"><i class="icon-large icon-folder-close"></i></a>
     {% endfor %}#}
 
     {% for key, val in column.options.actions %}
-        <a class="btn btn-sm btn-default" href="{% if val != '#' %}{{ path(val, {'id': row.id, 'parentId': app.request.query.get('parentId')}) }}{% else %}{{ val }}{% endif %}">{{ key|raw }}</a>
+        <a class="btn btn-xs btn-default" href="{% if val != '#' %}{{ path(val, {'id': row.id, 'parentId': app.request.query.get('parentId')}) }}{% else %}{{ val }}{% endif %}">{{ key|raw }}</a>
     {% endfor %}
 
     {% if grid.admin.isGranted('update') and column.options.edit %}
         {% if grid.admin.isTranslatable and row.hasTranslation(working_locale) == false %}
-            <a title="{{ 'Add'|trans }}" href="{{ grid.admin.genUrl('edit', {'id': row.id}) }}" class="btn btn-sm btn-danger"><i class="icon-large icon-pencil"></i> {{ 'edit'|trans|capitalize }}</a>
+            <a title="{{ 'Add'|trans }}" href="{{ grid.admin.genUrl('edit', {'id': row.id}) }}" class="btn btn-xs btn-danger"><i class="icon-large icon-pencil"></i> {{ 'edit'|trans|capitalize }}</a>
         {% else %}
-            <a title="{{ 'Edit'|trans }}" href="{{ grid.admin.genUrl('edit', {'id': row.id}) }}" class="btn btn-sm btn-default"><i class="icon-large icon-pencil"></i> {{ 'edit'|trans|capitalize }}</a>
+            <a title="{{ 'Edit'|trans }}" href="{{ grid.admin.genUrl('edit', {'id': row.id}) }}" class="btn btn-xs btn-default"><i class="icon-large icon-pencil"></i> {{ 'edit'|trans|capitalize }}</a>
         {% endif %}
     {% endif %}
 
     {% if grid.admin.isGranted('delete') and column.options.delete %}
-        <a title="{{ 'Delete'|trans }}" class="btn btn-sm btn-default msi_admin_delete" href="{{ grid.admin.genUrl('delete', {'id': row.id}) }}"><i class="icon-large icon-trash"></i> {{ 'delete'|trans|capitalize }}</a>
+        <a title="{{ 'Delete'|trans }}" class="btn btn-xs btn-default msi_admin_delete" href="{{ grid.admin.genUrl('delete', {'id': row.id}) }}"><i class="icon-large icon-trash"></i> {{ 'delete'|trans|capitalize }}</a>
     {% endif %}
 </div>

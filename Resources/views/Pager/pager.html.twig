@@ -1,15 +1,19 @@
+{% if pager.countPages > 1 %}
 {% set page = app.request.query.get('page', 1) %}
-<form class="form-inline" method=GET action="{{ path(app.request.attributes.get('_route', app.request.query.all)) }}">
-    <div class="input-group">
-        <div class="input-group-btn">
-            <a class="btn-default btn{% if page == 1 %} disabled{% endif %}" href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': page != 1 ? page - 1 : 1})) }}"><i class="icon-chevron-left icon-large"></i></a>
-        </div>
-        <span class="input-group-addon">page</span>
-        <input class="text-center form-control" name=page value="{{ page ?: 1 }}" type=text>
-        <span class="input-group-addon">{{ 'of'|trans }} {{ pager.countPages|number_format }} {{ 'page'|transchoice(pager.countPages) }}</span>
-        <div class="input-group-btn">
-            <a class="btn-default btn{% if page == pager.countPages %} disabled{% endif %}" href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': page != pager.countPages ? page + 1 : pager.countPages})) }}"><i class="icon-chevron-right icon-large"></i></a>
-            {#<button class="btn-default btn{% if pager.countPages <= 1 %} disabled{% endif %}" type=submit><i class="icon-search icon-large"></i></button>#}
+<form method=GET action="{{ path(app.request.attributes.get('_route', app.request.query.all)) }}">
+    <div class="row">
+        <div class="col-md-9 col-md-offset-3">
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <a class="btn-default btn{% if page == 1 %} disabled{% endif %}" href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': page != 1 ? page - 1 : 1})) }}"><i class="icon-chevron-left icon-large"></i></a>
+                </div>
+                <input class="text-center form-control" name=page value="{{ page ?: 1 }}" type=text>
+                <span class="input-group-addon">{{ 'of'|trans }} {{ pager.countPages|number_format }}</span>
+                <div class="input-group-btn">
+                    <a class="pull-right btn-default btn{% if page == pager.countPages %} disabled{% endif %}" href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'page': page != pager.countPages ? page + 1 : pager.countPages})) }}"><i class="icon-chevron-right icon-large"></i></a>
+                </div>
+            </div>
         </div>
     </div>
 </form>
+{% endif %}

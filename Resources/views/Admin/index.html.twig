@@ -27,57 +27,57 @@
 
 {% block actions %}
 {% if admin.isGranted('create') %}
-    <a href="{{ admin.genUrl('new') }}" class="btn btn-success"><i class="icon-large icon-plus"></i> {{ 'Add'|trans }} {{ admin.getLabel(1) }}</a>
+    <a href="{{ admin.genUrl('new') }}" class="btn btn-success"><i class="icon-large icon-plus-sign"></i> {{ 'Add'|trans }} {{ admin.getLabel(1) }}</a>
 {% endif %}
 {% endblock %}
 
 {% block content %}
-<div class="panel panel-default">
-    <div class="panel-body">
-<div class="row">
-    <div class="col-md-6">
-        {% include 'MsiAdminBundle:Pager:pager.html.twig' %}
+<div class="row" style="margin-bottom: 20px;">
+    <div class="col-md-7">
+        <form id="limitForm" class="form-inline" novalidate method="POST" action="{{ path('msi_admin_limit') }}">
+            <div class="form-group">
+                {{ 'view'|trans }}
+                <select name="limit" class="notchosen form-control" style="width: auto;">
+                    <option {% if app.session.get('limit') == 10 %}selected=selected{% endif %} value="10">10</option>
+                    <option {% if app.session.get('limit', 25) == 25 %}selected=selected{% endif %} value="25">25</option>
+                    <option {% if app.session.get('limit') == 50 %}selected=selected{% endif %} value="50">50</option>
+                    <option {% if app.session.get('limit') == 100 %}selected=selected{% endif %} value="100">100</option>
+                </select>
+                {{ 'results_per_page'|trans }}
+            </div>
+        </form>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
         {% if admin.getOption('search_fields')|length %}
         <form novalidate method="GET" action="{{ admin.genUrl('list') }}">
-            {% if admin.hasParent() %}
-                <input type="hidden" value="{{ app.request.query.get('parentId') }}" name="parentId">
-            {% endif %}
-            <div class="input-group">
-                <input class="form-control" value="{{ app.request.query.get('q') }}" name="q" type="text">
-                <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="icon-search icon-large"></i></button>
-                    <a class="btn btn-default" href="{{ admin.genUrl('list', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-remove icon-large"></i></a>
+            <div class="row">
+                <div class="col-md-9 col-md-offset-3">
+                    {% if admin.hasParent() %}
+                        <input type="hidden" value="{{ app.request.query.get('parentId') }}" name="parentId">
+                    {% endif %}
+                    <div class="input-group">
+                        <input class="form-control" value="{{ app.request.query.get('q') }}" name="q" type="text">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="icon-search icon-large"></i></button>
+                            <a class="btn btn-default" href="{{ admin.genUrl('list', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-remove icon-large"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
         {% endif %}
     </div>
 </div>
-</div>
+
 {% include 'MsiAdminBundle:Grid:default.html.twig' with {'grid': admin.getGrid()} %}
-<div class="panel-body">
+
 <div class="row">
-    <div class="col-md-6">
-        <p>{{ pager.from|number_format }}-{{ pager.to|number_format }} de {{ pager.count|number_format }} {{ 'result'|transchoice(pager.count) }}</p>
+    <div class="col-md-7">
+        {{ pager.from|number_format }} {{ 'to'|trans }} {{ pager.to|number_format }} {{ 'of'|trans }} {{ pager.count|number_format }} {{ 'result'|transchoice(pager.count) }}
     </div>
-    <div class="col-md-6">
-        <form id="limitForm" class="form-inline" novalidate method="POST" action="{{ path('msi_admin_limit') }}">
-            <div class="input-group">
-                <span class="input-group-addon">{{ 'view'|trans }}</span>
-                <select name="limit" class="notchosen form-control">
-                    <option {% if app.session.get('limit') == 10 %}selected=selected{% endif %} value="10">10</option>
-                    <option {% if app.session.get('limit', 25) == 25 %}selected=selected{% endif %} value="25">25</option>
-                    <option {% if app.session.get('limit') == 50 %}selected=selected{% endif %} value="50">50</option>
-                    <option {% if app.session.get('limit') == 100 %}selected=selected{% endif %} value="100">100</option>
-                </select>
-                <span id="gridCount" class="input-group-addon">{{ 'results_per_page'|trans }}</span>
-            </div>
-        </form>
+    <div class="col-md-5">
+        {% include 'MsiAdminBundle:Pager:pager.html.twig' %}
     </div>
-</div>
-</div>
 </div>
 {% endblock %}
 
