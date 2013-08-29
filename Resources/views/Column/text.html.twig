@@ -27,6 +27,6 @@
 {% if options.truncate %}
     {{ column.value|truncate(options.truncate_length, options.truncate_preserve, options.truncate_separator)|striptags }}
 {% else %}
-    {{ column.value|striptags }}
+    {{ column.value|raw }}
 {% endif %}
 {#</a>#}
