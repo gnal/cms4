@@ -82,6 +82,9 @@ fr: French
 en: English
 success!: The %label% has been saved.
 
+# labels
+Filename: File
+
 # misc
 add: add
 edit: edit

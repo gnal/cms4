@@ -20,16 +20,16 @@
             prev = null;
 
         if (typeof $(ui.item).next('tr').attr('id') !== 'undefined') {
-            next = $(ui.item).next('tr').attr('id').substr(2);
+            next = $(ui.item).next('tr').attr('id');
         }
 
         if (typeof $(ui.item).prev('tr').attr('id') !== 'undefined') {
-            prev = $(ui.item).prev('tr').attr('id').substr(2);
+            prev = $(ui.item).prev('tr').attr('id');
         }
 
-        $.ajax("{{ admin.container.get('msi_trip_trip_quote_item_admin').genUrl('sort') }}", {
+        $.ajax($(this).data('url'), {
             data: {
-                'current': $(ui.item).attr('id').substr(2),
+                'current': $(ui.item).attr('id'),
                 'next': next,
                 'prev': prev
             },

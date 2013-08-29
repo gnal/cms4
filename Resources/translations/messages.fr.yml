@@ -83,6 +83,9 @@ fr: Français
 en: Anglais
 success!: The %label% has been saved.
 
+#labels
+Filename: Fichier
+
 # misc
 add: ajouter
 edit: modifier

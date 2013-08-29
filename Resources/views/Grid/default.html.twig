@@ -2,7 +2,7 @@
 {# Head #}
 <thead>
     <tr>
-    {% if admin.hasTrait('Publishable', true) and admin.hasTrait('Translatable') %}
+    {% if admin.hasTrait('Translatable') %}
         <th>{{ 'Published'|trans }}</th>
     {% endif %}
     {% for column in grid.columns %}

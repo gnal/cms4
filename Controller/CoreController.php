@@ -217,7 +217,7 @@ class CoreController extends Controller
         $prevItemId = $request->query->get('prev');
 
         $rows = $this->admin->getObjectManager()->getFindByQueryBuilder([], [], ['a.position' => 'ASC'])->getQuery()->execute();
-        $item = $this->admin->getObjectManager()->getFindByQueryBuilder(['a.id' => $itemId])->getQuery()->getSingleResult();
+        $item = $this->admin->getObjectManager()->find(['a.id' => $itemId]);
 
         $i = 1;
         foreach ($rows as $row) {
@@ -237,7 +237,7 @@ class CoreController extends Controller
             $i++;
         }
 
-        return $this->getResponse();
+        return new Response();
     }
 
     protected function getIndexQueryBuilder()
