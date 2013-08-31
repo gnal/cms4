@@ -20,7 +20,7 @@
 
     <div class="tab-pane fade{% if admin.object.id == null %} active in{% endif %}" id="tab2">
         {% for translation in form.translations %}
-            {{ form_widget(translation.published) }}
+            {{ form_row(translation.published) }}
         {% endfor %}
         {{ form_row(form.name) }}
         {{ form_row(form.type) }}
