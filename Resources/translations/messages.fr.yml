@@ -101,6 +101,7 @@ alert_success: Les modifications ont été enregistrées.
 sign_out: Se déconnecter
 search: recherche
 summary: sommaire
+edit_language: Langage d'édition :
 
 # index
 results_per_page: résultats par page

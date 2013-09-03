@@ -100,6 +100,7 @@ alert_success: The changes have been saved.
 sign_out: Sign out
 search: search
 summary: summary
+edit_language: Editing language:
 
 # index
 results_per_page: results per page

@@ -1,9 +1,9 @@
 {% if site.locales|length > 1 %}
 <div class="pull-right">
-        current language: {{ working_locale|trans }}
-        {% for l in site.locales if l != working_locale %}
-            <a class="btn btn-primary" href="{{ path('msi_admin_working_locale', {'locale': l}) }}">Switch to {{ l|trans }}</a>
-        {% endfor %}
+    {{ 'edit_language'|trans }} {{ working_locale|trans }}
+    {% for l in site.locales if l != working_locale %}
+        <a class="btn btn-primary" href="{{ path('msi_admin_working_locale', {'locale': l}) }}">{{ l|trans }}</a>
+    {% endfor %}
 </div>
 {#<div class="btn-group pull-right">
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
