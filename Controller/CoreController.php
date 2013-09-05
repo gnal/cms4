@@ -201,7 +201,7 @@ class CoreController extends Controller
         $this->isGranted('update');
         $this->isGranted('ACL_UPDATE', $this->admin->getObject());
 
-        $this->admin->getObjectManager()->toggle($this->admin->getObject(), $this->getRequest());
+        $this->admin->getObjectManager()->toggle($this->admin->getObject(), $this->getRequest()->query->get('field'), $this->get('msi_admin.provider')->getWorkingLocale());
 
         // return $this->getResponse();
         return new Response();

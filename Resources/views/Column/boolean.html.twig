@@ -1,11 +1,15 @@
-{% if column.options.toggle %}
-<a href="{{ grid.admin.genUrl('toggle', {'id': column.object.id, 'field': column.name}) }}" class="msi_admin_admin_change label{% if column.value %} {{ column.options.btn_true }}{% else %} {{ column.options.btn_false }}{% endif %}" data-icon-true="{{ column.options.icon_true }}" data-icon-false="{{ column.options.icon_false }}" data-btn-true="{{ column.options.btn_true }}" data-btn-false="{{ column.options.btn_false }}">
-{% endif %}
-    {% if column.value %}
-        <i class="{{ column.options.icon_true }} icon-large"></i>
-    {% else %}
-        <i class="{{ column.options.icon_false }} icon-large"></i>
+{% if grid.admin.isTranslatable and row.hasTranslation(working_locale) == false %}
+    n/a
+{% else %}
+    {% if column.options.toggle %}
+    <a href="{{ grid.admin.genUrl('toggle', {'id': column.object.id, 'field': column.name}) }}" class="msi_admin_admin_change label{% if column.value %} {{ column.options.btn_true }}{% else %} {{ column.options.btn_false }}{% endif %}" data-icon-true="{{ column.options.icon_true }}" data-icon-false="{{ column.options.icon_false }}" data-btn-true="{{ column.options.btn_true }}" data-btn-false="{{ column.options.btn_false }}">
     {% endif %}
-{% if column.options.toggle %}
-</a>
+        {% if column.value %}
+            <i class="{{ column.options.icon_true }} icon-large"></i>
+        {% else %}
+            <i class="{{ column.options.icon_false }} icon-large"></i>
+        {% endif %}
+    {% if column.options.toggle %}
+    </a>
+    {% endif %}
 {% endif %}

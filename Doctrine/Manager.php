@@ -41,18 +41,13 @@ class Manager
         $this->em->flush();
     }
 
-    public function toggle($entity, $request)
+    public function toggle($entity, $field, $locale)
     {
-        $field = $request->query->get('field');
-        $locale = $request->query->get('locale');
-
         $getter = 'get'.ucfirst($field);
         $setter = 'set'.ucfirst($field);
 
-        if ($locale) {
-            $entity->getTranslation($locale)->$getter()
-                ? $entity->getTranslation($locale)->$setter(false)
-                : $entity->getTranslation($locale)->$setter(true);
+        if (!$this->classAnalyzer->hasMethod($this->getMetadata()->reflClass, $getter)) {
+            $entity->getTranslation($locale)->$getter() ? $entity->getTranslation($locale)->$setter(false) : $entity->getTranslation($locale)->$setter(true);
         } else {
             $entity->$getter() ? $entity->$setter(false) : $entity->$setter(true);
         }
