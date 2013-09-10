@@ -412,7 +412,7 @@ abstract class Admin
 
         // $crumbs[] = [
         //     'label' => '<i class="icon-folder-open"></i> '.$this->getLabel(2),
-        //     'path' => 'list' !== $action ? $this->genUrl('list') : '',
+        //     'path' => 'list' !== $action ? $this->genUrl('index') : '',
         //     'class' => 'list' === $action ? 'active' : '',
         // ];
 
@@ -450,7 +450,7 @@ abstract class Admin
         //     if ($action === 'edit' && !empty($hasShow)) {
         //         $path = $this->genUrl('show', ['id' => $this->getObject()->getId()]);
         //     } else {
-        //         $path = $this->genUrl('list');
+        //         $path = $this->genUrl('index');
         //     }
         //     $crumbs[] = [
         //         'label' => $this->container->get('translator')->trans('Back'),
@@ -475,7 +475,7 @@ abstract class Admin
 
         $breadcrumb->add(
             '<span class="icon-folder-open-alt icon-large"></span> '.$parent->getLabel(2),
-            $parent->genUrl('list', [
+            $parent->genUrl('index', [
                 'parentId' => $parent->hasParent() ? $object->$getter()->getId() : null,
             ], false)
 
@@ -499,13 +499,13 @@ abstract class Admin
         }
 
         $breadcrumb
-            ->add('<span class="icon-folder-open-alt icon-large"></span> '.$this->getLabel(2), $action === 'list' ? null : $this->genUrl('list'))
+            ->add('<span class="icon-folder-open-alt icon-large"></span> '.$this->getLabel(2), $action === 'list' ? null : $this->genUrl('index'))
         ;
 
         return $breadcrumb;
     }
 
-    public function buildListBreadcrumb($breadcrumb)
+    public function buildIndexBreadcrumb($breadcrumb)
     {
     }
 

@@ -52,30 +52,72 @@ class AdminLoader implements LoaderInterface
         $namespace = preg_replace(['|^[a-z]+_[a-z]+_|', '|_admin$|', '|_|'], ['', '', '-'], $id);
 
         $prefix = '/admin/'.$namespace;
-        $suffix = '';
 
-        $names = [
-            'list',
-            'new',
-            'edit',
-            'delete',
-            'toggle',
-            'sort',
-            'deleteUpload',
-        ];
+        $collection->add(
+            $id.'_index',
+            new Route(
+                $prefix,
+                [
+                    '_controller' => 'MsiAdminBundle:Core:index',
+                    '_admin' => $id,
+                ]
+            )
+        );
 
-        foreach ($names as $name) {
-            $collection->add(
-                $id.'_'.$name,
-                new Route(
-                    $prefix.'/'.$name.$suffix,
-                    [
-                        '_controller' => 'MsiAdminBundle:Core:'.$name,
-                        '_admin' => $id,
-                    ]
-                )
-            );
-        }
+        $collection->add(
+            $id.'_new',
+            new Route(
+                $prefix.'/new',
+                [
+                    '_controller' => 'MsiAdminBundle:Core:new',
+                    '_admin' => $id,
+                ]
+            )
+        );
+
+        $collection->add(
+            $id.'_edit',
+            new Route(
+                $prefix.'/edit',
+                [
+                    '_controller' => 'MsiAdminBundle:Core:edit',
+                    '_admin' => $id,
+                ]
+            )
+        );
+
+        $collection->add(
+            $id.'_delete',
+            new Route(
+                $prefix.'/delete',
+                [
+                    '_controller' => 'MsiAdminBundle:Core:delete',
+                    '_admin' => $id,
+                ]
+            )
+        );
+
+        $collection->add(
+            $id.'_toggle',
+            new Route(
+                $prefix.'/toggle',
+                [
+                    '_controller' => 'MsiAdminBundle:Core:toggle',
+                    '_admin' => $id,
+                ]
+            )
+        );
+
+        $collection->add(
+            $id.'_sort',
+            new Route(
+                $prefix.'/sort',
+                [
+                    '_controller' => 'MsiAdminBundle:Core:sort',
+                    '_admin' => $id,
+                ]
+            )
+        );
 
         return $collection;
     }

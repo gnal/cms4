@@ -38,7 +38,7 @@
             {% if column.name == '' and column.options.children %}
                 {% for child in admin.children if admin.hasChildren() %}
                     <td>
-                        <a class="btn btn-default btn-xs" href="{{ child.genUrl('list', {'parentId': row.id}) }}">{{ child.label(2) }}</a>
+                        <a class="btn btn-default btn-xs" href="{{ child.genUrl('index', {'parentId': row.id}) }}">{{ child.label(2) }}</a>
                     </td>
                 {% endfor %}
             {% endif %}

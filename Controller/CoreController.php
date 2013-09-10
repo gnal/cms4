@@ -30,7 +30,7 @@ class CoreController extends Controller
         $this->admin = $this->get($this->get('request')->attributes->get('_admin'));
     }
 
-    public function listAction(Request $request)
+    public function indexAction(Request $request)
     {
         $this->isGranted('read');
 

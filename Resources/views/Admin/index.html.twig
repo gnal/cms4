@@ -6,7 +6,7 @@
 
 {% block sidebar %}
 {% if filterForm is defined %}
-    <form novalidate method="GET" action="{{ admin.genUrl('list') }}">
+    <form novalidate method="GET" action="{{ admin.genUrl('index') }}">
         {% form_theme filterForm 'MsiAdminBundle:Form:form.html.twig' %}
         {% for item in filterForm %}
             <div class="form-group">
@@ -15,7 +15,7 @@
         {% endfor %}
         <div class="btn-group">
             <button type="submit" class="btn btn-default"><i class="icon-filter icon-large"></i></button>
-            <a class="btn btn-default" href="{{ admin.genUrl('list', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-large icon-remove"></i></a>
+            <a class="btn btn-default" href="{{ admin.genUrl('index', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-large icon-remove"></i></a>
         </div>
     </form>
 {% endif %}
@@ -49,7 +49,7 @@
     </div>
     <div class="col-md-5">
         {% if admin.getOption('search_fields')|length %}
-        <form novalidate method="GET" action="{{ admin.genUrl('list') }}">
+        <form novalidate method="GET" action="{{ admin.genUrl('index') }}">
             <div class="row">
                 <div class="col-md-9 col-md-offset-3">
                     {% if admin.hasParent() %}
@@ -59,7 +59,7 @@
                         <input class="form-control" value="{{ app.request.query.get('q') }}" name="q" type="text">
                         <div class="input-group-btn">
                             <button type="submit" class="btn btn-default"><i class="icon-search icon-large"></i></button>
-                            <a class="btn btn-default" href="{{ admin.genUrl('list', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-remove icon-large"></i></a>
+                            <a class="btn btn-default" href="{{ admin.genUrl('index', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-remove icon-large"></i></a>
                         </div>
                     </div>
                 </div>
@@ -158,7 +158,7 @@ $(function() {
         width: 119,
         height: 30,
         onQueueComplete: function() {
-            window.location = "{{ admin.genUrl('list') }}";
+            window.location = "{{ admin.genUrl('index') }}";
         }
     });
 });

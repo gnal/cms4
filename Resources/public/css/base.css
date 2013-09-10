@@ -1,0 +1,27 @@
+html {
+    overflow-y: scroll;
+}
+
+.container {
+    max-width: 970px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.btn [class^="icon-"], .btn [class*=" icon-"] {
+    vertical-align: middle;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    display: inline-block !important;
+    width: 1.1428571428571428em;
+    text-align: center;
+}
+
+[class^="icon-"].icon-large,
+[class*=" icon-"].icon-large {
+    width: 1.4285714285714286em;
+}
