@@ -87,6 +87,7 @@ class CoreController extends Controller
                 $entity = $qb->getQuery()->getArrayResult()[0];
                 return new JsonResponse([
                     'entity' => $entity,
+                    'status' => 'ok',
                 ]);
             }
 
@@ -140,6 +141,7 @@ class CoreController extends Controller
                     $entity = $qb->getQuery()->getArrayResult()[0];
                     $response = new JsonResponse([
                         'entity' => $entity,
+                        'status' => 'ok',
                     ]);
                 } else {
                     $response = $this->render($this->admin->getOption('edit_template'), ['form' => $this->admin->getForm()->createView()]);

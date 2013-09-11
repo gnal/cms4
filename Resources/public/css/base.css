@@ -25,3 +25,7 @@ a:hover {
 [class*=" icon-"].icon-large {
     width: 1.4285714285714286em;
 }
+
+.input-group {
+    margin-bottom: 15px;
+}

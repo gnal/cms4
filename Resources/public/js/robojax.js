@@ -67,7 +67,7 @@ if ( typeof Object.create !== 'function' ) {
                         return;
                     }
                     self.$modalBody
-                        .html($(response).find('form.form-crud'))
+                        .html($(response).find('form.robojax-form'))
                     ;
                 }
             });
@@ -95,10 +95,10 @@ if ( typeof Object.create !== 'function' ) {
                 data: $form.serialize(),
                 success: function (response) {
                     self.ready = true;
-                    if (response.entity) {
+                    if (response.status == 'ok') {
                         self.options.submitSuccess($this, response);
                     } else {
-                        self.$modalBody.html($(response).find('form.form-crud'));
+                        self.$modalBody.html($(response).find('form.robojax-form'));
                     }
                 }
             });

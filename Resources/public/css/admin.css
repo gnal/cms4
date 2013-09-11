@@ -268,3 +268,7 @@ border-color: #eed3d7 !important;
 #limitForm .input-group-addon:last-child {
     padding-right: 0;
 }
+
+hr {
+    margin: 10px 0;
+}
