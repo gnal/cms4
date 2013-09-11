@@ -32,6 +32,7 @@ if ( typeof Object.create !== 'function' ) {
 
             self.$body.on('click', '.robojax-submit', function(e) {
                 e.preventDefault();
+                console.log('dada');
                 self.submitForm($(this));
             });
 
