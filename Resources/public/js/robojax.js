@@ -30,7 +30,7 @@ if ( typeof Object.create !== 'function' ) {
                 self.execute($(this));
             });
 
-            self.$body.on('click', '.robojax_submit', function(e) {
+            self.$body.on('click', '.robojax-submit', function(e) {
                 e.preventDefault();
                 self.submitForm($(this));
             });
@@ -50,20 +50,20 @@ if ( typeof Object.create !== 'function' ) {
             }
             self.ready = false;
 
-            self.$modalBody
-                .empty()
-                .html('<div class="text-center"><i class="icon-spinner icon-4x icon-spin"></i></div>')
-            ;
-
-            self.$modal.find('.modal-title').html($this.data('modal-title'));
-
-            self.$modal.modal('show');
+            if (!$this.hasClass('robojax-delete')) {
+                self.$modalBody
+                    .empty()
+                    .html('<div class="text-center"><i class="icon-spinner icon-4x icon-spin"></i></div>')
+                ;
+                self.$modal.find('.modal-title').html($this.data('modal-title'));
+                self.$modal.modal('show');
+            }
 
             $.ajax($this.attr('href'), {
                 success: function(response) {
                     self.ready = true;
                     self.options.clickSuccess($this, response);
-                    if ($this.hasClass('robojax_delete')) {
+                    if ($this.hasClass('robojax-delete')) {
                         return;
                     }
                     self.$modalBody

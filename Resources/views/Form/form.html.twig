@@ -55,15 +55,17 @@
         {{ block('form_widget_simple') }}
     {% else %}
         <div class="form-group">
-            <div class="col-md-3">
-                {{ form_label(form) }}
-            </div>
-            <div class="col-md-9">
-                {{ form_widget(form.date) }}
-                {{ form_errors(form.date) }}
-                <br>
-                {{ form_widget(form.time) }}
-                {{ form_errors(form.time) }}
+            <div class="row">
+                <div class="col-md-3">
+                    {{ form_label(form) }}
+                </div>
+                <div class="col-md-9">
+                    {{ form_widget(form.date) }}
+                    {{ form_errors(form.date) }}
+                    <br>
+                    {{ form_widget(form.time) }}
+                    {{ form_errors(form.time) }}
+                </div>
             </div>
         </div>
     {% endif %}
