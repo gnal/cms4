@@ -2,7 +2,6 @@
 
 namespace Msi\AdminBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class SearchController extends Controller
