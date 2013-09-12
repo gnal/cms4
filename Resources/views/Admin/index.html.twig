@@ -6,18 +6,18 @@
 
 {% block sidebar %}
 {% if filterForm is defined %}
-    <form novalidate method="GET" action="{{ admin.genUrl('index') }}">
-        {% form_theme filterForm 'MsiAdminBundle:Form:form.html.twig' %}
-        {% for item in filterForm %}
-            <div class="form-group">
-                {{ form_widget(item) }}
-            </div>
-        {% endfor %}
-        <div class="btn-group">
-            <button type="submit" class="btn btn-default"><i class="icon-filter icon-large"></i></button>
-            <a class="btn btn-default" href="{{ admin.genUrl('index', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-large icon-remove"></i></a>
+<form novalidate method="GET" action="{{ admin.genUrl('index') }}">
+    {% form_theme filterForm 'MsiAdminBundle:Form:form.html.twig' %}
+    {% for child in filterForm %}
+        <div class="form-group">
+            {{ form_widget(child) }}
         </div>
-    </form>
+    {% endfor %}
+    <div class="btn-group">
+        <button type="submit" class="btn btn-default"><i class="icon-filter icon-large"></i></button>
+        <a class="btn btn-default" href="{{ admin.genUrl('index', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-large icon-remove"></i></a>
+    </div>
+</form>
 {% endif %}
 {% if admin.getOption('uploadify') %}
     <a class="btn" href="javascript:$('#file_upload').uploadify('upload','*')">GO</a>
@@ -32,8 +32,38 @@
 {% endblock %}
 
 {% block content %}
-<div class="row" style="margin-bottom: 20px;">
-    <div class="col-md-7">
+{#<div class="well well-sm">
+    {% if filterForm is defined %}
+    <form novalidate method="GET" action="{{ admin.genUrl('index') }}">
+    <div class="row">
+        <div class="col-md-1">
+            <p><strong>Filter</strong></p>
+        </div>
+        <div class="col-md-9">
+            {% form_theme filterForm 'MsiAdminBundle:Form:form.html.twig' %}
+            {% for child in filterForm %}
+                {% if loop.index == 1 or loop.index % 3 == 1 %}<div class="row">{% endif %}
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form_widget(child) }}
+                    </div>
+                </div>
+                {% if loop.index == filterForm|length or loop.index % 3 == 0 %}</div>{% endif %}
+            {% endfor %}
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group pull-right">
+                <button type="submit" class="btn btn-default"><i class="icon-filter icon-large"></i></button>
+                <a class="btn btn-default" href="{{ admin.genUrl('index', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-large icon-remove"></i></a>
+            </div>
+        </div>
+    </div>
+    </form>
+    {% endif %}
+</div>#}
+
+<div class="row" style="margin-bottom: 5px;">
+    <div class="col-md-6">
         <form id="limitForm" class="form-inline" novalidate method="POST" action="{{ path('msi_admin_limit') }}">
             <div class="form-group">
                 {{ 'view'|trans }}
@@ -47,11 +77,11 @@
             </div>
         </form>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-6">
         {% if admin.getOption('search_fields')|length %}
         <form novalidate method="GET" action="{{ admin.genUrl('index') }}">
-            <div class="row">
-                <div class="col-md-9 col-md-offset-3">
+            {#<div class="row">
+                <div class="col-md-9 col-md-offset-3">#}
                     {% if admin.hasParent() %}
                         <input type="hidden" value="{{ app.request.query.get('parentId') }}" name="parentId">
                     {% endif %}
@@ -62,8 +92,8 @@
                             <a class="btn btn-default" href="{{ admin.genUrl('index', {'parentId': app.request.query.get('parentId')}, false) }}"><i class="icon-remove icon-large"></i></a>
                         </div>
                     </div>
-                </div>
-            </div>
+                {#</div>
+            </div>#}
         </form>
         {% endif %}
     </div>

@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Msi\AdminBundle\Event\FilterEntityResponseEvent;
+use Msi\AdminBundle\Event\FilterResponseEntityEvent;
 use Msi\AdminBundle\Event\GetResponseEntityEvent;
 
 use Msi\AdminBundle\MsiAdminEvents;
