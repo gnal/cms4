@@ -89,6 +89,7 @@ Filenamefile: Fichier
 
 # misc
 add: ajouter
+new: nouvelle
 edit: modifier
 delete: supprimer
 view: afficher

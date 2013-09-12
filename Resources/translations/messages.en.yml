@@ -88,6 +88,7 @@ Filenamefile: File
 
 # misc
 add: add
+new: new
 edit: edit
 delete: delete
 view: view
