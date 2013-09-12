@@ -96,6 +96,11 @@ $('.datepicker').datepicker({
                         <i class="icon-large icon-ok-sign"></i> <span>{{ flashMessage }}</span>
                     </div>
                 {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    <div class="alert alert-danger fade in">
+                        <i class="icon-large icon-exclamation-sign"></i> <span>{{ flashMessage }}</span>
+                    </div>
+                {% endfor %}
             {% endif %}
 
             {% set actions = block('actions') %}
@@ -103,7 +108,9 @@ $('.datepicker').datepicker({
             <div class="row">
                 <div class="col-md-12">
                     {% include 'MsiAdminBundle::working_locale_btn.html.twig' %}
-                    {{ actions|raw }}
+                    <div class="btn-toolbar pull-right">
+                        {{ actions|raw }}
+                    </div>
                 </div>
             </div>
             <hr>
