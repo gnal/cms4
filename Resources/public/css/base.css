@@ -10,7 +10,10 @@ a:hover {
     text-decoration: none;
 }
 
-.btn [class^="icon-"], .btn [class*=" icon-"] {
+.navbar [class^="icon-"],
+.navbar [class*=" icon-"],
+.btn [class^="icon-"],
+.btn [class*=" icon-"] {
     vertical-align: middle;
 }
 

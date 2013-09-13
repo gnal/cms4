@@ -21,6 +21,10 @@ class Controller extends BaseController
 
         $template = $bundle.':'.$controller.':'.$action.'.html.twig';
 
+        if (isset($this->parameters['form'])) {
+            $this->parameters['form'] = $this->parameters['form']->createView();
+        }
+
         return $this->render($template, $this->parameters);
     }
 
