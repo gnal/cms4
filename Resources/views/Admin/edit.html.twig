@@ -1,6 +1,6 @@
 {% extends 'MsiAdminBundle::layout.html.twig' %}
 
-{% block title %}<i class="icon-pencil"></i> {{ 'edit'|trans|capitalize }} <small>{{ admin.object }}</small>{% endblock title %}
+{% block title %}{{ 'edit'|trans|capitalize }} {{ admin.label }} <small>{{ admin.object }}</small>{% endblock title %}
 
 {% block actions %}
 <button class="btn btn-primary msi_admin_save"><i class="icon-save icon-large"></i> {{ 'save'|trans }}</button>
@@ -8,7 +8,7 @@
 {% endblock actions %}
 
 {% block content %}
-<form novalidate class="form-crud" action="{{ admin.genUrl('edit', {'id': admin.object.id}) }}" method="POST" {{ form_enctype(form) }}>
+<form novalidate class="robojax-form" action="{{ admin.genUrl('edit', {'id': admin.object.id}) }}" method="POST" {{ form_enctype(form) }}>
         {% include admin.getOption('form_template') %}
 </form>
 {% endblock %}

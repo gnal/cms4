@@ -1,3 +1,2 @@
-{% for i, element in column.value %}
-    {% if i != column.value.count - 1 %}{{ element }},{% else %}{{ element }}{% endif %}
-{% endfor %}
+{% set options = column.options %}
+{{ column.value|join(', ')|truncate(options.truncate_length, options.truncate_preserve, options.truncate_separator) }}

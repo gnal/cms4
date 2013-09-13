@@ -1,7 +1,7 @@
 (function($) {
     "use strict";
     var $body = $('body');
-    var $form = $('form.form-crud');
+    var $form = $('form.robojax-form');
     $body.on('click', '.msi_admin_save', function(e) {
         $form.submit();
         e.preventDefault();

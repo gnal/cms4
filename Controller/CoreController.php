@@ -15,7 +15,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-use Msi\AdminBundle\Event\FilterEntityResponseEvent;
+use Msi\AdminBundle\Event\FilterResponseEntityEvent;
+use Msi\AdminBundle\Event\GetResponseEntityEvent;
+
+use Msi\AdminBundle\MsiAdminEvents;
 
 class CoreController extends Controller
 {
@@ -67,6 +70,14 @@ class CoreController extends Controller
         // check acl
         $this->isGranted('create');
         $this->isGranted('ACL_CREATE', $this->admin->getObject());
+
+        $event = new GetResponseEntityEvent($this->admin->getObject(), $this->getRequest());
+        $this->get('event_dispatcher')->dispatch(MsiAdminEvents::ENTITY_NEW_INIT, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
         // if post
         if ($this->processForm()) {
             if (!$this->getRequest()->isXmlHttpRequest()) {
@@ -87,6 +98,7 @@ class CoreController extends Controller
                 $entity = $qb->getQuery()->getArrayResult()[0];
                 return new JsonResponse([
                     'entity' => $entity,
+                    'status' => 'ok',
                 ]);
             }
 
@@ -117,6 +129,14 @@ class CoreController extends Controller
             $this->isGranted('update');
             $this->isGranted('ACL_UPDATE', $this->admin->getObject());
         }
+
+        $event = new GetResponseEntityEvent($this->admin->getObject(), $this->getRequest());
+        $this->get('event_dispatcher')->dispatch(MsiAdminEvents::ENTITY_EDIT_INIT, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
         // if post
         if ($this->processForm()) {
             if (!$this->getRequest()->isXmlHttpRequest()) {
@@ -140,13 +160,15 @@ class CoreController extends Controller
                     $entity = $qb->getQuery()->getArrayResult()[0];
                     $response = new JsonResponse([
                         'entity' => $entity,
+                        'status' => 'ok',
                     ]);
                 } else {
                     $response = $this->render($this->admin->getOption('edit_template'), ['form' => $this->admin->getForm()->createView()]);
                 }
             }
 
-            $this->get('event_dispatcher')->dispatch('msi_admin.entity.update.completed', new FilterEntityResponseEvent($this->admin->getObject(), $request, $response));
+            $event = new FilterResponseEntityEvent($this->admin->getObject(), $this->getRequest(), $response);
+            $this->get('event_dispatcher')->dispatch(MsiAdminEvents::ENTITY_EDIT_COMPLETED, $event);
 
             return $response;
         } else {
@@ -169,6 +191,13 @@ class CoreController extends Controller
     {
         $this->isGranted('delete');
         $this->isGranted('ACL_DELETE', $this->admin->getObject());
+
+        $event = new GetResponseEntityEvent($this->admin->getObject(), $this->getRequest());
+        $this->get('event_dispatcher')->dispatch(MsiAdminEvents::ENTITY_DELETE_INIT, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
 
         $this->admin->getObjectManager()->delete($this->admin->getObject());
 

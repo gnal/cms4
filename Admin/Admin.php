@@ -596,7 +596,7 @@ abstract class Admin
             'search_fields'        => [],
             'order_by'             => ['a.id' => 'DESC'],
             'uploadify'            => false,
-            'wq_route'             => 'list',
+            'wq_route'             => 'index',
         ]);
 
         $resolver->setOptional([
