@@ -6,7 +6,7 @@
         {% set l = loop.index %}
         <li id="{{ item.id }}" data-lvl="{{ item.lvl }}" data-lft="{{ item.lft }}" data-rgt="{{ item.rgt }}">
             {% for i in 0..item.lvl %}
-                {% if i != 0 %}
+                {% if i > 1 %}
                     {% if item.lvl and i < item.lvl %}
                         {% if i < item.lvl and i > 1 %}
                             <i class="icon-minus"></i>
