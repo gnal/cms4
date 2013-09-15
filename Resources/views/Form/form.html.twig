@@ -5,12 +5,16 @@
     {% if form.count %}
         {{ form_widget(form) }}
     {% else %}
+        {% if form.vars.block_prefixes.2 != 'checkbox' %}
         <div class="form-group{% if form.vars.errors|length %} has-error{% endif %}">
             {{ form_label(form) }}
+        {% endif %}
             {{ form_widget(form) }}
             {% if form.vars.attr['data-help'] is defined %}<span class="help-block">{{ attr['data-help'] }}</span>{% endif %}
             {{ form_errors(form) }}
+        {% if form.vars.block_prefixes.2 != 'checkbox' %}
         </div>
+        {% endif %}
     {% endif %}
 {% endspaceless %}
 {% endblock form_row %}
@@ -140,7 +144,11 @@
     <div class="checkbox">
         <label>
             <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-            {% if multiple is defined %}{{ label|trans }}{% endif %}
+            {% if multiple is defined %}
+                {{ label|trans }}
+            {% else %}
+                {{ form.vars.name|capitalize|trans }}
+            {% endif %}
         </label>
     </div>
 {% endspaceless %}
