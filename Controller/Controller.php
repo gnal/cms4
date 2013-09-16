@@ -27,6 +27,11 @@ class Controller extends BaseController
 
         return $this->render($template, $this->parameters);
     }
+    
+    public function createFormBuilder($name = 'form', $data = null)
+    {
+        return $this->get('form.factory')->createBuilder('form', $data);
+    }
 
     public function validateForm()
     {
