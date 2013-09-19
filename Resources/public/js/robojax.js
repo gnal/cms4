@@ -27,7 +27,7 @@ if ( typeof Object.create !== 'function' ) {
 
             self.$body.on('click', '.robojax', function(e) {
                 e.preventDefault();
-                self.execute($(this));
+                self.clicky($(this));
             });
 
             self.$body.on('click', '.robojax-submit', function(e) {
@@ -41,7 +41,8 @@ if ( typeof Object.create !== 'function' ) {
             });
         },
 
-        execute: function($this)
+        // request the form, create a modal and put the response inside
+        clicky: function($this)
         {
             var self = this;
 
@@ -49,6 +50,24 @@ if ( typeof Object.create !== 'function' ) {
                 return;
             }
             self.ready = false;
+
+            // make modal
+
+//             $('body').append('<div class="modal fade">
+//     <div class="modal-dialog">
+//         <div class="modal-content">
+//             <div class="modal-header">
+//                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+//                 <h4 class="modal-title"></h4>
+//             </div>
+//             <div class="modal-body">
+//             </div>
+//             <div class="modal-footer">
+//                 <button type="button" class="btn btn-primary"><i class="icon-save icon-large"></i> Save</button>
+//             </div>
+//         </div>
+//     </div>
+// </div>');
 
             if (!$this.hasClass('robojax-delete')) {
                 self.$modalBody
@@ -73,6 +92,7 @@ if ( typeof Object.create !== 'function' ) {
             });
         },
 
+        // sends the form and destroys the modal
         submitForm: function($this)
         {
             var self = this;

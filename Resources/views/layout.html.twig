@@ -46,21 +46,13 @@ $('.datepicker').datepicker({
             <a class="navbar-brand" href="{{ path('msi_admin_dashboard') }}">{{ block('brand') }}</a>
         </div>
         {% if is_granted('ROLE_ADMIN') %}
-            {#<div class="navbar-btn btn-group navbar-right">
-                <a href="{{ path('fos_user_profile_show') }}" class="btn btn-default">{{ app.user.username }}</a>
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ path('fos_user_security_logout') }}">{{ 'sign_out'|trans }}</a></li>
-                </ul>
-            </div>#}
-            <form class="navbar-form navbar-right" style="padding-right: 0;" method=GET action="{{ path('msi_admin_search_index') }}">
+            <p class="navbar-text navbar-right">{{ app.user.username }} | <a href="{{ path('fos_user_security_logout') }}">{{ 'sign_out'|trans }}</a></p>
+            {#<form class="navbar-form navbar-right" style="padding-right: 0;" method=GET action="{{ path('msi_admin_search_index') }}">
                 <div class="form-group">
                     <input type="text" class="form-control" name=q>
                 </div>
                 <button type="submit" class="btn btn-default"><span class="icon-search icon-large"></span></button>
-            </form>
+            </form>#}
             {{ knp_menu_render('MsiAdminBundle:MenuBuilder:adminMenu', {'allow_safe_labels': true, 'depth': 3, 'currentClass': 'active'}) }}
         {% endif %}
     </div>
