@@ -589,7 +589,7 @@ abstract class Admin
         $resolver->setDefaults([
             'controller'           => null,
             'form_template'        => 'MsiAdminBundle:Admin:form.html.twig',
-            'sidebar_template'     => 'MsiAdminBundle:Admin:sidebar.html.twig',
+            'sidebar_template'     => null,
             'index_template'       => 'MsiAdminBundle:Admin:index.html.twig',
             'new_template'         => 'MsiAdminBundle:Admin:new.html.twig',
             'edit_template'        => 'MsiAdminBundle:Admin:edit.html.twig',

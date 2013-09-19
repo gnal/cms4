@@ -6,7 +6,7 @@
         {% if column.name == '' and column.options.children %}
             {% for child in admin.children if admin.hasChildren() %}
                 <th>
-                    {#{{ child.label(2) }}#}
+                    {{ child.label(2) }}
                 </th>
             {% endfor %}
         {% endif %}

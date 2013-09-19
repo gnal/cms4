@@ -74,6 +74,9 @@ $('.datepicker').datepicker({
             <div id="sidebar">
             {{ msi_block_render('admin_sidebar_top', page) }}
             {{ sidebar|raw }}
+            {% if admin is defined and admin.getOption('sidebar_template') %}
+                {% include admin.getOption('sidebar_template') %}
+            {% endif %}
             {{ msi_block_render('admin_sidebar_bottom', page) }}
             <div class="clearfix"></div>
             </div>

@@ -24,7 +24,7 @@ trait Uploadable
         return strtolower($class.'-'.$fieldName.$suffix);
     }
 
-    public function getPathname($fieldName = 'filename', $prefix = '', $default = 'http://placehold.it/250x250')
+    public function getPathname($fieldName = 'filename', $prefix = '', $default = null)
     {
         if (!in_array($fieldName, $this->getUploadFields())) {
             throw new \InvalidArgumentException('upload field name "'.$fieldName.'" doesn\'t exist for entity '.get_class($this));
@@ -32,7 +32,7 @@ trait Uploadable
 
         $getter = 'get'.ucfirst($fieldName);
 
-        return $this->$getter() ? '/uploads/'.$this->getUploadDir($fieldName).'/'.$prefix.$this->$getter() : $default;
+        return '/uploads/'.$this->getUploadDir($fieldName).'/'.$prefix.$this->$getter();
     }
 
     public function generateFileName(UploadedFile $file)
