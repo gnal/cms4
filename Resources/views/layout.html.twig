@@ -1,8 +1,8 @@
 {% extends 'MsiAdminBundle:Page:layout.html.twig' %}
 
 {% block css %}
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<link href="{{ asset('bundles/msiadmin/vendor/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ asset('bundles/msiadmin/vendor/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="{{ asset('bundles/msiadmin/vendor/chosen/chosen.css') }}">
 <link rel="stylesheet" href="{{ asset('bundles/msiadmin/vendor/eternicode-bootstrap-datepicker/css/datepicker.css') }}">
@@ -15,7 +15,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
 <script src="{{ asset('bundles/msiadmin/vendor/hinclude/hinclude.js') }}"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="{{ asset('bundles/msiadmin/vendor/bootstrap/js/bootstrap.js') }}"></script>
 <script src="{{ asset('bundles/msiadmin/vendor/chosen/chosen.jquery.min.js') }}"></script>
 <script src="{{ asset('bundles/msiadmin/vendor/eternicode-bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('bundles/msiadmin/vendor/eternicode-bootstrap-datepicker/js/locales/bootstrap-datepicker.fr.js') }}"></script>
