@@ -7,11 +7,15 @@
     {% else %}
         {% if form.vars.block_prefixes.2 != 'checkbox' %}
         <div class="form-group{% if form.vars.errors|length %} has-error{% endif %}">
-            {{ form_label(form) }}
+            <div class="col-md-3">
+                {{ form_label(form) }}
+            </div>
         {% endif %}
-            {{ form_widget(form) }}
-            {% if form.vars.attr['data-help'] is defined %}<span class="help-block">{{ attr['data-help'] }}</span>{% endif %}
-            {{ form_errors(form) }}
+            <div class="col-md-9">
+                {{ form_widget(form) }}
+                {% if form.vars.attr['data-help'] is defined %}<span class="help-block">{{ attr['data-help'] }}</span>{% endif %}
+                {{ form_errors(form) }}
+            </div>
         {% if form.vars.block_prefixes.2 != 'checkbox' %}
         </div>
         {% endif %}
