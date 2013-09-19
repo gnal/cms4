@@ -473,6 +473,10 @@ abstract class Admin
             $this->buildParentBreadcrumb($breadcrumb, $parent->getParent(), $object->$getter());
         }
 
+        if ($parent->hasParent() && !$object->$getter()) {
+            die('"'.$parent->getLabel().'" has no "'.$parent->getParent()->getLabel().'". Better make sure that all "'.$parent->getLabel(2).'" have a "'.$parent->getParent()->getLabel().'".');
+        }
+
         $breadcrumb->add(
             '<span class="icon-folder-open-alt icon-large"></span> '.$parent->getLabel(2),
             $parent->genUrl('index', [

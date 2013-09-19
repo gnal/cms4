@@ -1,18 +1,18 @@
 entity:
-    Menu: Menu|Menus
-    MenuRoot: Menu|Menus
-    MenuNode: Item|Items
-    Page: Page|Pages
-    Block: Bloc|Blocs
-    Site: Site|Sites
+    Menu: menu|menus
+    MenuRoot: menu|menus
+    MenuNode: item|items
+    Page: page|pages
+    Block: bloc|blocs
+    Site: site|sites
 
 locale:
-    fr: Français
-    en: English
+    fr: français
+    en: english
 
-save: Enregistrer
-save_quit: Enregistrer & Quitter
-save_add: Enregistrer & Ajouter
+save: enregistrer
+save_quit: enregistrer & quitter
+save_add: enregistrer & ajouter
 
 Dashboard: Tableau de bord
 Language:: Langage :
@@ -79,8 +79,8 @@ Open in a new tab: Ouvrir dans un nouvel onglet
 Groups: Groupes
 Body: Contenu
 Whitelist: Liste blanche
-fr: Français
-en: Anglais
+fr: français
+en: anglais
 success!: The %label% has been saved.
 
 #labels
@@ -102,7 +102,7 @@ alert_success: Les modifications ont été enregistrées.
 sign_out: Se déconnecter
 search: recherche
 summary: sommaire
-edit_language: Langage d'édition :
+edit_language: langue d'édition :
 
 # index
 results_per_page: résultats par page

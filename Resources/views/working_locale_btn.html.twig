@@ -1,8 +1,8 @@
 {% if site.locales|length > 1 %}
-{#<div class="pull-right">#}
-    {{ 'edit_language'|trans }} {{ working_locale|trans }}
+<div class="pull-right">
+    <small class="text-muted">{{ 'edit_language'|trans }}</small> {{ working_locale|trans }}
     {% for l in site.locales if l != working_locale %}
-        <a class="btn btn-primary" href="{{ path('msi_admin_working_locale', {'locale': l}) }}">{{ l|trans }}</a>
+        | <a href="{{ path('msi_admin_working_locale', {'locale': l}) }}">{{ l|trans }}</a>
     {% endfor %}
-{#</div>#}
+</div>
 {% endif %}
