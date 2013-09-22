@@ -21,7 +21,7 @@ a:hover {
 [class*=" icon-"] {
     display: inline-block !important;
     width: 1.1428571428571428em;
-    text-align: left;
+    text-align: center;
 }
 
 [class^="icon-"].icon-large,
