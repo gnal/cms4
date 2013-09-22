@@ -5,6 +5,7 @@ entity:
     Page: Page|Pages
     Block: Block|Blocks
     Site: Site|Sites
+    Email: email|emails
 
 locale:
     fr: Français
