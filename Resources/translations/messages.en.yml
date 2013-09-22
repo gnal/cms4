@@ -102,6 +102,7 @@ sign_out: Sign out
 search: search
 summary: summary
 edit_language: editing language:
+User: user
 
 # index
 results_per_page: results per page

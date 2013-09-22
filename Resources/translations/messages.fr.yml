@@ -103,6 +103,7 @@ sign_out: Se déconnecter
 search: recherche
 summary: sommaire
 edit_language: langue d'édition :
+User: utilisateur
 
 # index
 results_per_page: résultats par page

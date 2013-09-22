@@ -58,6 +58,8 @@ abstract class BaseColumn
             }
         }
 
+        $this->fixValue();
+
         return $this;
     }
 
@@ -99,5 +101,9 @@ abstract class BaseColumn
     public function set($name, $val)
     {
         $this->options[$name] = $val;
+    }
+
+    public function fixValue()
+    {
     }
 }

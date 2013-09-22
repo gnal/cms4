@@ -13,8 +13,8 @@ class NumberColumn extends BaseColumn
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'decimals' => 0,
-        ));
+        ]);
     }
 }
