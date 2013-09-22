@@ -516,7 +516,7 @@ abstract class Admin
     public function buildNewBreadcrumb($breadcrumb)
     {
         $breadcrumb
-            ->add('<span class="icon-plus-sign-alt icon-large"></span> '.ucfirst($this->container->get('translator')->trans('add')))
+            ->add('<span class="icon-plus-sign-alt icon-large"></span> '.$this->container->get('translator')->trans('add'))
         ;
     }
 
@@ -524,7 +524,7 @@ abstract class Admin
     {
         $breadcrumb
             ->add('<span class="icon-file-alt icon-large"></span> '.$this->getObject(), $this->hasShow() ? $this->genUrl('show', ['id' => $this->getObject()->getId()]) : null)
-            ->add('<span class="icon-pencil icon-large"></span> '.ucfirst($this->container->get('translator')->trans('edit')))
+            ->add('<span class="icon-pencil icon-large"></span> '.$this->container->get('translator')->trans('edit'))
         ;
     }
 
