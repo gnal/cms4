@@ -2,12 +2,12 @@
 <div class="tab-content">
     <div class="tab-pane fade active in" id="tab1">
         {{ form_row(form.parent) }}
-        {{ form_row(form.targetBlank) }}
         {% for translation in form.translations %}
             {#{{ form_row(translation.published) }}#}
             {{ form_row(translation.name) }}
             {{ form_row(translation.route) }}
         {% endfor %}
+        {{ form_row(form.targetBlank) }}
     </div>
 
     <div class="tab-pane fade" id="tab2">

@@ -10,9 +10,9 @@ class BooleanColumn extends BaseColumn
     {
         $resolver->setDefaults([
             'toggle' => true,
-            'btn_true' => 'label-success',
-            'btn_false' => 'label-default',
-            'icon_true' => 'icon-check',
+            'btn_true' => 'btn-success',
+            'btn_false' => 'btn-default',
+            'icon_true' => 'icon-check-sign',
             'icon_false' => 'icon-check-empty',
         ]);
     }
