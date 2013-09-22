@@ -524,7 +524,7 @@ abstract class Admin
     {
         $breadcrumb
             ->add('<span class="icon-file-alt icon-large"></span> '.$this->getObject(), $this->hasShow() ? $this->genUrl('show', ['id' => $this->getObject()->getId()]) : null)
-            ->add('<span class="icon-pencil icon-large"></span> '.$this->container->get('translator')->trans('edit'))
+            ->add('<span class="icon-edit-sign icon-large"></span> '.$this->container->get('translator')->trans('edit'))
         ;
     }
 
