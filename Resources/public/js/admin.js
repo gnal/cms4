@@ -4,6 +4,8 @@
     var loadingCellIds = [];
 
     $table.on('click', 'a.msi_admin_admin_change', function(e) {
+        e.preventDefault();
+
         var $this = $(this),
             iconTrue = $this.data('icon-true'),
             iconFalse = $this.data('icon-false'),
@@ -16,12 +18,12 @@
         }
         loadingCellIds.push(cellId);
 
-        $this.html('<i class="icon-spinner icon-spin icon-large"></i>');
+        $this.html('<span class="icon-spinner icon-spin icon-large"></span>');
 
         $.ajax($this.attr('href'), {
             success: function() {
                 if ($this.hasClass(BadgeTrue)) {
-                    var i = '<i class="icon-large"><span class="hide">0</span></i>';
+                    var i = '<span class="icon-large"><span class="hide">0</span></span>';
                     $this
                         .removeClass(BadgeTrue)
                         .addClass(BadgeFalse)
@@ -31,7 +33,7 @@
                         .removeClass(iconTrue)
                         .addClass(iconFalse);
                 } else {
-                    var i = '<i class="icon-large"><span class="hide">1</span></i>';
+                    var i = '<span class="icon-large"><span class="hide">1</span></span>';
                     $this
                         .removeClass(BadgeFalse)
                         .addClass(BadgeTrue)
@@ -45,7 +47,6 @@
                 loadingCellIds.splice(loadingCellIds.indexOf(cellId), 1);
             }
         });
-        e.preventDefault();
     });
 
     $('form.form-horizontal').on('click', 'a.msi_admin_admin_deleteUpload', function(e) {
