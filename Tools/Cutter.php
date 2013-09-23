@@ -126,7 +126,7 @@ class Cutter
 
     public function save($prefix = null)
     {
-        $filename = $prefix ? $this->file->getPath().'/'.$prefix.$this->file->getFilename() : $this->file->getPathname();
+        $filename = $prefix !== null ? $this->file->getPath().'/'.$prefix.$this->file->getFilename() : $this->file->getPathname();
 
         switch ($this->file->getExtension()) {
             case 'png':

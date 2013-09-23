@@ -8,7 +8,7 @@
     {{ site.translation.metaKeywords }}
 {% endif %}
 {% endspaceless %}
-{% endblock meta_keywords %}
+{% endblock %}
 
 {% block meta_description %}
 {% spaceless %}
@@ -18,11 +18,21 @@
     {{ site.translation.metaDescription }}
 {% endif %}
 {% endspaceless %}
-{% endblock meta_description %}
+{% endblock %}
+
+{% block meta_title %}
+{% spaceless %}
+{% if page.translation.metaTitle %}
+    {{ page.translation.metaTitle }}
+{% else %}
+    {{ block('title')|striptags }}
+{% endif %}
+{% endspaceless %}
+{% endblock %}
 
 {% block brand %}
 {{ site.translation.brand|raw }}
-{% endblock brand %}
+{% endblock %}
 
 {% block head_title %}{{ page.translation.title }}{% endblock %}
 
@@ -43,4 +53,4 @@
     {% else %}
         {{ page.translation.body|raw }}
     {% endif %}
-{% endblock page_content %}
+{% endblock %}
