@@ -147,7 +147,7 @@
             {% if multiple is defined %}
                 {{ label|trans }}
             {% else %}
-                {% set label = form.parent.vars.name~'.'~form.vars.name %}
+                {% set label = form.vars.name|capitalize %}
                 {{ label|trans }}
             {% endif %}
         </label>

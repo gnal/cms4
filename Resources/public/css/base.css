@@ -37,8 +37,6 @@ a:hover {
     vertical-align: middle;
 }
 
-/*img {
-    display: block;
-    height: auto;
-    max-width: 100%;
-}*/
+.uc {
+    text-transform: uppercase;
+}
