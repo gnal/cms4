@@ -54,3 +54,18 @@
         {{ page.translation.body|raw }}
     {% endif %}
 {% endblock %}
+
+{% block flash %}
+{% spaceless %}
+{% for flashMessage in app.session.flashbag.get('success') %}
+    <div class="alert alert-success fade in">
+        <i class="icon-large icon-ok-sign"></i> <span>{{ flashMessage }}</span>
+    </div>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('error') %}
+    <div class="alert alert-danger fade in">
+        <i class="icon-large icon-exclamation-sign"></i> <span>{{ flashMessage }}</span>
+    </div>
+{% endfor %}
+{% endspaceless %}
+{% endblock %}
