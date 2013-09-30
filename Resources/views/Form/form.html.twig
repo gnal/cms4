@@ -3,7 +3,10 @@
 {% block form_row %}
 {% spaceless %}
     {% if form.count %}
-        {{ form_widget(form) }}
+        <div class="form-group{% if form.vars.errors|length %} has-error{% endif %}">
+            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+        </div>
     {% else %}
         {% if form.vars.block_prefixes.2 != 'checkbox' %}
         <div class="form-group{% if form.vars.errors|length %} has-error{% endif %}">
