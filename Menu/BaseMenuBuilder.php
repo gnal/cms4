@@ -65,6 +65,10 @@ class BaseMenuBuilder extends ContainerAware
                     break;
                 }
             }
+            if (empty($childLocale)) {
+                $childLocale = key($child['translations']);
+            }
+
             if ($child['page']) {
                 foreach ($child['page']['translations'] as $k => $translation) {
                     if ($this->container->get('request')->getLocale() === $translation['locale']) {
@@ -72,7 +76,11 @@ class BaseMenuBuilder extends ContainerAware
                         break;
                     }
                 }
+                if (empty($pageLocale)) {
+                    $pageLocale = key($child['page']['translations']);
+                }
             }
+
             $route = $child['translations'][$childLocale]['route'];
             $options = [];
 

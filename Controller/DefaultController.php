@@ -2,6 +2,7 @@
 
 namespace Msi\AdminBundle\Controller;
 
+use Msi\BaseBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller

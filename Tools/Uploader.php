@@ -24,7 +24,7 @@ class Uploader
         $dirname = $entity->getUploadDir($fieldName);
         $getter = 'get'.ucfirst($fieldName);
 
-        // avoid deleting all images if field is empty
+        // avoid deleting all images if field is empty. if empty it will fuck up the regex in the finder.
         if (!$entity->$getter()) {
             return;
         }

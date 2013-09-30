@@ -2,6 +2,7 @@
 
 namespace Msi\AdminBundle\Controller;
 
+use Msi\BaseBundle\Controller\Controller;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class SearchController extends Controller

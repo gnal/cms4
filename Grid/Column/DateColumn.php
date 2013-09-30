@@ -8,7 +8,9 @@ class DateColumn extends BaseColumn
 {
     public function fixValue()
     {
-        $this->value = $this->value->format($this->options['format']);
+        if ($this->value) {
+            $this->value = $this->value->format($this->options['format']);
+        }
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
