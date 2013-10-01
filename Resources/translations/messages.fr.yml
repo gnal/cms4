@@ -87,6 +87,7 @@ success!: The %label% has been saved.
 #labels
 Filename: Fichier
 Filenamefile: Fichier
+Metatitle: Titre
 
 # misc
 add: ajouter
@@ -104,7 +105,7 @@ sign_out: Se déconnecter
 search: recherche
 summary: sommaire
 edit_language: langue d'édition :
-User: utilisateur
+user: utilisateur
 
 # index
 results_per_page: résultats par page
