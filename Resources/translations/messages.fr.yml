@@ -83,6 +83,7 @@ Whitelist: Liste blanche
 fr: français
 en: anglais
 success!: The %label% has been saved.
+back: retour
 
 #labels
 Filename: Fichier
