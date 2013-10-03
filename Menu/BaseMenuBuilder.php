@@ -65,7 +65,7 @@ class BaseMenuBuilder extends ContainerAware
                     break;
                 }
             }
-            if (empty($childLocale)) {
+            if (!isset($childLocale)) {
                 $childLocale = key($child['translations']);
             }
 
@@ -76,7 +76,7 @@ class BaseMenuBuilder extends ContainerAware
                         break;
                     }
                 }
-                if (empty($pageLocale)) {
+                if (!isset($pageLocale)) {
                     $pageLocale = key($child['page']['translations']);
                 }
             }
