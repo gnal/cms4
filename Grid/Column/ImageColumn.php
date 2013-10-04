@@ -8,8 +8,9 @@ class ImageColumn extends BaseColumn
 {
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'collection' => false,
-        ));
+            'translation' => false,
+        ]);
     }
 }
