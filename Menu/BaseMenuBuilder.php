@@ -12,106 +12,22 @@ class BaseMenuBuilder extends ContainerAware
     {
         $node = $this->container->get('msi_cms.menu_root_manager')->findRootByName($name);
 
-        if (!isset($node[0])) {
-            return $this->container->get('knp_menu.array_loader')->load([]);
+        if (!$node || !$node->getTranslation()->getPublished()) {
+            return $this->container->get('knp_menu.factory')->createItem('default');
         }
 
-        return $this->create($node[0]);
+        return $this->create($node);
     }
 
     public function create($node)
     {
-        foreach ($node['translations'] as $k => $translation) {
-            if ($this->container->get('request')->getLocale() === $translation['locale']) {
-                $nodeLocale = $k;
-                break;
-            }
-        }
-
-        if (!$node['translations'][$nodeLocale]['published']) {
-            return $this->container->get('knp_menu.array_loader')->load([]);
-        }
-
-        $array = [
-            'name' => $node['translations'][$nodeLocale]['name'],
-            'extras' => [
-                'groups' => $node['operators'],
-                'published' => $node['translations'][$nodeLocale]['published'],
-            ],
-        ];
-
-        $this->buildArray($node, $array);
-
-        $item = $this->container->get('knp_menu.array_loader')->load($array);
-
-        if (!$item->getExtra('published')) {
-            // return $this->container->get('knp_menu.array_loader')->load('default');
-            return null;
-        }
+        $item = $this->container->get('knp_menu.node_loader')->load($node);
 
         $this->addWalker('removeUnpublished');
         $this->addWalker('setSafeLabel');
         $this->addWalker('checkRole');
 
         return $item;
-    }
-
-    public function buildArray($node, &$array)
-    {
-        foreach ($node['children'] as $child) {
-            foreach ($child['translations'] as $k => $translation) {
-                if ($this->container->get('request')->getLocale() === $translation['locale']) {
-                    $childLocale = $k;
-                    break;
-                }
-            }
-            if (!isset($childLocale)) {
-                $childLocale = key($child['translations']);
-            }
-
-            if ($child['page']) {
-                foreach ($child['page']['translations'] as $k => $translation) {
-                    if ($this->container->get('request')->getLocale() === $translation['locale']) {
-                        $pageLocale = $k;
-                        break;
-                    }
-                }
-                if (!isset($pageLocale)) {
-                    $pageLocale = key($child['page']['translations']);
-                }
-            }
-
-            $route = $child['translations'][$childLocale]['route'];
-            $options = [];
-
-            if ($child['page']) {
-                if (!$child['page']['route']) {
-                    $options['route'] = 'msi_page_show';
-                    $options['routeParameters'] = ['slug' => $child['page']['translations'][$pageLocale]['slug']];
-                } else {
-                    $options['route'] = $child['page']['route'];
-                }
-            } elseif (preg_match('#^@#', $route)) {
-                $options['route'] = substr($route, 1);
-            } else {
-                $options['uri'] = $route;
-            }
-
-            if ($child['targetBlank']) {
-                $options['linkAttributes'] = ['target' => '_blank'];
-            }
-
-            $options['extras'] = [
-                'groups' => $child['operators'],
-                'published' => $child['translations'][$childLocale]['published'],
-            ];
-
-            $array['children'][$child['translations'][$childLocale]['name']] = $options;
-
-            if (count($child['children'])) {
-                $this->buildArray($child, $array['children'][$child['translations'][$childLocale]['name']]);
-            }
-        }
     }
 
     public function setBootstrapDropdownMenuAttributes($node)

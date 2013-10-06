@@ -118,8 +118,8 @@ services:
     msi_admin.class_analyzer:
         class: Msi\AdminBundle\Tools\ClassAnalyzer
 
-    knp_menu.array_loader:
-        class: Knp\Menu\Loader\ArrayLoader
+    knp_menu.node_loader:
+        class: Knp\Menu\Loader\NodeLoader
         arguments: [ @knp_menu.factory ]
 
     msi_admin.breadcrumb.factory:

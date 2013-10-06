@@ -51,6 +51,6 @@ class MenuManager extends BaseManager
         // $qb->andWhere($qb->expr()->eq('ct.locale', ':ctlocale'));
         // $qb->setParameter('ctlocale', $locale);
 
-        return $qb->getQuery()->getArrayResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 }
