@@ -30,6 +30,16 @@ $('.datepicker').datepicker({
 });
 </script>
 {{ parent() }}
+<script>
+(function($) {
+    "use strict";
+    $('.confirmable').on('click', function() {
+        if (!window.confirm("{{ 'confirmable'|trans }}")) {
+            return false;
+        }
+    });
+})(jQuery);
+</script>
 {% endblock %}
 
 {% block body %}

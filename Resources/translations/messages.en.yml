@@ -104,6 +104,7 @@ search: search
 summary: summary
 edit_language: editing language:
 User: user
+confirmable: Are you sure you want to do this?
 
 # index
 results_per_page: results per page

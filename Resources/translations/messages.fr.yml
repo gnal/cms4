@@ -105,6 +105,7 @@ search: recherche
 summary: sommaire
 edit_language: langue d'édition :
 User: utilisateur
+confirmable: Êtes-vous sûr de vouloir faire ça?
 
 # index
 results_per_page: résultats par page

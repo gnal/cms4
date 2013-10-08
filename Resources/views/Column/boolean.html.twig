@@ -2,14 +2,18 @@
     n/a
 {% else %}
     {% if column.options.toggle %}
-    <a href="{{ grid.admin.genUrl('toggle', {'id': column.object.id, 'field': column.name}) }}" class="msi_admin_admin_change btn btn-xs{% if column.value %} {{ column.options.btn_true }}{% else %} {{ column.options.btn_false }}{% endif %}" data-icon-true="{{ column.options.icon_true }}" data-icon-false="{{ column.options.icon_false }}" data-btn-true="{{ column.options.btn_true }}" data-btn-false="{{ column.options.btn_false }}">
+        <a href="{{ grid.admin.genUrl('toggle', {'id': column.object.id, 'field': column.name}) }}" class="msi_admin_admin_change btn btn-xs{% if column.value %} {{ column.options.btn_true }}{% else %} {{ column.options.btn_false }}{% endif %}" data-icon-true="{{ column.options.icon_true }}" data-icon-false="{{ column.options.icon_false }}" data-btn-true="{{ column.options.btn_true }}" data-btn-false="{{ column.options.btn_false }}">
+    {% else %}
+        <span class="label label-{% if column.value %}success{% else %}default{% endif %}">
     {% endif %}
         {% if column.value %}
-            <i class="{{ column.options.icon_true }} icon-large"></i>
+            <span class="{{ column.options.icon_true }} icon-large"></span>
         {% else %}
-            <i class="{{ column.options.icon_false }} icon-large"></i>
+            <span class="{{ column.options.icon_false }} icon-large"></span>
         {% endif %}
     {% if column.options.toggle %}
-    </a>
+        </a>
+    {% else %}
+        </span>
     {% endif %}
 {% endif %}
