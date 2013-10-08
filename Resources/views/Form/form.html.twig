@@ -63,10 +63,19 @@
     {% else %}
         <div class="form-group">
             {{ form_label(form) }}
-            {{ form_widget(form.date) }}
-            {{ form_errors(form.date) }}
-            {{ form_widget(form.time) }}
-            {{ form_errors(form.time) }}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_widget(form.date) }}
+                    {{ form_errors(form.date) }}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_widget(form.time) }}
+                    {{ form_errors(form.time) }}
+                </div>
+            </div>
         </div>
     {% endif %}
 {% endspaceless %}
@@ -74,16 +83,19 @@
 
 {% block date_widget %}
 {% spaceless %}
+    {% set vars = {'attr': {'class': 'notchosen form-control' }} %}
     {% if widget == 'single_text' %}
         {{ block('form_widget_simple') }}
     {% else %}
-        <div {{ block('widget_container_attributes') }}>
-            <div class="input-group">
-                {{ form_widget(form.day) }}
-                <span class="input-group-addon">-</span>
-                {{ form_widget(form.month) }}
-                <span class="input-group-addon">-</span>
-                {{ form_widget(form.year) }}
+        <div class="row">
+            <div class="col-md-4">
+                {{ form_widget(form.day, vars) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(form.month, vars) }}
+            </div>
+            <div class="col-md-4">
+                {{ form_widget(form.year, vars) }}
             </div>
         </div>
     {% endif %}
@@ -92,14 +104,15 @@
 
 {% block time_widget %}
 {% spaceless %}
+    {% set vars = {'attr': {'class': 'notchosen form-control' }} %}
     {% if widget == 'single_text' %}
         {{ block('form_widget_simple') }}
     {% else %}
-        {% set vars = widget == 'text' ? { 'attr': { 'size': 1 }} : {} %}
-        <div {{ block('widget_container_attributes') }}>
-            <div class="input-group">
+        <div class="row">
+            <div class="col-md-4">
                 {{ form_widget(form.hour, vars) }}
-                <span class="input-group-addon">:</span>
+            </div>
+            <div class="col-md-4">
                 {{ form_widget(form.minute, vars) }}
             </div>
         </div>
