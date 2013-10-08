@@ -82,6 +82,7 @@ Whitelist: Whitelist
 fr: French
 en: English
 success!: The %label% has been saved.
+back: back
 
 # labels
 Filename: File

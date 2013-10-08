@@ -83,10 +83,12 @@ Whitelist: Liste blanche
 fr: français
 en: anglais
 success!: The %label% has been saved.
+back: retour
 
 #labels
 Filename: Fichier
 Filenamefile: Fichier
+Metatitle: Titre
 
 # misc
 add: ajouter
@@ -104,7 +106,7 @@ sign_out: Se déconnecter
 search: recherche
 summary: sommaire
 edit_language: langue d'édition :
-User: utilisateur
+user: utilisateur
 confirmable: Êtes-vous sûr de vouloir faire ça?
 
 # index
