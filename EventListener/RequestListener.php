@@ -40,7 +40,7 @@ class RequestListener
         }
 
         if (!$this->provider->getSite()->getEnabled()) {
-            die($this->provider->getSite()->getOfflineMessage() ?: 'offline');
+            die($this->provider->getSite()->getTranslation()->getOfflineMessage() ?: 'offline');
         }
 
         if (!in_array($request->getLocale(), $this->provider->getSite()->getLocales())) {

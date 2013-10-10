@@ -124,3 +124,6 @@ services:
 
     msi_admin.breadcrumb.factory:
         class: Msi\AdminBundle\Breadcrumb\BreadcrumbFactory
+
+    msi_admin.doctrine.orm.naming_strategy:
+        class: Msi\AdminBundle\Doctrine\Mapping\DefaultNamingStrategy
