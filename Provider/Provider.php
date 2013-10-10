@@ -22,7 +22,6 @@ class Provider
 
     public function getSite()
     {
-        // return $this->siteManager->create();
         if (!$this->site) {
             $site = $this->siteManager->getFindByQueryBuilder(
                 ['a.host' => $this->request->getHost()],
