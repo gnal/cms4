@@ -27,6 +27,8 @@ class BaseMenuBuilder extends ContainerAware
         $this->addWalker('setSafeLabel');
         $this->addWalker('checkRole');
 
+        $this->checkRootAcl($item);
+
         return $item;
     }
 
@@ -87,25 +89,22 @@ class BaseMenuBuilder extends ContainerAware
         $node->getParent()->removeChild($node);
     }
 
-    // protected function findCurrent($node)
-    // {
-    //     $requestUri = $this->container->get('request')->getRequestUri();
-    //     if ($pos = strrpos($requestUri, '?')) {
-    //         $requestUri = substr($requestUri, 0, $pos);
-    //     }
-    //     foreach ($node->getChildren() as $child) {
-    //         $menuUri = $child->getUri();
-    //         if ($pos = strrpos($menuUri, '?')) {
-    //             $menuUri = substr($menuUri, 0, $pos);
-    //         }
-    //         if ($menuUri === $requestUri) {
-    //             $child->setCurrent(true);
-    //         } else {
-    //             $child->setCurrent(false);
-    //             $this->findCurrent($child);
-    //         }
-    //     }
-    // }
+    protected function checkRootAcl($node)
+    {
+        if (!count($node->getExtra('groups'))) {
+            return;
+        }
+
+        foreach ($node->getExtra('groups') as $group) {
+            if ($this->container->get('security.context')->getToken()->getUser()->getGroups()->contains($group)) {
+                return;
+            }
+        }
+
+        foreach ($node->getChildren() as $child) {
+            $node->removeChild($child);
+        }
+    }
 
     public function execute($menu)
     {
