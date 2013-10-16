@@ -9,6 +9,10 @@
 <link rel="stylesheet" href="{{ asset('bundles/msiadmin/css/base.css') }}">
 <link rel="stylesheet" href="{{ asset('bundles/msiadmin/css/admin.css') }}">
 {{ parent() }}
+
+<!--[if lt IE 9]>
+    <script src="{{ asset('bundles/msiadmin/js/respond.min.js') }}"></script>
+<![endif]-->
 {% endblock %}
 
 {% block js %}
