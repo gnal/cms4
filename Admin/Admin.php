@@ -78,6 +78,10 @@ abstract class Admin
     {
     }
 
+    public function newPreRender(&$parameters)
+    {
+    }
+
     public function editPreRender(&$parameters)
     {
     }

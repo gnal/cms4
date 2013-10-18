@@ -117,7 +117,11 @@ class CoreController extends Controller
             }
         }
 
-        return $this->render($this->admin->getOption('new_template'), ['form' => $this->admin->getForm()->createView()]);
+        $parameters['form'] = $this->admin->getForm()->createView();
+
+        $this->admin->newPreRender($parameters);
+
+        return $this->render($this->admin->getOption('new_template'), $parameters);
     }
 
     public function editAction(Request $request)
