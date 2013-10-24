@@ -27,7 +27,9 @@
 
 {% block actions %}
 {% if admin.isGranted('create') %}
-    <a href="{{ admin.genUrl('new') }}" class="btn btn-success"><span class="icon-plus-sign-alt icon-large"></span> {{ 'add'|trans }}</a>
+    {% if admin.hasParent == false or (admin.getParentAssociationMapping.type == '2' and app.request.query.get('parentId')) %}
+        <a href="{{ admin.genUrl('new') }}" class="btn btn-success"><span class="icon-plus-sign-alt icon-large"></span> {{ 'add'|trans }}</a>
+    {% endif %}
 {% endif %}
 {% endblock %}
 

@@ -404,6 +404,19 @@ abstract class Admin
         }
     }
 
+    public function getParentAssociationMapping()
+    {
+        if (!$this->hasParent()) {
+            return null;
+        }
+
+        foreach ($this->getMetadata()->associationMappings as $value) {
+            if ($value['targetEntity'] === $this->getParent()->getClass()) {
+                return $value;
+            }
+        }
+    }
+
     public function buildBreadcrumb($action = null)
     {
         // $action = $action ?: $this->getAction();
