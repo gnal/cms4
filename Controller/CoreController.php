@@ -206,6 +206,8 @@ class CoreController extends Controller
 
         $this->admin->getObjectManager()->delete($this->admin->getObject());
 
+        $this->addFlash('success', $this->container->get('translator')->trans('delete_success'));
+
         return $this->getResponse();
     }
 
