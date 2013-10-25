@@ -11,6 +11,7 @@ class ActionColumn extends BaseColumn
         $resolver->setDefaults([
             'actions' => [],
             'delete' => true,
+            'ajax_delete' => true,
             'edit' => true,
             'children' => true,
             'attr' => ['class' => 'text-right'],
