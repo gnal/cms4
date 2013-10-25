@@ -1,6 +1,6 @@
 <div style="white-space: nowrap;">
     {% for child in grid.admin.children if grid.admin.hasChildren() and column.options.children %}
-        <a title="{{ child.label(2) }}" href="{{ child.genUrl('index', {'parentId': row.id}) }}" class="btn btn-xs btn-default"><i class="icon-large icon-folder-close-alt"></i> {{ child.label(2) }}</a>
+        <a title="{{ child.label(2) }}" href="{{ child.genUrl('index', {'parentId': row.id}, false) }}" class="btn btn-xs btn-default"><i class="icon-large icon-folder-close-alt"></i> {{ child.label(2) }}</a>
     {% endfor %}
 
     {% for key, val in column.options.actions %}
