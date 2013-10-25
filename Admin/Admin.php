@@ -515,7 +515,7 @@ abstract class Admin
     {
         $breadcrumb = $this->container->get('msi_admin.breadcrumb.factory')->create();
 
-        if ($this->hasParent()) {
+        if ($this->hasParent() && $this->getParentObject()->getId()) {
             $this->buildParentBreadcrumb($breadcrumb, $this->getParent(), $this->getParentObject());
         }
 
