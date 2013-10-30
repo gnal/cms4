@@ -408,6 +408,19 @@ abstract class Admin
         }
     }
 
+    public function getParentAssociationMapping()
+    {
+        if (!$this->hasParent()) {
+            return null;
+        }
+
+        foreach ($this->getMetadata()->associationMappings as $value) {
+            if ($value['targetEntity'] === $this->getParent()->getClass()) {
+                return $value;
+            }
+        }
+    }
+
     public function buildBreadcrumb($action = null)
     {
         // $action = $action ?: $this->getAction();
@@ -502,7 +515,7 @@ abstract class Admin
     {
         $breadcrumb = $this->container->get('msi_admin.breadcrumb.factory')->create();
 
-        if ($this->hasParent()) {
+        if ($this->hasParent() && $this->getParentObject()->getId()) {
             $this->buildParentBreadcrumb($breadcrumb, $this->getParent(), $this->getParentObject());
         }
 

@@ -206,6 +206,10 @@ class CoreController extends Controller
 
         $this->admin->getObjectManager()->delete($this->admin->getObject());
 
+        if (!$this->getRequest()->isXmlHttpRequest()) {
+            $this->addFlash('success', $this->container->get('translator')->trans('delete_success'));
+        }
+
         return $this->getResponse();
     }
 

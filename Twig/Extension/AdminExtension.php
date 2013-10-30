@@ -143,4 +143,13 @@ class AdminExtension extends \Twig_Extension
 
         return $this->container->get('templating')->render('MsiAdminBundle:Pager:'.$options['template'].'.html.twig', array('paginator' => $paginator, 'pagination' => $pagination));
     }
+
+    protected function generateUrl($page)
+    {
+        $request = $this->container->get('request');
+
+        $parameters = array_merge($request->query->all(), array('page' => $page));
+
+        return $this->container->get('router')->generate($request->attributes->get('_route'), $parameters);
+    }
 }

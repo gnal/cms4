@@ -22,11 +22,11 @@ if ( typeof Object.create !== 'function' ) {
             //     return;
             // }
 
-            self.options.carouselLiDimension = self.$carousel.children().first().width();
-
             if (self.options.axis === 'x') {
+                self.options.carouselLiDimension = self.$carousel.children().first().outerWidth(true);
                 self.carouselWrapDimension = self.$carousel.closest('div').width();
             } else {
+                self.options.carouselLiDimension = self.$carousel.children().first().outerHeight(true);
                 self.carouselWrapDimension = self.$carousel.closest('div').height();
             }
 
@@ -214,6 +214,7 @@ if ( typeof Object.create !== 'function' ) {
 
             self.$carousel.animate(properties, self.options.carouselSpeed, function() {
                 direction === 'next' ? self.options.afterNext() : self.options.afterPrev();
+                self.options.slider ? self.show('next') : self.options.afterNext();
                 self.carouselReady = true;
             });
         },

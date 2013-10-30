@@ -108,6 +108,7 @@ summary: sommaire
 edit_language: langue d'édition :
 user: utilisateur
 confirmable: Êtes-vous sûr de vouloir faire ça?
+delete_success: Suppression effectuée avec succès.
 
 # index
 results_per_page: résultats par page
