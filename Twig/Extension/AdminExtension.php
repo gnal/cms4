@@ -38,6 +38,16 @@ class AdminExtension extends \Twig_Extension
 
     public function transDate($date, $format = 'd F')
     {
+        if ($date instanceof \DateTime) {
+            $date = $date->format($format);
+        } else {
+            $date = date($format, strtotime($date));
+        }
+
+        if ($this->container->get('request')->getLocale() === 'en') {
+            return $date;
+        }
+
         return preg_replace([
             '#January#',
             '#February#',
@@ -51,6 +61,14 @@ class AdminExtension extends \Twig_Extension
             '#October#',
             '#November#',
             '#December#',
+
+            '#Mon#',
+            '#Tue#',
+            '#Wed#',
+            '#Thu#',
+            '#Fri#',
+            '#Sat#',
+            '#Sun#',
         ], [
             'janvier',
             'février',
@@ -64,7 +82,15 @@ class AdminExtension extends \Twig_Extension
             'octobre',
             'novembre',
             'décembre',
-        ], date($format, strtotime($date)));
+
+            'Lun',
+            'Mar',
+            'Mer',
+            'Jeu',
+            'Ven',
+            'Sam',
+            'Dim',
+        ], $date);
     }
 
     public function getName()
