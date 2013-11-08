@@ -23,10 +23,10 @@
 {% endif %}#}
 {% set options = column.options %}
 
-{#<a href="{{ admin.genUrl('edit', {'id': object.id}) }}">#}
+{% if options.route %}<a href="{{ path(options.route, column.routeParameters) }}">{% endif %}
 {% if options.truncate %}
     {{ column.value|truncate(options.truncate_length, options.truncate_preserve, options.truncate_separator)|striptags }}
 {% else %}
     {{ column.value|raw }}
 {% endif %}
-{#</a>#}
+{% if options.route %}</a>{% endif %}
