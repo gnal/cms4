@@ -15,6 +15,7 @@ class TextColumn extends BaseColumn
             'truncate_separator' => '...',
             'route' => null,
             'route_parameters' => [],
+            'url_as_label' => false,
         ]);
     }
 

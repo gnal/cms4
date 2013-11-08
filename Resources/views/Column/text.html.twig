@@ -25,8 +25,16 @@
 
 {% if options.route %}<a href="{{ path(options.route, column.routeParameters) }}">{% endif %}
 {% if options.truncate %}
-    {{ column.value|truncate(options.truncate_length, options.truncate_preserve, options.truncate_separator)|striptags }}
+    {% if options.url_as_label %}
+        {{ path(options.route, column.routeParameters)|truncate(options.truncate_length, options.truncate_preserve, options.truncate_separator)|striptags }}
+    {% else %}
+        {{ column.value|truncate(options.truncate_length, options.truncate_preserve, options.truncate_separator)|striptags }}
+    {% endif %}
 {% else %}
-    {{ column.value|raw }}
+    {% if options.url_as_label %}
+        {{ path(options.route, column.routeParameters) }}
+    {% else %}
+        {{ column.value|raw }}
+    {% endif %}
 {% endif %}
 {% if options.route %}</a>{% endif %}
