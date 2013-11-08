@@ -23,7 +23,7 @@
 {% endif %}#}
 {% set options = column.options %}
 
-{% if options.route %}<a href="{{ path(options.route, column.routeParameters) }}">{% endif %}
+{% if options.route %}<a target="_blank" href="{{ path(options.route, column.routeParameters) }}">{% endif %}
 {% if options.truncate %}
     {% if options.url_as_label %}
         {{ path(options.route, column.routeParameters)|truncate(options.truncate_length, options.truncate_preserve, options.truncate_separator)|striptags }}
