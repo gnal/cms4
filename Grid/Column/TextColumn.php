@@ -13,6 +13,21 @@ class TextColumn extends BaseColumn
             'truncate_length' => 30,
             'truncate_preserve' => false,
             'truncate_separator' => '...',
+            'route' => null,
+            'route_parameters' => [],
+            'url_as_label' => false,
         ]);
+    }
+
+    public function getRouteParameters()
+    {
+        $dada=[];
+        foreach ($this->getOptions()['route_parameters'] as $parameter) {
+            $getter = 'get'.ucfirst($parameter);
+            $value = $this->getObject()->$getter();
+            $dada[$parameter] = $value;
+        }
+
+        return $dada;
     }
 }
