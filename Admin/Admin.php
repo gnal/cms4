@@ -86,6 +86,29 @@ abstract class Admin
     {
     }
 
+    public function buildCsvQuery(QueryBuilder $qb)
+    {
+    }
+
+    public function buildCsv($rows)
+    {
+        return '';
+    }
+
+    public function fixCsv($string)
+    {
+        $string = utf8_decode($string);
+
+        $string = '"'.$string.'",';
+
+        return $string;
+    }
+
+    public function getCsvFilename()
+    {
+        return $this->id;
+    }
+
     public function getSearchFields()
     {
         foreach ($this->getOption('search_fields') as $field) {
