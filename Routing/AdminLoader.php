@@ -119,6 +119,17 @@ class AdminLoader implements LoaderInterface
             )
         );
 
+        $collection->add(
+            $id.'_exportcsv',
+            new Route(
+                $prefix.'/export-csv',
+                [
+                    '_controller' => 'MsiAdminBundle:Core:exportCsv',
+                    '_admin' => $id,
+                ]
+            )
+        );
+
         return $collection;
     }
 }

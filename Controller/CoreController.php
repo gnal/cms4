@@ -276,6 +276,28 @@ class CoreController extends Controller
         return new Response();
     }
 
+    public function exportCsvAction()
+    {
+        $qb = $this->admin->getObjectManager()->getMasterQueryBuilder();
+
+        $this->admin->buildCsvQuery($qb);
+
+        $rows = $qb->getQuery()->execute();
+
+        $csv = $this->admin->buildCsv($rows);
+
+        $filename = $this->admin->getCsvFilename().".csv";
+
+        $response = new Response();
+        $response->headers->set("Content-type", "text/csv; charset=utf-8");
+        $response->headers->set("Content-Disposition", "attachment; filename=".$filename);
+        $response->headers->set("Pragma", "no-cache");
+        $response->headers->set("Expires", "0");
+        $response->setContent($csv);
+
+        return $response;
+    }
+
     protected function getIndexQueryBuilder()
     {
         $where = [];
