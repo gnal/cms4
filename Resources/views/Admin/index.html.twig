@@ -70,8 +70,8 @@
             <div class="form-group">
                 <small class="text-muted">{{ 'view'|trans }}</small>
                 <select name="limit" class="notchosen form-control" style="width: auto;">
-                    <option {% if app.session.get('limit', 10) == 10 %}selected=selected{% endif %} value="10">10</option>
-                    <option {% if app.session.get('limit') == 25 %}selected=selected{% endif %} value="25">25</option>
+                    <option {% if app.session.get('limit') == 10 %}selected=selected{% endif %} value="10">10</option>
+                    <option {% if app.session.get('limit', 25) == 25 %}selected=selected{% endif %} value="25">25</option>
                     <option {% if app.session.get('limit') == 50 %}selected=selected{% endif %} value="50">50</option>
                     <option {% if app.session.get('limit') == 100 %}selected=selected{% endif %} value="100">100</option>
                 </select>

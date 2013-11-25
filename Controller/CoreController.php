@@ -49,7 +49,7 @@ class CoreController extends Controller
 
         // Pager
         $pager = $this->get('msi_admin.pager.factory')->create($qb, array('attr' => array('class' => 'pull-left')));
-        $pager->paginate($request->query->get('page', 1) ?: 1, $this->get('session')->get('limit', 10));
+        $pager->paginate($request->query->get('page', 1) ?: 1, $this->get('session')->get('limit', 25));
 
         // Table
         $grid = $this->admin->getGrid();
