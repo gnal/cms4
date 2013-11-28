@@ -1,0 +1,30 @@
+{% block grid_action_children %}
+{% for child in admin.children %}
+    <a href="{{ child.genUrl('index', {'parentId': row.id}, false) }}" class="btn btn-xs btn-default">
+        <i class="icon-large icon-folder-close-alt"></i> {{ child.label(2) }}
+    </a>
+{% endfor %}
+{% endblock %}
+
+{% block grid_action_edit %}
+{% if admin.isGranted('update') %}
+    {# temporary fix to show the user he has no translation for this lang #}
+    {% if admin.isTranslatable and row.hasTranslation(working_locale) == false %}
+        <a href="{{ admin.genUrl('edit', {'id': row.id}) }}" class="btn btn-xs btn-danger">
+            <i class="icon-large icon-pencil"></i> {{ 'edit'|trans }}
+        </a>
+    {% else %}
+        <a href="{{ admin.genUrl('edit', {'id': row.id}) }}" class="btn btn-xs btn-default">
+            <i class="icon-large icon-pencil"></i> {{ 'edit'|trans }}
+        </a>
+    {% endif %}
+{% endif %}
+{% endblock %}
+
+{% block grid_action_delete %}
+{% if admin.isGranted('delete') %}
+    <a class="btn btn-xs btn-default msi_admin_delete" href="{{ admin.genUrl('delete', {'id': row.id}) }}">
+        <i class="icon-large icon-trash"></i> {{ 'delete'|trans }}
+    </a>
+{% endif %}
+{% endblock %}

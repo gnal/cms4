@@ -1,54 +1,30 @@
 <div class="table-responsive">
-<table style="border-bottom: 1px solid #ddd;" id="grid" class="{% if admin.hasTrait('Sortable') %}table-sortable {% endif %}table table-bordered">
-{# Head #}
-<thead>
-    <tr>
-    {% for column in grid.columns %}
-        {#{% if column.name == '' and column.options.children %}
-            {% for child in admin.children if admin.hasChildren() %}
-                <th>
-                    {{ child.label(2) }}
-                </th>
+    <table style="border-bottom: 1px solid #ddd;" id="grid" class="{% if admin.hasTrait('Sortable') %}table-sortable {% endif %}table table-bordered">
+        {# Head #}
+        <thead>
+            <tr>
+                {% for column in grid.columns %}
+                    <th>{{ column.get('label')|capitalize|trans }}</th>
             {% endfor %}
-        {% endif %}#}
-        <th>{{ column.get('label')|capitalize|trans }}</th>
-    {% endfor %}
-    </tr>
-</thead>
-{# Body #}
-<tbody>
-{% for row in grid.rows %}
-    <tr id="tr{{ row.id }}" data-row="{{ loop.index }}">
-        {#{% if admin.hasTrait('Translatable') %}
-            <td>
-                {% if row.hasTranslation(working_locale) %}
-                    <a href="{{ admin.genUrl('toggle', {'id': row.id, 'field': 'published', 'locale': working_locale}) }}" class="msi_admin_admin_change btn btn-xs{% if row.translation(working_locale).published %} btn-success{% else %} btn-default{% endif %}" data-icon-true="icon-check" data-icon-false="icon-check-empty" data-btn-true="btn-success" data-btn-false="btn-default">
-                        {% if row.translation(working_locale).published %}
-                            <i class="icon-check icon-large"></i>
-                        {% else %}
-                            <i class="icon-check-empty icon-large"></i>
-                        {% endif %}
-                    </a>
-                {% else %}
-                    <span class="label label-danger">n'est pas traduit</span>
-                {% endif %}
-            </td>
-        {% endif %}
-        #}
-        {% for column in grid.columns %}
-            {#{% if column.name == '' and column.options.children %}
-                {% for child in admin.children if admin.hasChildren() %}
-                    <td>
-                        <a class="btn btn-default btn-xs" href="{{ child.genUrl('index', {'parentId': row.id}) }}">{{ child.label(2) }}</a>
+                <th></th>
+            </tr>
+        </thead>
+        {# Body #}
+        <tbody>
+        {% for row in grid.rows %}
+            <tr id="tr{{ row.id }}" data-row="{{ loop.index }}">
+                {% for column in grid.columns %}
+                    <td {% for attrname,attrvalue in column.options.attr %}{{attrname}}="{{attrvalue}}" {% endfor %}id="td{{ loop.index~row.id }}">
+                        {% include 'MsiAdminBundle:Column:'~column.type~'.html.twig' with {'i': loop.index, 'column': column.resolveRow(row, working_locale)} %}
                     </td>
                 {% endfor %}
-            {% endif %}#}
-            <td {% for attrname,attrvalue in column.options.attr %}{{attrname}}="{{attrvalue}}" {% endfor %}id="td{{ loop.index~row.id }}">
-            {% include 'MsiAdminBundle:Column:'~column.type~'.html.twig' with {'i': loop.index, 'column': column.resolveRow(row, working_locale)} %}
-            </td>
+                <td>
+                    <div style="white-space: nowrap;">
+                        {% include admin.options.grid_action_template %}
+                    </div>
+                </td>
+            </tr>
         {% endfor %}
-    </tr>
-{% endfor %}
-</tbody>
-</table>
+        </tbody>
+    </table>
 </div>

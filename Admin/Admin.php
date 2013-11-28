@@ -654,6 +654,7 @@ abstract class Admin
             'form_template'        => 'MsiAdminBundle:Admin:form.html.twig',
             'sidebar_template'     => null,
             'index_template'       => 'MsiAdminBundle:Admin:index.html.twig',
+            'grid_action_template' => 'MsiAdminBundle:Admin:grid_action.html.twig',
             'new_template'         => 'MsiAdminBundle:Admin:new.html.twig',
             'edit_template'        => 'MsiAdminBundle:Admin:edit.html.twig',
             'search_fields'        => [],
