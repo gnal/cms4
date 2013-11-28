@@ -577,7 +577,7 @@ abstract class Admin
     public function buildEditBreadcrumb($breadcrumb)
     {
         $breadcrumb
-            ->add('<span class="icon-file-alt icon-large"></span> '.$this->getObject(), $this->hasShow() ? $this->genUrl('show', ['id' => $this->getObject()->getId()]) : null)
+            ->add('<span class="icon-file-alt icon-large"></span> '.$this->getObject(), $this->genUrl('edit', ['id' => $this->getObject()->getId()]))
             ->add('<span class="icon-edit-sign icon-large"></span> '.$this->container->get('translator')->trans('edit'))
             ->add('<span class="icon-share-alt icon-large"></span> '.$this->container->get('translator')->trans('back'), $this->genUrl('index'), [
                 'attr' => [
@@ -604,18 +604,6 @@ abstract class Admin
         $this->$method($breadcrumb);
 
         return $breadcrumb;
-    }
-
-    public function hasShow()
-    {
-        $collection = $this->container->get('router')->getRouteCollection();
-        foreach ($collection->all() as $name => $route) {
-            if ($this->getId().'_show' === $name) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public function getUser()
