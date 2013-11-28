@@ -518,7 +518,7 @@ abstract class Admin
         }
 
         $breadcrumb->add(
-            '<span class="icon-folder-open-alt icon-large"></span> '.$parent->getLabel(2),
+            '<span class="icon-folder-open-alt icon-large"></span> '.ucfirst($parent->getLabel(2)),
             $parent->genUrl('index', [
                 'parentId' => $parent->hasParent() ? $object->$getter()->getId() : null,
             ], false)
@@ -527,10 +527,10 @@ abstract class Admin
 
         $breadcrumb->add(
             '<span class="icon-file-alt icon-large"></span> '.$object,
-            $parent->hasShow() ? $parent->genUrl('show', [
+            $parent->genUrl('edit', [
                 'id' => $object->getId(),
                 'parentId' => $parent->hasParent() ? $object->$getter()->getId() : null,
-            ], false) : null
+            ], false)
         );
     }
 
@@ -543,7 +543,7 @@ abstract class Admin
         }
 
         $breadcrumb
-            ->add('<span class="icon-folder-open-alt icon-large"></span> '.$this->getLabel(2), $action === 'list' ? null : $this->genUrl('index'))
+            ->add('<span class="icon-folder-open-alt icon-large"></span> '.ucfirst($this->getLabel(2)), $action === 'list' ? null : $this->genUrl('index'))
         ;
 
         return $breadcrumb;
