@@ -24,6 +24,7 @@
         {% for translation in form.translations %}
             {{ form_row(translation.metaKeywords) }}
             {{ form_row(translation.metaDescription) }}
+            {{ form_row(translation.metaTitle) }}
         {% endfor %}
     </div>
     {% if app.user.isSuperAdmin %}
