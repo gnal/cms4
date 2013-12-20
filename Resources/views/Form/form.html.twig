@@ -13,7 +13,7 @@
             {{ form_label(form) }}
         {% endif %}
             {{ form_widget(form) }}
-            {% if form.vars.attr['data-help'] is defined %}<span class="help-block">{{ attr['data-help'] }}</span>{% endif %}
+            {% if form.vars.attr['data-help'] is defined %}<small class="help-block">{{ attr['data-help'] }}</small>{% endif %}
             {{ form_errors(form) }}
         {% if form.vars.block_prefixes.2 != 'checkbox' %}
         </div>
@@ -48,7 +48,7 @@
 {% spaceless %}
     {% if errors|length > 0 %}
         {% for error in errors %}
-            <span class="help-block">{{ error.message }}</span>
+            <small class="help-block">{{ error.message }}</small>
         {% endfor %}
     {% endif %}
 {% endspaceless %}

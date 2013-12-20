@@ -32,7 +32,7 @@ trait Uploadable
 
         $getter = 'get'.ucfirst($fieldName);
 
-        return '/uploads/'.$this->getUploadDir($fieldName).'/'.$prefix.$this->$getter();
+        return $this->$getter() ? '/uploads/'.$this->getUploadDir($fieldName).'/'.$prefix.$this->$getter() : $default;
     }
 
     public function generateFileName(UploadedFile $file)
