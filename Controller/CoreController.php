@@ -215,7 +215,6 @@ class CoreController extends Controller
 
     public function deleteUploadAction()
     {
-        die('deprecated must redo da logic');
         $this->isGranted('update');
         $this->isGranted('ACL_UPDATE', $this->admin->getObject());
 
@@ -225,11 +224,12 @@ class CoreController extends Controller
             $entity = $this->admin->getObject();
         }
 
-        $this->get('msi_admin.uploader')->removeUpload($entity);
-        $entity->setFilename(null);
-        $this->admin->getObjectManager()->update($entity);
+        $this->get('msi_admin.uploader')->removeUpload($this->getRequest()->query->get('field'), $entity);
+        $setter = 'set'.ucfirst($this->getRequest()->query->get('field'));
+        $entity->$setter(null);
+        $this->admin->getObjectManager()->update($this->admin->getObject());
 
-        return $this->getResponse();
+        return $this->redirect($this->admin->genUrl('edit', ['id' => $this->admin->getObject()->getId()]));
     }
 
     public function toggleAction()

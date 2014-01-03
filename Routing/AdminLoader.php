@@ -98,6 +98,17 @@ class AdminLoader implements LoaderInterface
         );
 
         $collection->add(
+            $id.'_deleteupload',
+            new Route(
+                $prefix.'/delete-upload',
+                [
+                    '_controller' => 'MsiAdminBundle:Core:deleteUpload',
+                    '_admin' => $id,
+                ]
+            )
+        );
+
+        $collection->add(
             $id.'_toggle',
             new Route(
                 $prefix.'/toggle',
