@@ -37,9 +37,12 @@ trait Uploadable
 
     public function generateFileName(UploadedFile $file)
     {
-        return [
-            'filename' => uniqid(time()),
-        ];
+        $arr = [];
+        foreach ($this->getUploadFields() as $key => $value) {
+            $arr[$value] = uniqid(time());
+        }
+
+        return $arr;
     }
 
     public function getUploadFields()
