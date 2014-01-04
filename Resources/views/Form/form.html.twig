@@ -10,7 +10,7 @@
     {% else %}
         {% if form.vars.block_prefixes.2 != 'checkbox' %}
         <div class="form-group{% if form.vars.errors|length %} has-error{% endif %}">
-            {{ form_label(form) }}
+            {% if form.vars.label != ' ' %}{{ form_label(form) }}{% endif %}
         {% endif %}
             {{ form_widget(form) }}
             {% if form.vars.attr['data-help'] is defined %}<small class="help-block">{{ attr['data-help'] }}</small>{% endif %}
