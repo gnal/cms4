@@ -113,13 +113,13 @@ class AdminExtension extends \Twig_Extension
             $pagination[] = array('attr' => array('class' => 'disabled'), 'url' => $this->generateUrl(1), 'label' => '«');
         }
         // first
-        if ($paginator->getPage() > 4) {
+        if ($paginator->getPage() > 2) {
             $pagination[] = array('attr' => array(), 'url' => $this->generateUrl(1), 'label' => 1);
             $pagination[] = array('attr' => array('class' => 'disabled'), 'label' => '...', 'url' => '#');
         }
         // middle
         if ($numPages > 1) {
-            for ($i=$paginator->getPage() - 4; $i < $paginator->getPage() - 4 + 7; $i++) {
+            for ($i=$paginator->getPage() - 2; $i < $paginator->getPage() - 2 + 3; $i++) {
                 if ($i + 1 == $paginator->getPage()) {
                     $pagination[] = array('attr' => array('class' => 'active'), 'url' => $this->generateUrl($i + 1), 'label' => $i + 1);
                 } else if ($i >= 0 && $i <= $numPages - 1) {
@@ -128,7 +128,7 @@ class AdminExtension extends \Twig_Extension
             }
         }
         // last
-        if ($paginator->getPage() < $numPages - 3) {
+        if ($paginator->getPage() < $numPages - 1) {
             $pagination[] = array('attr' => array('class' => 'disabled'), 'label' => '...', 'url' => '#');
             $pagination[] = array('attr' => array(), 'url' => $this->generateUrl($numPages), 'label' => $numPages);
         }
