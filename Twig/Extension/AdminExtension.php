@@ -148,7 +148,7 @@ class AdminExtension extends \Twig_Extension
     {
         $request = $this->container->get('request');
 
-        $parameters = array_merge($request->get('_route_params'), ['page' => $page]);
+        $parameters = array_merge($request->get('_route_params'), $request->query->all(), ['page' => $page]);
 
         return $this->container->get('router')->generate($request->attributes->get('_route'), $parameters);
     }
