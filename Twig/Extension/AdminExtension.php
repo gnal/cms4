@@ -113,13 +113,30 @@ class AdminExtension extends \Twig_Extension
             $pagination[] = array('attr' => array('class' => 'disabled'), 'url' => $this->generateUrl(1), 'label' => '«');
         }
         // first
-        if ($paginator->getPage() > 2) {
+        if ($paginator->getPage() > 3) {
             $pagination[] = array('attr' => array(), 'url' => $this->generateUrl(1), 'label' => 1);
             $pagination[] = array('attr' => array('class' => 'disabled'), 'label' => '...', 'url' => '#');
         }
         // middle
         if ($numPages > 1) {
-            for ($i=$paginator->getPage() - 2; $i < $paginator->getPage() - 2 + 3; $i++) {
+            if ($paginator->getPage() == 1 || $paginator->getPage() == $numPages - 2) {
+                $modifier = 1;
+            } else {
+                $modifier = 0;
+            }
+            if ($paginator->getPage() == $numPages || $paginator->getPage() == 3) {
+                $imodifier = 1;
+            } else {
+                $imodifier = 0;
+            }
+
+            if ($paginator->getPage() == 1 || $paginator->getPage() == 2) {
+                $modifier = $modifier + 1;
+            }
+            if ($paginator->getPage() == $numPages || $paginator->getPage() == $numPages - 1) {
+                $imodifier = $imodifier + 1;
+            }
+            for ($i=$paginator->getPage() - 2 - $imodifier; $i < $paginator->getPage() + 1 + $modifier; $i++) {
                 if ($i + 1 == $paginator->getPage()) {
                     $pagination[] = array('attr' => array('class' => 'active'), 'url' => $this->generateUrl($i + 1), 'label' => $i + 1);
                 } else if ($i >= 0 && $i <= $numPages - 1) {
@@ -128,7 +145,7 @@ class AdminExtension extends \Twig_Extension
             }
         }
         // last
-        if ($paginator->getPage() < $numPages - 1) {
+        if ($paginator->getPage() < $numPages - 2) {
             $pagination[] = array('attr' => array('class' => 'disabled'), 'label' => '...', 'url' => '#');
             $pagination[] = array('attr' => array(), 'url' => $this->generateUrl($numPages), 'label' => $numPages);
         }
