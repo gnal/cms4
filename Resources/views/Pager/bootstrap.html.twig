@@ -1,4 +1,4 @@
-{% set paginator_attr = paginator.options.attr|merge({'class': (paginator.options.attr.class|default('')~' pagination')|trim}) %}
+{% set paginator_attr = paginator.options.attr|merge({'class': (paginator.options.attr.class|default('')~' pagination pagination-sm')|trim}) %}
 <ul{% for attrname, attrvalue in paginator_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
     {% for item in pagination %}
         {% set item_attr = item.attr %}
