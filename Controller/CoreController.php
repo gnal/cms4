@@ -237,10 +237,17 @@ class CoreController extends Controller
         $this->isGranted('update');
         $this->isGranted('ACL_UPDATE', $this->admin->getObject());
 
+        $event = new GetResponseEntityEvent($this->admin->getObject(), $this->getRequest());
+        $this->get('event_dispatcher')->dispatch(MsiAdminEvents::ENTITY_TOGGLE_INIT, $event);
+
         $this->admin->getObjectManager()->toggle($this->admin->getObject(), $this->getRequest()->query->get('field'), $this->get('msi_admin.provider')->getWorkingLocale());
 
-        // return $this->getResponse();
-        return new Response();
+        $response = new Response();
+
+        $event = new FilterResponseEntityEvent($this->admin->getObject(), $this->getRequest(), $response);
+        $this->get('event_dispatcher')->dispatch(MsiAdminEvents::ENTITY_TOGGLE_COMPLETED, $event);
+
+        return $response;
     }
 
     public function sortAction(Request $request)
