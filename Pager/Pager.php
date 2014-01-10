@@ -66,7 +66,9 @@ class Pager extends Paginator
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'attr' => array(),
+            'attr' => [
+                'class' => 'pull-right',
+            ],
             'template' => 'bootstrap',
             'suffix' => '',
         ));
