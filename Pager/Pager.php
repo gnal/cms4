@@ -68,6 +68,7 @@ class Pager extends Paginator
         $resolver->setDefaults(array(
             'attr' => array(),
             'template' => 'bootstrap',
+            'suffix' => '',
         ));
     }
 }

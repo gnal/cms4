@@ -108,13 +108,13 @@ class AdminExtension extends \Twig_Extension
         $pagination = array();
         // previous
         if ($paginator->getPage() != 1) {
-            $pagination[] = array('attr' => array(), 'url' => $this->generateUrl($paginator->getPage() - 1), 'label' => '«');
+            $pagination[] = array('attr' => array(), 'url' => $this->generateUrl($paginator->getPage() - 1, $options['suffix']), 'label' => '«');
         } else {
-            $pagination[] = array('attr' => array('class' => 'disabled'), 'url' => $this->generateUrl(1), 'label' => '«');
+            $pagination[] = array('attr' => array('class' => 'disabled'), 'url' => $this->generateUrl(1, $options['suffix']), 'label' => '«');
         }
         // first
         if ($paginator->getPage() > 3) {
-            $pagination[] = array('attr' => array(), 'url' => $this->generateUrl(1), 'label' => 1);
+            $pagination[] = array('attr' => array(), 'url' => $this->generateUrl(1, $options['suffix']), 'label' => 1);
             $pagination[] = array('attr' => array('class' => 'disabled'), 'label' => '...', 'url' => '#');
         }
         // middle
@@ -138,22 +138,22 @@ class AdminExtension extends \Twig_Extension
             }
             for ($i=$paginator->getPage() - 2 - $imodifier; $i < $paginator->getPage() + 1 + $modifier; $i++) {
                 if ($i + 1 == $paginator->getPage()) {
-                    $pagination[] = array('attr' => array('class' => 'active'), 'url' => $this->generateUrl($i + 1), 'label' => $i + 1);
+                    $pagination[] = array('attr' => array('class' => 'active'), 'url' => $this->generateUrl($i + 1, $options['suffix']), 'label' => $i + 1);
                 } else if ($i >= 0 && $i <= $numPages - 1) {
-                    $pagination[] = array('attr' => array(), 'url' => $this->generateUrl($i + 1), 'label' => $i + 1);
+                    $pagination[] = array('attr' => array(), 'url' => $this->generateUrl($i + 1, $options['suffix']), 'label' => $i + 1);
                 }
             }
         }
         // last
         if ($paginator->getPage() < $numPages - 2) {
             $pagination[] = array('attr' => array('class' => 'disabled'), 'label' => '...', 'url' => '#');
-            $pagination[] = array('attr' => array(), 'url' => $this->generateUrl($numPages), 'label' => $numPages);
+            $pagination[] = array('attr' => array(), 'url' => $this->generateUrl($numPages, $options['suffix']), 'label' => $numPages);
         }
         // next
         if ($paginator->getPage() != $numPages) {
-            $pagination[] = array('attr' => array(), 'url' => $this->generateUrl($paginator->getPage() + 1), 'label' => '»');
+            $pagination[] = array('attr' => array(), 'url' => $this->generateUrl($paginator->getPage() + 1, $options['suffix']), 'label' => '»');
         } else {
-            $pagination[] = array('attr' => array('class' => 'disabled'), 'url' => $this->generateUrl($numPages), 'label' => '»');
+            $pagination[] = array('attr' => array('class' => 'disabled'), 'url' => $this->generateUrl($numPages, $options['suffix']), 'label' => '»');
         }
 
         if ($paginator->getPage() > $numPages) return;
@@ -161,12 +161,12 @@ class AdminExtension extends \Twig_Extension
         return $this->container->get('templating')->render('MsiAdminBundle:Pager:'.$options['template'].'.html.twig', array('paginator' => $paginator, 'pagination' => $pagination));
     }
 
-    protected function generateUrl($page)
+    protected function generateUrl($page, $suffix = '')
     {
         $request = $this->container->get('request');
 
         $parameters = array_merge($request->get('_route_params'), $request->query->all(), ['page' => $page]);
 
-        return $this->container->get('router')->generate($request->attributes->get('_route'), $parameters);
+        return $this->container->get('router')->generate($request->attributes->get('_route'), $parameters).$suffix;
     }
 }
