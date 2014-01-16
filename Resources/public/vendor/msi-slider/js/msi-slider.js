@@ -212,7 +212,7 @@ if ( typeof Object.create !== 'function' ) {
                 }
             }
 
-            self.$carousel.animate(properties, self.options.carouselSpeed, function() {
+            self.$carousel.animate(properties, self.options.carouselSpeed, self.options.carouselEasing, function() {
                 direction === 'next' ? self.options.afterNext() : self.options.afterPrev();
                 self.options.slider ? self.show('next') : self.options.afterNext();
                 self.carouselReady = true;
@@ -319,6 +319,7 @@ if ( typeof Object.create !== 'function' ) {
         pauseOnHover: true,
         axis: 'x',
         carouselSpeed: 400,
+        carouselEasing: 'swing',
         sliderEffect: 'fade',
         sliderProperties: {mode: 'show', easing: 'swing'},
         sliderSpeed: 400,
