@@ -46,12 +46,7 @@
 
 {% block page_content %}
 {% spaceless %}
-{% set content = block('content') %}
-{% if content %}
-{{ content|raw }}
-{% else %}
-{{ page.translation.body|raw }}
-{% endif %}
+{{ block('content') }}
 {% endspaceless %}
 {% endblock %}
 

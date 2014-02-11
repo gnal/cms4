@@ -24,11 +24,13 @@ trait Uploadable
         return strtolower($class.'-'.$fieldName.$suffix);
     }
 
-    public function getPathname($fieldName = 'filename', $prefix = '', $default = null)
+    public function getPathname($fieldName = null, $prefix = '', $default = null)
     {
-        if (!in_array($fieldName, $this->getUploadFields())) {
+        if ($fieldName && !in_array($fieldName, $this->getUploadFields())) {
             throw new \InvalidArgumentException('upload field name "'.$fieldName.'" doesn\'t exist for entity '.get_class($this));
         }
+
+        $fieldName = $fieldName ?: $this->getUploadFields()[0];
 
         $getter = 'get'.ucfirst($fieldName);
 
