@@ -44,12 +44,6 @@
 {{ page.js|raw }}
 {% endblock js %}
 
-{% block page_content %}
-{% spaceless %}
-{{ block('content') }}
-{% endspaceless %}
-{% endblock %}
-
 {% block flash %}
 {% spaceless %}
 {% for flashMessage in app.session.flashbag.get('success') %}
