@@ -68,13 +68,29 @@ if ( typeof Object.create !== 'function' ) {
                     .children('li')
                     .first()
                     .addClass('active')
-                    .css('z-index', 999);
+                    .css('z-index', 999)
+                    .css('position', 'relative')
+                ;
 
                 $.each(self.$slider.children('li'), function(i, e) {
                     var $e = $(e);
+                    // data-id use is to link carousel li to slider li
                     $e.attr('data-id', i);
+
+                    // an absolute element is not automatically put top left
+                    $e
+                        .css('top', 1)
+                        .css('left', 1)
+                        // width 100% is needed for firefox
+                        .css('width', '100%')
+                    ;
+
                     if (i !== 0) {
-                        $e.css('z-index', 998).hide();
+                        $e
+                            .css('z-index', 998)
+                            .css('display', 'none')
+                            .css('position', 'absolute')
+                        ;
                         $e.find('.overlay').hide();
                     }
                 });
@@ -269,14 +285,37 @@ if ( typeof Object.create !== 'function' ) {
 
             self.sliderReady = false;
 
-            $sliderLi.css('z-index', 999).addClass('active');
-            self.$activeSliderLi.css('z-index', 998).removeClass('active');
+            // prepare next slide to become active
+            $sliderLi
+                .addClass('active')
+                .css('z-index', 999)
+            ;
 
+            // prepare current slide to become hidden
+            self.$activeSliderLi
+                .removeClass('active')
+                .css('z-index', 998)
+            ;
+
+            // fix carousel active li
             $carouselLi.addClass('active');
             self.$activeCarouselLi.removeClass('active');
 
             $sliderLi.effect(self.options.sliderEffect, self.options.sliderProperties, self.options.sliderSpeed, function() {
-                self.$activeSliderLi.hide();
+                // for optimization we should move all the css into a default slider css file and work with classes.
+
+                // reason we can't just have one relative and the rest absolute at all time is that whenever we will hide the relative (need to hide it to then make it reappear) one our slide will lose its height
+
+                // if we ever have a problem here, what we could do is rigth before set li height and wdith to image's height and width, do the position switch, then set the li height and width back to auto/100%.
+
+                $sliderLi
+                    .css('position', 'relative')
+                ;
+
+                self.$activeSliderLi
+                    .css('display', 'none')
+                    .css('position', 'absolute')
+                ;
                 self.$activeSliderLi.find('.overlay').hide();
 
                 var callback = function() {
