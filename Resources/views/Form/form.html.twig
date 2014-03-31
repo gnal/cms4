@@ -129,7 +129,7 @@
 
 {% block textarea_widget %}
 {% spaceless %}
-    <textarea {{ block('widget_attributes') }} class="form-control">{{ value }}</textarea>
+    <textarea {{ block('widget_attributes') }} class="form-control">{{ value|raw }}</textarea>
     {% if attr.class is not defined %}
         {#<div class="char-count" style="margin-top:5px;line-height:20px;"></div>#}
     {% endif %}
