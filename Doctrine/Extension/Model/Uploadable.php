@@ -12,6 +12,7 @@ trait Uploadable
             throw new \InvalidArgumentException('upload field name "'.$fieldName.'" doesn\'t exist for entity '.get_class($this));
         }
 
+        // attempt at generating a good name for the folder ;)
         $class = get_class($this);
         $class = substr($class, strrpos($class, '\\') + 1);
         $class = lcfirst($class);
@@ -19,9 +20,10 @@ trait Uploadable
             return '-'.strtolower($matches[0]);
         }, $class);
 
+        $prefix = method_exists($this, 'getUploadDirPrefix') ? $this->getUploadDirPrefix().'/' : '';
         $suffix = method_exists($this, 'getUploadDirSuffix') ? '/'.$this->getUploadDirSuffix() : '';
 
-        return strtolower($class.'-'.$fieldName.$suffix);
+        return strtolower($prefix.$class.'-'.$fieldName.$suffix);
     }
 
     public function getPathname($fieldName = null, $prefix = '', $default = null)

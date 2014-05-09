@@ -129,7 +129,7 @@
 
 {% block textarea_widget %}
 {% spaceless %}
-    <textarea {{ block('widget_attributes') }} class="form-control">{{ value }}</textarea>
+    <textarea {{ block('widget_attributes') }} class="form-control">{{ value|raw }}</textarea>
     {% if attr.class is not defined %}
         {#<div class="char-count" style="margin-top:5px;line-height:20px;"></div>#}
     {% endif %}
@@ -183,15 +183,14 @@
 
 {% block choice_widget_expanded %}
 {% spaceless %}
-    <div class="btn-toolbar">
+    {#<div class="btn-toolbar">
         <button class="btn btn-default btn-select-all">{{ 'All'|trans }}</button>
         <button class="btn btn-default btn-select-none">{{ 'None'|trans }}</button>
-    </div>
-    <div>
+    </div>#}
+    {{ form_label(form) }}
     {% for child in form %}
         {{ form_widget(child, {'multiple': 'multiple'}) }}
     {% endfor %}
-    </div>
 {% endspaceless %}
 {% endblock choice_widget_expanded %}
 
