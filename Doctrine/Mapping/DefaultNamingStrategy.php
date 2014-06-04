@@ -50,4 +50,9 @@ class DefaultNamingStrategy implements NamingStrategy
     {
         return strtolower($this->classToTableName($entityName).'_'.($referencedColumnName ?: $this->referenceColumnName()));
     }
+
+    public function embeddedFieldToColumnName($propertyName, $embeddedColumnName, $className = null, $embeddedClassName = null)
+    {
+        return $propertyName.'_'.$embeddedColumnName;
+    }
 }
