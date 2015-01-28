@@ -126,7 +126,7 @@
     <input type="{{ type }}" {{ block('widget_attributes') }} class="form-control" {% if value is not empty %}value="{{ value }}" {% endif %}/>
 
     {% set fieldName = form.vars.name|slice(0, -4) %}
-    {% if type == 'file' and form.parent.vars.value.pathname(fieldName) %}
+    {% if admin is defined and type == 'file' and form.parent.vars.value.pathname(fieldName) %}
         <img class="img-responsive" style="max-width: 300px; margin: 10px 0;" src="{{ form.parent.vars.value.pathname(fieldName) }}" alt="0">
         <a class="btn btn-default" href="{{ path(admin.id~'_deleteupload', {'id': form.parent.vars.value.id, 'field': fieldName}) }}"><i class="icon icon-remove icon-large"></i></a>
     {% endif %}
